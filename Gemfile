@@ -22,6 +22,15 @@ group :assets do
   gem 'quiet_assets'
 end
 
+group :development do
+  # Debug use
+  gem 'miniprofiler'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'pry-rails'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -35,6 +44,11 @@ gem 'jquery-rails'
 
 # thin server
 gem 'thin'
+
+# user
+gem 'rubycas-client', ">=2.3.10.rc1"
+gem "rubycas-client-rails", :git => "git://github.com/rubycas/rubycas-client-rails.git"
+
 
 # file uploader
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
