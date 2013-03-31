@@ -6,7 +6,7 @@ Yxtimes::Application.routes.draw do
   put "user" => "users#update"
 
   resources :posts
-  get "logout" => "application#logout"
+  get "logout" => "users#logout"
 
 
   # The priority is based upon order of creation:

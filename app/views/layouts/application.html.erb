@@ -7,8 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if user_sign_in? %>
+  <% if current_user %>
     <%= link_to "logout", logout_path %>
+    <%= "current_user: " + current_user.name %>
   <% end -%>
 <hr>
 <%= notice %>
