@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   before_filter :cas_filter, except: "new"
 
   def new
-    if User.where(name: session[:cas_user]).exists?
-      redirect_to root_path
-      return
+    if !session[:cas_user] || User.where(name: session[:cas_user]).exists?
+      redirect_to root_path and return
     end
     @user = User.create(name: session[:cas_user])
     render action: "edit", notice: '您第一次登录系统，修改个人信息.'
