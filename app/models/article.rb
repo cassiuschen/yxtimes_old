@@ -1,4 +1,4 @@
-class Post
+class Article
   include Mongoid::Document
   include Mongoid::Timestamps
   
@@ -7,6 +7,6 @@ class Post
 
   validates_presence_of :title
 
-  embeds_many :replies, class_name: 'Reply', inverse_of: :post
+  embeds_many :replies, class_name: 'Reply', inverse_of: :article
 
 end

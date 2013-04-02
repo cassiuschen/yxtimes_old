@@ -1,4 +1,7 @@
 Yxtimes::Application.routes.draw do
+  resources :articles
+
+
   get "home/index"
 
   get "users/new"

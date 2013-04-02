@@ -4,6 +4,6 @@ class Reply
 
   field :content, type: String
 
-  embedded_in :post, class_name: 'Post', inverse_of: :replies
+  embedded_in :article, class_name: 'Article', inverse_of: :replies
   
 end
