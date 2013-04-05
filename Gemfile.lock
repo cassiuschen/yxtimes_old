@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/rubycas/rubycas-client-rails.git
-  revision: b97de6edc7871bc43ca1c9572f4d9188a210b341
-  specs:
-    rubycas-client-rails (0.1.1)
-      rails (>= 3.0.0)
-      rubycas-client (~> 2.3.9.rc1)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -77,6 +69,8 @@ GEM
     less-rails (2.3.2)
       actionpack (>= 3.1)
       less (~> 2.3.1)
+    less-rails-bootstrap (2.3.2)
+      less-rails (~> 2.3.1)
     libv8 (3.11.8.17)
     mail (2.5.3)
       i18n (>= 0.4.0)
@@ -172,6 +166,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   less-rails
+  less-rails-bootstrap
   meta_request
   miniprofiler
   mongoid
@@ -179,7 +174,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.13)
   rubycas-client (>= 2.3.10.rc1)
-  rubycas-client-rails!
   therubyracer
   thin
   uglifier (>= 1.0.3)

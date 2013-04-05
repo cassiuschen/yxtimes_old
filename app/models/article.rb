@@ -4,9 +4,11 @@ class Article
   
   field :title, type: String
   field :content, type: String
+  field :source, type: String
 
   validates_presence_of :title
 
-  embeds_many :replies, class_name: 'Reply', inverse_of: :article
-
+  embeds_many :comments
+  belongs_to :collection
+  
 end

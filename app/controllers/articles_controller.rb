@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: [:index, :show]
+  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: [:index, :show]
+  
+
   # GET /articles
   # GET /articles.json
   def index

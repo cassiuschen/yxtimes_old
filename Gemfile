@@ -12,6 +12,7 @@ gem 'mongoid'
 # in production environments by default.
 group :assets do
   gem 'less-rails'
+  gem 'less-rails-bootstrap'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -47,8 +48,6 @@ gem 'thin'
 
 # user
 gem 'rubycas-client', ">=2.3.10.rc1"
-gem "rubycas-client-rails", :git => "git://github.com/rubycas/rubycas-client-rails.git"
-
 
 # file uploader
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'

@@ -65,7 +65,7 @@ module Yxtimes
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Ruby CAS
-    config.rubycas.cas_base_url = 'http://127.0.0.1:8888/'
+    # i18n
+    config.i18n.default_locale = "zh-CN"
   end
 end

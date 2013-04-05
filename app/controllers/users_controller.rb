@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :cas_filter, except: "new"
-
-  def new
-    if !session[:cas_user] || User.where(name: session[:cas_user]).exists?
-      redirect_to root_path and return
-    end
-    @user = User.create(name: session[:cas_user])
-    render action: "edit", notice: '您第一次登录系统，修改个人信息.'
-  end
+  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter
+  prepend_before_filter CASClient::Frameworks::Rails::Filter
 
   def edit
     @user = current_user
@@ -25,6 +18,7 @@ class UsersController < ApplicationController
   end
 
   def logout
-    RubyCAS::Filter.logout(self)
+    CASClient::Frameworks::Rails::Filter.logout(self)
   end
+
 end

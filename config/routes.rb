@@ -7,9 +7,8 @@ Yxtimes::Application.routes.draw do
   get "users/new"
   get "users/edit"
   put "user" => "users#update"
-
-  resources :posts
   get "logout" => "users#logout"
+  get "login" => "users#login"
 
 
   # The priority is based upon order of creation:
