@@ -1,0 +1,64 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require todc-bootstrap
+ *= require_self
+ *= require_directory .
+ */
+
+
+.debug_dump {
+  width: 500px;
+  display: none\9;   // disappear in IE
+  max-height: 400px;
+  overflow: scroll;
+  opacity: 0.1;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  width: 850px;
+  min-height: 100%;
+  background-color: #FFF;
+  box-shadow: 0 0 5px #999;
+}
+
+#left-nav {
+  position: absolute;
+  width: 150px;
+  top: 200px;
+}
+
+#main {
+  margin-left: 180px;
+  min-height: 500px;
+}
+#user-info {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+.nav-link {
+  display: block;
+  font-family: Songti;
+  font-size: 24px;
+  line-height: 1.6;
+}

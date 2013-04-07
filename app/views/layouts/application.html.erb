@@ -2,27 +2,37 @@
 <html>
 <head>
   <title>Yxtimes</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <meta name="viewport" content="width=1170px"/>  
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-    <%= link_to "logout", logout_path %>
-    <%= "current_user: " + current_user.name %>
-  <% else %>
-    <%= link_to "login", CASClient::Frameworks::Rails::Filter.login_url(controller) %>
-  <% end -%>
-<hr>
-<%= notice %>
-<%= yield %>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<hr>
+  <div class="container">
+    <div id="left-nav">
+      <% Category.all.each do |category| %>
+        <%= link_to category.name, category_show_path(category), class: "nav-link" %>
+      <% end -%>
+      <%= link_to "投票", votes_path, class: "nav-link" %>
+    </div>
+    <div id="main">
+      <% unless notice.blank? %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end -%>
+      <%= yield %>
+    </div>
+  </div>
+  <div id="user-info">
+    <% if current_user %>
+      <%= link_to logout_path do %>
+        <i class="icon-signout"></i>
+      <% end -%>
+    <% else %>
+      <%= link_to CASClient::Frameworks::Rails::Filter.login_url(controller) do %>
+        <i class="icon-signin"></i>
+      <% end -%>
+    <% end -%>
+  </div>
 <%= debug(params) if Rails.env.development? %>
+<%= javascript_include_tag "application" %>
 </body>
 </html>

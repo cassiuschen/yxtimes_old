@@ -1,6 +1,8 @@
 Yxtimes::Application.routes.draw do
-  resources :articles
+  resources :votes
 
+
+  resources :articles
 
   get "home/index"
 
@@ -9,6 +11,8 @@ Yxtimes::Application.routes.draw do
   put "user" => "users#update"
   get "logout" => "users#logout"
   get "login" => "users#login"
+
+  get "c/:id" => "categories#show", as: "category_show"
 
 
   # The priority is based upon order of creation:

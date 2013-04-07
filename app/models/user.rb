@@ -14,4 +14,6 @@ class User
 
   field :last_sign_in_at,    :type => Time
 
+  has_many :articles
+
 end

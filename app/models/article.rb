@@ -9,6 +9,7 @@ class Article
   validates_presence_of :title
 
   embeds_many :comments
-  belongs_to :collection
+  belongs_to :category
+  belongs_to :author, class_name: "User"
   
 end

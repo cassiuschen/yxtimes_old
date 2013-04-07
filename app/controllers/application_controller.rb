@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
         redirect_to users_edit_path, notice: "您第一次登录系统，修改个人信息."
         return
       end
-      @current_user.last_sign_in_at = session[:previous_redirect_to_cas]
-      @current_user.save!
+
+      @current_user.update_attributes!(:last_sign_in_at => session[:previous_redirect_to_cas])
     end
   end
 
