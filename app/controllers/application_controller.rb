@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     !!@current_user
   end
 
-  def current_user 
+  def current_user
     @current_user
   end
 

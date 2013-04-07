@@ -1,7 +1,9 @@
 Yxtimes::Application.routes.draw do
+
+  get "feature/show"
+  get "feature/edit"
+
   resources :votes
-
-
   resources :articles
 
   get "home/index"

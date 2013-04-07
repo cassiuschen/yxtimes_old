@@ -2,11 +2,25 @@
   <%= @article.title %>
 </h1>
 
-<p>
-  <b>Content:</b>
-  <%= @article.content %>
-</p>
-
-
+<div class="author">
+  作者：<%= @article.author.nickname %>
+</div>
+<div class="clearfix">
+  <% unless @article.source.blank? %>
+    <div class="pull-right">
+      <%= link_to @article.source, @article.source, target: '_blank', class: 'link' %>
+    </div>
+  <% end -%>  
+  <div class="time">
+    <%= short_time @article.created_at %>
+  </div>
+</div>
+<div class="content" style="margin-top: 20px;">
+  <%= raw @article.content %>
+</div>
+<br>
+<br>
+<br>
+<br>
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>

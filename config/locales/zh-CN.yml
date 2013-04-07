@@ -201,9 +201,12 @@ zh-CN:
     models:
       user: 用户
       article: 文章
+      category: 目录
     attributes:
       user:
         nickname: 昵称
+        sinature: 签名
       article:
         title: 标题
         content: 内容
+        source: 来源

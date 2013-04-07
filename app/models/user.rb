@@ -12,8 +12,11 @@ class User
 
   field :sinature, type: String
 
-  field :last_sign_in_at,    :type => Time
+  field :last_sign_in_at, :type => Time
 
-  has_many :articles
+  has_many :articles, inverse_of: :author
 
+  has_and_belongs_to_many :star_articles, class_name: "Article", inverse_of: nil
+
+  embeds_many :notifications
 end
