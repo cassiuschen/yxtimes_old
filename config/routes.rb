@@ -2,13 +2,17 @@ Yxtimes::Application.routes.draw do
 
   get "feature" => "feature#show", as: "feature"
   get "feature/edit"
+  put "feature" => "feature#update", as: "feature"
 
-  resources :votes
-  resources :articles
+  resources :articles, :votes do
+    post "comments" => "comments#create"
+    delete "comments/:id" => "comments#destroy", as: "comment"
+    post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
+    delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
+  end
 
   get "home/index"
 
-  get "users/new"
   get "users/edit"
   put "user" => "users#update"
   get "logout" => "users#logout"

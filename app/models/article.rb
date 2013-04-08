@@ -7,45 +7,56 @@ class Article
   field :source, type: String
 
   field :read_count, type: Integer, default: 0
-  field :like_count, type: Integer, default: 0
-  field :dislike_count, type: Integer, default: 0
 
   validates_presence_of :title
 
   field :_id, type: Integer, default: -> { Article.count + 1 }
 
-  embeds_many :comments
+  embeds_many :comments, inverse_of: nil
   belongs_to :category
   belongs_to :author, class_name: "User", inverse_of: :articles
 
+  has_and_belongs_to_many :likers, class_name: 'User', inverse_of: nil
+  has_and_belongs_to_many :dislikers, class_name: 'User', inverse_of: nil
+  has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
   before_save do |article|
-    if article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
-    else
+    unless article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
       article.source = "http://" + article.source
     end
   end
 
   def read
-    read_couny += 1
+    read_count += 1
+  end
+
+  def liked_by?(user)
+    likers.include? user
+  end
+
+  def disliked_by?(user)
+    dislikers.include? user
   end
 
   def liked_by(user)
-    return if user.like_articles.include? self
-    if user.dislike_articles.delete self
-      self.dislike_count -= 1
-    end
-    user.like_articles << self
-    self.like_count += 1
+    return if likers.include? user
+    dislikers.delete user
+    likers << user
   end
 
   def disliked_by(user)
-    return if user.dislike_articles.include? self
-    if user.like_articles.delete self
-      self.like_count -= 1
-    end
-    user.dislike_articles << self
-    self.dislike_count += 1
+    return if dislikers.include? user
+    likers.delete user
+    dislikers << user
   end
+
+  def starred_by?(user)
+    starrers.include? user
+  end
+
+  def starred_by(user)
+    return if starrers.include? user
+    starrers << user
+end
 
 end

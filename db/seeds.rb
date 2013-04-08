@@ -1,6 +1,7 @@
 User.destroy_all
 Category.destroy_all
 Article.destroy_all
+Feature.destroy_all
 
 User.create!(name: "test")
 
@@ -44,4 +45,4 @@ categories.each do |cat|
   end
 end
 
-feature = Feature.new(title: "Test feature", content: "This is a test feature.", articles: Article.all[1..10])
+feature = Feature.create!(title: "Test feature", content: "This is a test feature.", articles: Article.all[1..10])
