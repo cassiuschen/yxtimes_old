@@ -8,6 +8,4 @@ class Vote
   embeds_many :comments
   belongs_to :author, class_name: "User"
 
-  has_and_belongs_to_many :voters, class_name: "User", inverse_of: nil
-
 end
