@@ -1,21 +1,17 @@
-<h1>Listing articles</h1>
+<h1>全部文章列表</h1>
 
-<table>
+<table class="table table-bordered table-hover">
   <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th class="w30">目录</th>
+    <th>标题</th>
+    <th colspan="2">动作</th>
   </tr>
-
 <% @articles.each do |article| %>
   <tr>
-    <td><%= article.title %></td>
-    <td><%= article.content %></td>
-    <td><%= link_to 'Show', article %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to article.category.name, category_show_path(article.category) %></td>
+    <td><%= link_to article.title, article, class: "link" %></td>
+    <td class="w30"><%= link_to '编辑', edit_article_path(article), class: "link" %></td>
+    <td class="w30"><%= link_to '删除', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></td>
   </tr>
 <% end %>
 </table>

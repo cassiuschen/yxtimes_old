@@ -17,6 +17,12 @@ class User
   has_many :articles, inverse_of: :author
 
   has_and_belongs_to_many :star_articles, class_name: "Article", inverse_of: nil
+  has_and_belongs_to_many :like_articles, class_name: "Article", inverse_of: nil
+  has_and_belongs_to_many :dislike_articles, class_name: "Article", inverse_of: nil
 
   embeds_many :notifications
+
+  def send_notification(notification)
+    self.notifications.create!(content: notification)
+  end
 end

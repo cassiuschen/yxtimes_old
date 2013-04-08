@@ -1,6 +1,6 @@
 Yxtimes::Application.routes.draw do
 
-  get "feature/show"
+  get "feature" => "feature#show", as: "feature"
   get "feature/edit"
 
   resources :votes
@@ -14,7 +14,7 @@ Yxtimes::Application.routes.draw do
   get "logout" => "users#logout"
   get "login" => "users#login"
 
-  get "c/:id" => "categories#show", as: "category_show"
+  get "cat:id" => "categories#show", as: "category_show"
 
 
   # The priority is based upon order of creation:

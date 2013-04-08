@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Yxtimes</title>
-  <meta name="viewport" content="width=1170px"/>  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <title>银杏时报</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="container">
     <div id="left-nav">
-      <%= link_to "专题", feature_show_path, class: "nav-link" %>
+      <%= link_to "专题", feature_path, class: "nav-link" %>
       <% Category.all.each do |category| %>
         <%= link_to category.name, category_show_path(category), class: "nav-link" %>
       <% end -%>
