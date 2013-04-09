@@ -3,8 +3,10 @@ class Comment
   include Mongoid::Timestamps
 
   field :content, type: String
+  validates_presence_of :content
 
   embeds_many :subComments
+  embedded_in :commentable, polymorphic: true
   belongs_to :commenter, class_name: "User"
 
   has_and_belongs_to_many :likers, class_name: 'User', inverse_of: nil
@@ -29,4 +31,5 @@ class Comment
     likers.delete user
     dislikers << user
   end
+  
 end

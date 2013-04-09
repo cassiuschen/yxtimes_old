@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter
-  prepend_before_filter CASClient::Frameworks::Rails::Filter
+  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: :show
+  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: :show
 
   def edit
     @user = current_user
@@ -19,6 +19,10 @@ class UsersController < ApplicationController
 
   def logout
     CASClient::Frameworks::Rails::Filter.logout(self)
+  end
+
+  def show
+    
   end
 
 end

@@ -1,3 +1,5 @@
+include ActionView::Helpers::SanitizeHelper
+
 class Article
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -5,14 +7,15 @@ class Article
   field :title, type: String
   field :content, type: String
   field :source, type: String
+  field :digest, type: String, default: -> { content ? strip_tags(content)[0..80] + "……" : "" }
 
   field :read_count, type: Integer, default: 0
 
-  validates_presence_of :title
+  validates_presence_of :title, :content
 
   field :_id, type: Integer, default: -> { Article.count + 1 }
 
-  embeds_many :comments, inverse_of: nil
+  embeds_many :comments, as: :commentable
   belongs_to :category
   belongs_to :author, class_name: "User", inverse_of: :articles
 
@@ -21,13 +24,14 @@ class Article
   has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
   before_save do |article|
-    unless article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
+    digest = strip_tags(content)[0..80] + "……" if digest.blank?
+    unless article.source.blank? || article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
       article.source = "http://" + article.source
     end
   end
 
   def read
-    read_count += 1
+    update_attributes(read_count: read_count + 1)
   end
 
   def liked_by?(user)

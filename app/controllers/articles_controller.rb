@@ -18,7 +18,11 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
+    @article.read
 
+    @comment = Comment.new
+    @subcomment = SubComment.new
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @article }
@@ -44,7 +48,7 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(params[:article])
+    @article = Article.new(params[:article].merge({ author: current_user }))
 
     respond_to do |format|
       if @article.save

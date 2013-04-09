@@ -3,9 +3,10 @@ class SubComment
   include Mongoid::Timestamps
 
   field :content, type: String
+  validates_presence_of :content
 
   embedded_in :comment
-  belongs_to :commenter, class_name: "User"
+  belongs_to :commenter, class_name: "User", inverse_of: nil
 
   has_and_belongs_to_many :likers, class_name: 'User', inverse_of: nil
   has_and_belongs_to_many :dislikers, class_name: 'User', inverse_of: nil

@@ -40,7 +40,7 @@ content = <<_EOF_
 _EOF_
 
 categories.each do |cat|
-  rand.rand(10).times do |i|
+  (rand.rand(10)+3).times do |i|
     cat.articles.create!(title: "Test article #{i} in #{cat.name}", content: content, source: "http://test.seiue.com:3000", author: User.first)
   end
 end
