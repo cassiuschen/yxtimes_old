@@ -33,6 +33,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new.json
   def new
     @article = Article.new
+    @article.category = Category.find(params[:category]) if params[:category]
 
     respond_to do |format|
       format.html # new.html.erb

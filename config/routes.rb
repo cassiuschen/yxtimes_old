@@ -4,21 +4,31 @@ Yxtimes::Application.routes.draw do
   get "feature/edit"
   put "feature" => "feature#update", as: "feature"
 
-  resources :articles, :votes do
+  resources :votes do
     post "comments" => "comments#create"
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
   end
 
+  resources :articles do
+    post "comments" => "comments#create"
+    delete "comments/:id" => "comments#destroy", as: "comment"
+    post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
+    delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
+  end
+
+  # category
+  get "cat:id" => "categories#show", as: "category_show"
+
+  # home controller
   get "home/index"
 
+  # users controller
   get "users/edit"
   put "user" => "users#update"
   get "logout" => "users#logout"
   get "login" => "users#login"
-
-  get "cat:id" => "categories#show", as: "category_show"
 
 
   # The priority is based upon order of creation:

@@ -7,7 +7,7 @@ class Article
   field :title, type: String
   field :content, type: String
   field :source, type: String
-  field :digest, type: String, default: -> { content ? strip_tags(content)[0..80] + "……" : "" }
+  field :digest, type: String
 
   field :read_count, type: Integer, default: 0
 
@@ -18,6 +18,7 @@ class Article
   embeds_many :comments, as: :commentable
   belongs_to :category
   belongs_to :author, class_name: "User", inverse_of: :articles
+  validates_presence_of :author, :category
 
   has_and_belongs_to_many :likers, class_name: 'User', inverse_of: nil
   has_and_belongs_to_many :dislikers, class_name: 'User', inverse_of: nil

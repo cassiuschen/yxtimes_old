@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def create_subcomment
-
+    
   end
 
   def destroy_subcomment

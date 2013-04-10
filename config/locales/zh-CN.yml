@@ -212,6 +212,7 @@ zh-CN:
         title: 标题
         content: 内容
         source: 来源
+        category: 目录
       comment:
         content: 内容
       sub_comment:

@@ -19,7 +19,15 @@
     <%= f.label :content %><br />
     <%= f.text_field :content %>
   </div>
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.select :category, options_for_select(Category.all.map{|c|[c.name,c.id]}), :prompt => '选择分类' %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <pre>
+    <%= @article.to_json %>
+  </pre>
 <% end %>
