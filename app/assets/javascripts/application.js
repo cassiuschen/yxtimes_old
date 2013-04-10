@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap/dropdown
+//= require wysihtml5-parser_rules
+//= require wysihtml5-0.3.0
 //= require_tree .
