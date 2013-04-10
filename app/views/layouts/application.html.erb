@@ -17,8 +17,10 @@
       <%= link_to "投票", votes_path, class: "nav-link" %>
     </div>
     <div id="main">
-      <% unless notice.blank? %>
-        <div class="alert alert-success"><%= notice %></div>
+      <% flash.each do |k,v| %>
+        <div class="alert alert-<%= k %>">
+          <%= v %>
+        </div>
       <% end -%>
       <%= yield %>
     </div>

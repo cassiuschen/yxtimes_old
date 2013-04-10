@@ -1,19 +1,16 @@
 <h1>Listing votes</h1>
 
-<table>
+<table class="table table-bordered table-hover">
   <tr>
     <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="2">Action</th>
   </tr>
 
 <% @votes.each do |vote| %>
   <tr>
-    <td><%= vote.title %></td>
-    <td><%= link_to 'Show', vote %></td>
-    <td><%= link_to 'Edit', edit_vote_path(vote) %></td>
-    <td><%= link_to 'Destroy', vote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to vote.title, vote, class: "link" %></td>
+    <td class="w30"><%= link_to 'Edit', edit_vote_path(vote), class: "link" %></td>
+    <td class="w30"><%= link_to 'Destroy', vote, method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></td>
   </tr>
 <% end %>
 </table>

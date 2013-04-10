@@ -5,7 +5,7 @@ class Comment
   field :content, type: String
   validates_presence_of :content
 
-  embeds_many :subComments
+  embeds_many :subcomments, class_name: "SubComment"
   embedded_in :commentable, polymorphic: true
   belongs_to :commenter, class_name: "User"
 

@@ -18,19 +18,27 @@
 <div class="content" style="margin-top: 20px;">
   <%= raw @article.content %>
 </div>
-<%= form_for @comment, url: article_comments_path(@article) do |f| %>
+<hr>
+<h2><%= @article.comments.count %> Comments:</h2>
+<%= form_for [@article, @comment] do |f| %>
   <%= f.text_field :content %>
   <%= f.submit %>
 <% end -%>
-<hr>
-<h2><%= @article.comments.count %> Comments:</h2>
 <% @article.comments.each do |comment| %>
 <div class="well">
   <b>
-    <%= comment.commenter.nickname if comment.commenter %>
+    <%= comment.commenter.nickname %>
     says: 
   </b>
   <%= comment.content %>
+  <% comment.subcomments.each do |subcomment| %>
+  <div class="well">
+    <b>
+      <%= subcomment.commenter.nickname %> says: 
+    </b>
+    <%= subcomment.content %>
+  </div>
+  <% end -%>
   <%= form_for @subcomment, url: article_subcomments_path(@article, comment) do |f| %>
     <%= f.text_field :content %>
     <%= f.submit %>

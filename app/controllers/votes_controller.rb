@@ -14,6 +14,10 @@ class VotesController < ApplicationController
   # GET /votes/1.json
   def show
     @vote = Vote.find(params[:id])
+    @vote.read
+
+    @comment = Comment.new
+    @subcomment = SubComment.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -79,5 +83,9 @@ class VotesController < ApplicationController
       format.html { redirect_to votes_url }
       format.json { head :no_content }
     end
+  end
+
+  def vote_for
+    
   end
 end

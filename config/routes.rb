@@ -9,6 +9,7 @@ Yxtimes::Application.routes.draw do
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
+    post "options" => "comments#votes#vote_for"
   end
 
   resources :articles do

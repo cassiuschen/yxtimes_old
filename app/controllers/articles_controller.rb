@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new.json
   def new
     @article = Article.new
-    @article.category = Category.find(params[:category]) if params[:category]
+    @article.category_id = params[:category] if params[:category]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -88,6 +88,10 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url }
       format.json { head :no_content }
     end
+  end
+
+  def vote_for
+    
   end
 
 end
