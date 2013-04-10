@@ -6,6 +6,7 @@
   <title>银杏时报</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
+  <%= yield :style %>
 </head>
 <body>
   <div class="container">
@@ -40,7 +41,8 @@
       <% end -%>
     <% end -%>
   </div>
-<%= debug(params) if Rails.env.development? %>
-<%= javascript_include_tag "application" %>
+  <%= debug(params) if Rails.env.development? %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :script %>
 </body>
 </html>
