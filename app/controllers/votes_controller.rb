@@ -48,7 +48,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
+        format.html { redirect_to @vote, flash: { success: 'Vote was successfully created.' } }
         format.json { render json: @vote, status: :created, location: @vote }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.update_attributes(params[:vote])
-        format.html { redirect_to @vote, notice: 'Vote was successfully updated.' }
+        format.html { redirect_to @vote, flash: { success: 'Vote was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -86,6 +86,16 @@ class VotesController < ApplicationController
   end
 
   def vote_for
+    @vote = Vote.find(params[:vote_id])
+    @option = @vote.options.find(params[:option])
+
+    if @vote.voters.include? current_user
+      redirect_to :back, flash: { error: "Vote again!" }
+      return 
+    end
     
+    @option.update_attributes(count: @option.count + 1)
+    @vote.voters << current_user
+    redirect_to :back, flash: { success: "Vote successfully" }
   end
 end

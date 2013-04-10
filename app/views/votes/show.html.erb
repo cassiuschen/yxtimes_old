@@ -1,11 +1,7 @@
 <h1><%= @vote.title %></h1>
-<% @vote.options.each do |opt| %>
-  <%= opt.content + " (#{opt.count})" %>
-  <br>
-<% end -%>
 <%= form_tag vote_options_path(@vote), method: :post do %>
   <% @vote.options.each do |opt| %>
-    <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content %>
+    <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
   <% end -%>
   <%= submit_tag "Submit" %>
 <% end %>
@@ -30,7 +26,7 @@
     <%= subcomment.content %>
   </div>
   <% end -%>
-  <%= form_for @subcomment, url: vote_subcomments_path(@article, comment) do |f| %>
+  <%= form_for @subcomment, url: vote_subcomments_path(@vote, comment) do |f| %>
     <%= f.text_field :content %>
     <%= f.submit %>
   <% end -%>

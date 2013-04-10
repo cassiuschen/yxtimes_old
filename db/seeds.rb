@@ -42,7 +42,7 @@ _EOF_
 
 categories.each do |cat|
   (rand.rand(10)+3).times do |i|
-    cat.articles.create!(title: "Test article #{i} in #{cat.name}", content: content, source: "http://test.seiue.com:3000", author: User.first)
+    cat.articles.create!(title: "Test article #{i} in #{cat.name}", content: content, source: "test.seiue.com:3000", author: User.first)
   end
 end
 

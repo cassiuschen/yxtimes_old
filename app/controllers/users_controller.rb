@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     params[:user].delete("name")
 
     if @user.update_attributes(params[:user])
-      redirect_to root_path, notice: "profile was successfully update."
+      redirect_to root_path, flash: { success: "profile was successfully update."} 
     else
       render action: "edit"
     end

@@ -7,6 +7,8 @@ gem 'rails', '3.2.13'
 
 gem 'mongoid'
 
+gem 'kaminari'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -50,6 +52,7 @@ gem 'rubycas-client', ">=2.3.10.rc1"
 
 # file uploader
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
 
 # Deploy with Capistrano
 # gem 'capistrano'

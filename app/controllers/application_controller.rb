@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
         return
       end
 
-      @current_user.update_attributes!(:last_sign_in_at => session[:previous_redirect_to_cas])
+      @current_user.update_attributes!(last_sign_in_at: session[:previous_redirect_to_cas], last_sign_in_ip: request.remote_ip)
     end
   end
 

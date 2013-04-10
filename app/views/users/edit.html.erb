@@ -13,12 +13,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nickname %><br />
+    <%= f.label :nickname %>
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :sinature %><br />
+    <%= f.label :sinature %>
     <%= f.text_field :sinature %>
+  </div>
+  <div class="field">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+    <%= image_tag @user.avatar, width: 60, height: 60 %>
   </div>
   <div class="actions">
     <%= f.submit %>

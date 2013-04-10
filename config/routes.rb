@@ -5,14 +5,17 @@ Yxtimes::Application.routes.draw do
   put "feature" => "feature#update", as: "feature"
 
   resources :votes do
+    get "comments" => "comments#show"
     post "comments" => "comments#create"
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
-    post "options" => "comments#votes#vote_for"
+    
+    post "options" => "votes#vote_for"
   end
 
   resources :articles do
+    get "comments" => "comments#show"
     post "comments" => "comments#create"
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
@@ -26,7 +29,8 @@ Yxtimes::Application.routes.draw do
   get "home/index"
 
   # users controller
-  get "users/edit"
+  get "users/:id" => "users#show"
+  get "edit" => "users#edit", as: "user_edit"
   put "user" => "users#update"
   get "logout" => "users#logout"
   get "login" => "users#login"

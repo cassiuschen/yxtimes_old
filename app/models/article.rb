@@ -25,7 +25,7 @@ class Article
   has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
   before_save do |article|
-    digest = strip_tags(content)[0..80] + "……" if digest.blank?
+    article.digest = strip_tags(article.content)[0..80] + "……" if article.digest.blank?
     unless article.source.blank? || article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
       article.source = "http://" + article.source
     end

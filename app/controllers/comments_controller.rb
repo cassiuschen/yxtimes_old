@@ -1,6 +1,14 @@
 class CommentsController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter
-  prepend_before_filter CASClient::Frameworks::Rails::Filter
+  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: :show
+  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: :show
+
+  def show
+    @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
+
+    respond_to do |format|
+      format.json { render json: @commentable.comments.to_json }
+    end
+  end
  
   def create
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])

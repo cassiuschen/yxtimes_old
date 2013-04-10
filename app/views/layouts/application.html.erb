@@ -26,9 +26,13 @@
     </div>
   </div>
   <div id="user-info">
-    <% if current_user %>
+    <% if user_signed_in? %>
       <%= link_to logout_path do %>
         <i class="icon-signout"></i>
+      <% end -%>
+      <br>
+      <%= link_to user_edit_path do %>
+        <i class="icon-user"></i>
       <% end -%>
     <% else %>
       <%= link_to CASClient::Frameworks::Rails::Filter.login_url(controller) do %>

@@ -2,7 +2,7 @@ class User
   include Mongoid::Document
 
   field :name, type: String
-  validates :name, uniqueness: true
+  validates_uniqueness_of :name
 
   attr_readonly :name
   field :_id, type: String, default: -> { name }
@@ -13,9 +13,11 @@ class User
   field :sinature, type: String
 
   field :last_sign_in_at, :type => Time
+  field :last_sign_in_ip, :type => String
+
+  mount_uploader :avatar, AvatarUploader
 
   has_many :articles, inverse_of: :author
-
   embeds_many :notifications
 
   def send_notification(notification)

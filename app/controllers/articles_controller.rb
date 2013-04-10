@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: [:index, :show]
-  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: [:index, :show]
+  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: [:show]
+  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: [:show]
   
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
