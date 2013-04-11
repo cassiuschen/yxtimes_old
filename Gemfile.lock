@@ -125,6 +125,9 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails_kindeditor (0.3.14)
+      carrierwave
+      mini_magick
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -181,6 +184,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   rails (= 3.2.13)
+  rails_kindeditor (~> 0.3.14)
   rubycas-client (>= 2.3.10.rc1)
   therubyracer
   thin

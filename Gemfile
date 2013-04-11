@@ -54,6 +54,8 @@ gem 'rubycas-client', ">=2.3.10.rc1"
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
 
+gem 'rails_kindeditor', '~> 0.3.14'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
