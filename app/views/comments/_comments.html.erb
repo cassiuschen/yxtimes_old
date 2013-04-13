@@ -1,0 +1,27 @@
+<h2 id="comments"><%= commentable.comments.count %> Comments:</h2>
+<%= form_for [commentable, @comment] do |f| %>
+  <%= f.text_field :content %>
+  <%= check_box_tag :anonymous %>
+  <%= f.submit %>
+<% end -%>
+<% commentable.comments.each do |comment| %>
+<div class="well">
+  <b>
+    <%= comment.commenter ? comment.commenter.nickname : "匿名用户" %>
+    says: 
+  </b>
+  <%= comment.content %>
+  <% comment.subcomments.each do |subcomment| %>
+  <div class="well">
+    <b>
+      <%= subcomment.commenter ? subcomment.commenter.nickname : "匿名用户" %> says: 
+    </b>
+    <%= subcomment.content %>
+  </div>
+  <% end -%>
+  <%= form_for @subcomment, url: article_subcomments_path(commentable, comment) do |f| %>
+    <%= f.text_field :content %>
+    <%= f.submit %>
+  <% end -%>
+</div>
+<% end -%>

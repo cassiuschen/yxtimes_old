@@ -1,7 +1,5 @@
-class ArticlesController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: [:show]
-  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: [:show]
-  
+class ArticlesController < ApplicationController  
+  prepend_before_filter :cas_filter, except: :show
 
   # GET /articles
   # GET /articles.json
@@ -88,10 +86,6 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url }
       format.json { head :no_content }
     end
-  end
-
-  def vote_for
-    
   end
 
 end

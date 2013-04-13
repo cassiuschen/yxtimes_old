@@ -1,10 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter CASClient::Frameworks::Rails::GatewayFilter, :cas_user
+  before_filter :cas_gateway_filter, :cas_user
   
   helper_method :current_user, :user_signed_in?
 
   private
+
+  def cas_gateway_filter
+    return if @has_already_filter
+    if cookies[:tgt]
+      CASClient::Frameworks::Rails::Filter.filter(self)
+      @has_already_filter = true
+    end
+  end
+
+  def cas_filter
+    return if @has_already_filter
+    CASClient::Frameworks::Rails::Filter.filter(self)
+    @has_already_filter = true
+  end
+
   def cas_user
     if session[:cas_user]
       begin

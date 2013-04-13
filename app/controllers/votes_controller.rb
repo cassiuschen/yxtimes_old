@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  prepend_before_filter :cas_filter, except: [:index, :show]
+
   # GET /votes
   # GET /votes.json
   def index

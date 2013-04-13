@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: :show
-  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: :show
+  before_filter :cas_filter, only: [:destroy, :destroy_subcomment]
 
   def show
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
 
     respond_to do |format|
+      format.html { redirect_to(url_for(@commentable)+"#comments") }
       format.json { render json: @commentable.comments.to_json }
     end
   end

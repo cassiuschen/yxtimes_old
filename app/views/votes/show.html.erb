@@ -6,32 +6,7 @@
   <%= submit_tag "Submit" %>
 <% end %>
 <hr>
-<h2><%= @vote.comments.count %> Comments:</h2>
-<%= form_for [@vote, @comment] do |f| %>
-  <%= f.text_field :content %>
-  <%= f.submit %>
-<% end -%>
-<% @vote.comments.each do |comment| %>
-<div class="well">
-  <b>
-    <%= comment.commenter.nickname %>
-    says: 
-  </b>
-  <%= comment.content %>
-  <% comment.subcomments.each do |subcomment| %>
-  <div class="well">
-    <b>
-      <%= subcomment.commenter.nickname %> says: 
-    </b>
-    <%= subcomment.content %>
-  </div>
-  <% end -%>
-  <%= form_for @subcomment, url: vote_subcomments_path(@vote, comment) do |f| %>
-    <%= f.text_field :content %>
-    <%= f.submit %>
-  <% end -%>
-</div>
-<% end -%>
+<%= render 'comments/comments', collecton: @vote, as: 'article' %>
 <br>
 <br>
 <br>

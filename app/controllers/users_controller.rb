@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter CASClient::Frameworks::Rails::GatewayFilter, except: :show
-  prepend_before_filter CASClient::Frameworks::Rails::Filter, except: :show
+  prepend_before_filter :cas_filter, except: :show
 
   def edit
     @user = current_user
