@@ -1,5 +1,8 @@
 Yxtimes::Application.routes.draw do
 
+  resources :features
+
+
   get "feature" => "feature#show", as: "feature"
   get "feature/edit"
   put "feature" => "feature#update", as: "feature"

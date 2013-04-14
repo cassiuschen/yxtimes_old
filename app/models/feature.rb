@@ -1,12 +1,12 @@
 class Feature
   include Mongoid::Document
-
+  include Mongoid::Timestamps
+  
   field :title, type: String
   field :content, type: String
 
-  has_and_belongs_to_many :articles, inverse_of: nil
+  defaut_scope desc(:created_at)
 
-  before_save do |document|
-    false if Feature.count > 0
-  end
+  has_and_belongs_to_many :articles, inverse_of: nil
+  validates_presence_of :articles
 end

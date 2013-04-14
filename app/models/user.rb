@@ -11,6 +11,7 @@ class User
   validates_presence_of :nickname
 
   field :sinature, type: String
+  field :power, type: Integer, default: 0
 
   field :last_sign_in_at, :type => Time
   field :last_sign_in_ip, :type => String
@@ -22,5 +23,13 @@ class User
 
   def send_notification(notification)
     self.notifications.create!(content: notification)
+  end
+
+  def is_admin?
+    !!(self.power >= 10)
+  end
+
+  def is_reporter?
+    !!(self.power >= 1)
   end
 end

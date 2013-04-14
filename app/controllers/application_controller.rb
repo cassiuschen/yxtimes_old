@@ -2,9 +2,24 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :cas_gateway_filter, :cas_user
   
-  helper_method :current_user, :user_signed_in?
+  helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?
 
   private
+
+  def require_admin
+    unless current_user && current_user.is_admin?
+      redirect_to root_path, notice: "请先登录"
+      return
+    end
+  end
+
+  def is_admin?
+    current_user.is_admin?
+  end
+
+  def is_reporter?
+    current_user.is_reporter?
+  end
 
   def cas_gateway_filter
     return if @has_already_filter

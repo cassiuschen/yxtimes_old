@@ -8,6 +8,9 @@ class Article
   field :content, type: String
   field :source, type: String
   field :digest, type: String
+  field :is_verified, type: Boolean, default: false
+
+  default_scope where(is_verified: true)
 
   field :read_count, type: Integer, default: 0
 
@@ -62,6 +65,13 @@ class Article
   def starred_by(user)
     return if starrers.include? user
     starrers << user
-end
+  end
 
+  def is_verified?
+    self.is_verified
+  end
+
+  def verify!
+    self.update_attributes(is_verified: true)
+  end
 end
