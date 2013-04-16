@@ -19,34 +19,37 @@
   <div id="feeds" style="padding: 30px 40px;">  
   <% end -%>
     <table>
-      <tr class="timeline-item">
-        <td class="time">
-          2013.3.4<br>
-          13:35
-        </td>
-        <td class="content">
-          关注了
-          <a href="###" class="link">调查</a> 中的文章
-          <a href="###" class="timeline-link">《听听纽带的声音》</a>
-        </td>
-      </tr>
+      <% @user.feeds.each do |feed| %>
+        <tr class="timeline-item">
+          <td class="time">
+            <%= beautify_time_with_br(feed.created_at) %>
+          </td>
+          <td class="content">
+            <%= feed.content %>
+           <!--  关注了
+            <a href="###" class="link">调查</a> 中的文章
+            <a href="###" class="timeline-link">《听听纽带的声音》</a> -->
+          </td>
+        </tr>
+      <% end %>
     </table>
   </div>
   <% if @user.articles.count %>
     <div id="articles" style="padding: 0 40px 30px;">
       <table>
-        <tr class="timeline-item">
-        <td class="time">
-          2013.3.4<br>
-          13:35
-        </td>
-        <td class="content">
-          发布于
-          <a href="###" class="link">调查</a>
-          <a href="###" class="timeline-link" style="text-indent: 0;">听听纽带的声音</a>
-          <div style="color: #999;">股市“跌跌不休”，金价持续低迷，银行理财产品和艺术品投资也不保险……面对重回“负利率”时代的通胀压力，工薪阶层几大传统投资理财渠道几乎全部受阻。在博鳌亚洲论坛2013年年会上，如何让百姓的“钱袋子”不缩水进而保值增值，成为与会嘉宾探讨的焦点之一......</div>
-        </td>
-      </tr>
+        <% @user.articles.each do |article| %>
+          <tr class="timeline-item">
+          <td class="time">
+            <%= beautify_time_with_br(article.created_at) %>
+          </td>
+          <td class="content">
+            发布于
+            <a href="<%= category_path(article.category) %>" class="link"><%= article.category.name %></a>
+            <a href="<%= article_path(article) %>" class="timeline-link" style="text-indent: 0;"><%= article.title %></a>
+            <div style="color: #999;"><%= article.digest(120).gsub(/\s|　/, "") %></div>
+          </td>
+        </tr>
+        <% end %>
       </table>
     </div>
     </div>

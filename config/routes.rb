@@ -19,6 +19,9 @@ Yxtimes::Application.routes.draw do
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
+    member do 
+      get "follow"
+    end
   end
 
   # category

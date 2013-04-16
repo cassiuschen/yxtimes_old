@@ -31,6 +31,8 @@ class VotesController < ApplicationController
   # GET /votes/new.json
   def new
     @vote = Vote.new
+    @option1 = Option.new
+    @option2 = Option.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,8 @@ class VotesController < ApplicationController
   # GET /votes/1/edit
   def edit
     @vote = Vote.find(params[:id])
+    @option1 = @vote.options[0]
+    @option2 = @vote.options[1]
   end
 
   # POST /votes

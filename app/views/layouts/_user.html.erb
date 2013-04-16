@@ -6,15 +6,17 @@
           <%= image_tag current_user.avatar, class: "avatar-inner" %>
           <div class="noti-num">
             <div class="noti-num-inner">
-              1
+              <%= current_user.notifications.count %>
             </div>
           </div>
         </a>
-        <div class="noti-box dropdown">
-          <a href="###" class="noti-item">
-            <div class="unread">●</div>
-            尼玛教你回家吃饭! ! 尼玛教你回家吃饭! ! 
-          </a>
+        <div class="noti-box dropdown"> 
+          <% current_user.notifications.each do |noti| %>
+            <a href="<%= noti.link %>" class="noti-item">
+              <div class="unread">●</div>
+              <%= noti.content %>
+            </a>
+          <% end %>
         </div>
       </div>
       <div class="center mt10">

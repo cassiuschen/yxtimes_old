@@ -6,5 +6,6 @@ class HomeController < ApplicationController
     @renwu = Category.renwu.articles
     @yuedu = Category.yuedu.articles
     @vote = Vote.first
+    @most_read = Article.desc(:read_count)
   end
 end

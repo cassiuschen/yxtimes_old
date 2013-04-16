@@ -1,6 +1,7 @@
 class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Rails.application.routes.url_helpers
 
   field :content, type: String
   validates_presence_of :content
@@ -30,6 +31,14 @@ class Comment
     return if dislikers.include? user
     likers.delete user
     dislikers << user
+  end
+
+  after_create :push_notifications
+  def push_notifications
+    return if !commentable.is_a?(Article)
+    self.commentable.starrers.each do |user|
+      user.send_notification("#{commenter.name} 评论了文章《#{commentable.title}》", article_path(commentable))
+    end
   end
   
 end

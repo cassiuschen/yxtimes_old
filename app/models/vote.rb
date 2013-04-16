@@ -12,6 +12,7 @@ class Vote
 
   validates_presence_of :title, :options
 
+  accepts_nested_attributes_for :options
   has_and_belongs_to_many :voters, class_name: "User", inverse_of: nil
 
   def read
