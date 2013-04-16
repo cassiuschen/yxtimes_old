@@ -6,11 +6,11 @@ class Vote
   field :read_count, type: Integer, default: 0
   field :_id, type: Integer, default: -> { Vote.count + 1 }
 
-  validates_presence_of :title
-
   embeds_many :options, class_name: "Vote::Option"
   embeds_many :comments, as: :commentable
   belongs_to :author, class_name: "User"
+
+  validates_presence_of :title, :options
 
   has_and_belongs_to_many :voters, class_name: "User", inverse_of: nil
 

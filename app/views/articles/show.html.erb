@@ -3,7 +3,7 @@
 </h1>
 
 <div class="author">
-  作者：<%= @article.author.nickname %>
+  作者：<%= link_to @article.author.nickname, @article.author, class %>
 </div>
 <div class="clearfix">
   <% unless @article.source.blank? %>

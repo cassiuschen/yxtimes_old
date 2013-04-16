@@ -1,10 +1,34 @@
 <h1><%= @vote.title %></h1>
-<%= form_tag vote_options_path(@vote), method: :post do %>
+<% if @vote.voters.include? current_user %>
+    <table class="vote-table">
   <% @vote.options.each do |opt| %>
-    <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
+      <tr>
+        <td style="width: 200px;">
+          <%= opt.content %>
+        </td>
+        <td style="width: 300px;"> 
+          <div class="progress progress-warning" style="margin: 0px;">
+            <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters.count).to_s + "%" %>">
+            </div>
+          </div>
+        </td>
+        <td style="width: 50px;">
+          <%= opt.count %>
+        </td>
+      </tr>
+    </div>
   <% end -%>
-  <%= submit_tag "Submit" %>
-<% end %>
+    </table>
+<% else %>
+  <%= form_tag vote_options_path(@vote), method: :post do %>
+    <% @vote.options.each do |opt| %>
+    <div>
+      <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
+    </div>
+    <% end -%>
+    <%= submit_tag "投票", class: "btn btn-danger" %>
+  <% end %>
+<% end -%>
 <hr>
 <%= render partial: 'comments/comments', object: @vote, as: 'commentable' %>
 <br>
