@@ -43,6 +43,8 @@ class Article
     end
   end
 
+  before_save :sanitize_content
+
   def read
     update_attributes(read_count: read_count + 1)
   end
@@ -83,4 +85,24 @@ class Article
   def verify!
     self.update_attributes(is_verified: true)
   end
+
+  protected
+  def sanitize_content
+    self.content = Sanitize.clean(
+      self.content,
+      :elements => %w[
+        a abbr b blockquote br cite code dd dfn dl dt em h1 h2 h3 h4 h5 h6 i kbd div font 
+        li mark ol p pre q s samp small span strike strong sub sup time u ul var img table tbody tr td
+      ],
+      :attributes => {
+        :all    => ['style', 'width', 'height', 'src', 'color'],
+        'a'     => ['title', 'href', 'target'],
+      },
+      :protocols => {
+        'a'   => {'href' => ['ftp', 'http', 'https', 'mailto']}
+      },
+      :remove_contents => true
+    )
+  end
+end
 end

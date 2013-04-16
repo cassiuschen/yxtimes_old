@@ -98,6 +98,7 @@ GEM
       mongoid (~> 3.0)
     moped (1.4.5)
     multi_json (1.7.2)
+    nokogiri (1.5.9)
     origin (1.0.11)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -141,6 +142,8 @@ GEM
     ref (1.0.4)
     rubycas-client (2.3.10.rc1)
       activesupport
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -186,6 +189,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails_kindeditor (~> 0.3.14)
   rubycas-client (>= 2.3.10.rc1)
+  sanitize
   therubyracer
   thin
   uglifier (>= 1.0.3)
