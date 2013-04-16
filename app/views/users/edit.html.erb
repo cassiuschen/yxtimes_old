@@ -1,5 +1,5 @@
 <h1>编辑个人资料</h1>
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url: user_update_path) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
