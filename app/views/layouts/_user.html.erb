@@ -20,7 +20,7 @@
       <div class="center mt10">
         <span class="white bold" style="font-size: 18px;"><%= current_user.nickname %></span>
       </div>
-      <div class="center gray">老师</div>
+      <div class="center gray"><%= current_user.is_who %></div>
       <a href="/" class="center gray mt30"><i class="icon-home icon-2x p0"></i><br>主页</a>
       <a href="<%= new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>发布</a>
       <a href="<%= "###" %>" class="center gray mt30"><i class="icon-eye-open icon-2x p0"></i><br>审核</a>

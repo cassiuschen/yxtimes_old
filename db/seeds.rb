@@ -4,7 +4,7 @@ Article.destroy_all
 Feature.destroy_all
 Vote.destroy_all
 
-User.create!(name: "test")
+User.create!(name: "test", power: 100)
 
 categories = Category.create!([
   { name: '阅读' },
@@ -42,11 +42,10 @@ _EOF_
 
 categories.each do |cat|
   (rand.rand(10)+20).times do |i|
-    cat.articles.create!(title: "Test article #{i} in #{cat.name}", content: content, source: "test.seiue.com:3000", author: User.first)
+    cat.articles.create!(title: "Test article #{i} in #{cat.name}", content: content, source: "test.seiue.com:3000", author: User.first, is_verified: true)
   end
 end
 
 feature = Feature.create!(title: "Test feature", content: "This is a test feature.", articles: Article.all[1..10])
 
 vote = Vote.create!(title: "Test Vote 1", options: (1..4).map{|i|Vote::Option.new(content: "Option " + i.to_s + " in the vote.")})
-

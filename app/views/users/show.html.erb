@@ -2,9 +2,9 @@
   <div class="avatar">
     <%= image_tag @user.avatar, class: "avatar-inner" %>
   </div>
-  <div style="position: absolute; color: white;">
-    <h1><%= @user.nickname %></h1>
-    <div><%= @user.is_who %></div>
+  <div style="position: absolute; color: white; left: 515px; top: 155px; text-align: center;">
+    <div style="font-size: 26px; line-height: 1.5; font-weight: bold;"><%= @user.nickname %></div>
+    <div style="font-size: 16px;"><%= @user.is_who %></div>
   </div>
 </div>
 <div id="timeline" data-toggle="tabs">

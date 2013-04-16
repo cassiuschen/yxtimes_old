@@ -30,7 +30,7 @@ Yxtimes::Application.routes.draw do
   # users controller
   get "users/:id" => "users#show", as: "user"
   get "edit" => "users#edit", as: "user_edit"
-  put "user" => "users#update"
+  put "user" => "users#update", as: "user_update"
 
   get "users/:id/feeds" => "users#show_feeds", as: "user_feeds"
   get "users/:id/articles" => "users#show_articles", as: "user_articles"
