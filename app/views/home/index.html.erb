@@ -3,11 +3,8 @@
     <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
       <img src="" width="610" height="260" alt="" class="bgw pull-left">
       <div class="text-block" style="margin-left: 610px;">
-        <h2><a href="###"><%= @feature.title %></a></h2>
+        <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
         <p><%= @feature.content %></p>
-        <a href="###" class="comments" style="left: 25px;">
-          <i class="icon-comment"></i>(<%= @feature.comments_count %>)
-        </a>
         <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
                   专题
                 </h4></a>
@@ -15,29 +12,19 @@
     </div>
     <div class="ml20" style="float: left; position: relative; height: 210px; padding: 25px 0; width: 150px;">
       <div style="color:#F6DA3E;font-size:22px;text-shadow:0 1px 1px rgba(0,0,0,0.8);margin-bottom: 15px;">MOST READ</div>
-      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
-        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">1.</span>
-        听听纽带的声音
-      </a>
-      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
-        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">2.</span>
-        听听纽带的声音
-      </a>
-      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
-        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">3.</span>
-        听听纽带的声音
-      </a>
-      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
-        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">4.</span>
-        听听纽带的声音
-      </a>
+      <% @most_read[0..3].each do |most| %>
+        <a href="<%= article_path(most) %>" style="display: block; color: #FFF; font-size: 16px;">
+          <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">1.</span>
+          <%= most.title.truncate(18) %>
+        </a>
+      <% end %>
     </div>
     <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
       <img src="" width="300" height="260" alt="" class="bgw pull-right">
       <div class="text-block" style="margin-right: 300px;">
-        <h2><a href="###"><%= @diaocha.title %></a></h2>
+        <h2><%= link_to @diaocha.title, @diaocha %></h2>
         <p><%= @diaocha.digest(50) %></p>
-        <a href="###" class="comments" style="right: 25px;">
+        <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
           <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
         </a>
         <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
@@ -48,9 +35,9 @@
     <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
       <% @guandian[0..2].each do |point| %>
         <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
-          <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###"><%= point.title %></a></h2>
+          <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
           <p><%= point.digest(50) %></p>
-          <a href="###" class="comments" style="left: 25px;">
+          <a href="<%= article_path(point, anchor: 'comments') %>" class="comments" style="left: 25px;">
             <i class="icon-comment"></i>(<%= point.comments.count %>)
           </a>
         </div> 
@@ -62,10 +49,10 @@
     <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
       <img src="" width="300" height="200" alt="" class="bgw pull-right">
       <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
-        <div style="font-size: 18px; line-height: 24px;"><a style="color: white;" href="###"><%= @renwu.first.title %></a></div>
+        <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.first.title, @renwu.first, style: "color: white;" %></div>
         <div style="color: #ccc;"  ><%= @renwu.first.digest %></div>
       </div>
-      <a href="###" class="comments" style="right: 25px;">
+      <a href="<%= article_path(@renwu.first, anchor: 'comments') %>" class="comments" style="right: 25px;">
         <i class="icon-comment"></i>(<%= @renwu.first.comments.count %>)
       </a>
       <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
@@ -75,7 +62,7 @@
     <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
       <div class="text-block">
         <% @yuedu[0..6].each do |read| %>
-          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###"><%= read.title %></a></div>
+          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="<%= article_path(read) %>"><%= read.title %></a></div>
         <% end %>
       </div>
       
