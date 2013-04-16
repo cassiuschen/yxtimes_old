@@ -3,10 +3,10 @@
     <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
       <img src="" width="610" height="260" alt="" class="bgw pull-left">
       <div class="text-block" style="margin-left: 610px;">
-        <h2><a href="###">听听纽带的声音</a></h2>
-        <p>自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧节黑匣子展演与培训课程的声自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧节黑匣子展演与培训课程的声培训……</p>
+        <h2><a href="###"><%= @feature.title %></a></h2>
+        <p><%= @feature.content %></p>
         <a href="###" class="comments" style="left: 25px;">
-          <i class="icon-comment"></i>(123)
+          <i class="icon-comment"></i>(<%= @feature.comments_count %>)
         </a>
         <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
                   专题
@@ -35,10 +35,10 @@
     <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
       <img src="" width="300" height="260" alt="" class="bgw pull-right">
       <div class="text-block" style="margin-right: 300px;">
-        <h2>听听<a href="###">听听纽带的声音</a></h2>
-        <p>自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧……</p>
+        <h2><a href="###"><%= @diaocha.title %></a></h2>
+        <p><%= @diaocha.digest(50) %></p>
         <a href="###" class="comments" style="right: 25px;">
-          <i class="icon-comment"></i>(123)
+          <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
         </a>
         <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
                   调查
@@ -46,27 +46,15 @@
       </div>
     </div>
     <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
-      <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
-        <h2><a href="###">听听纽带的声音</a></h2>
-        <p>自从上一篇关于戏剧节的报道发出以来……</p>
-        <a href="###" class="comments" style="left: 25px;">
-          <i class="icon-comment"></i>(123)
-        </a>
-      </div>
-      <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5); border-left: 1px solid rgba(0,0,0,0.1)">
-        <h2><a href="###">听听纽带的声音</a></h2>
-        <p>自从上一篇关于戏剧节的报道发出以来……</p>
-        <a href="###" class="comments" style="left: 25px;">
-          <i class="icon-comment"></i>(123)
-        </a>
-      </div>
-      <div class="text-block pull-left" style="width: 111px; border-left: 1px solid rgba(0,0,0,0.1)">
-        <h2><a href="###">听听纽带的声音</a></h2>
-        <p>自从上一篇关于戏剧节的报道发出以来……</p>
-        <a href="###" class="comments" style="left: 25px;">
-          <i class="icon-comment"></i>(123)
-        </a>
-      </div>
+      <% @guandian[0..2].each do |point| %>
+        <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
+          <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###"><%= point.title %></a></h2>
+          <p><%= point.digest(50) %></p>
+          <a href="###" class="comments" style="left: 25px;">
+            <i class="icon-comment"></i>(<%= point.comments.count %>)
+          </a>
+        </div> 
+      <% end %>
       <a href="<%= category_path(2) %>"><h4 class="category" style="right: 15px; color: #8DC433">
               观点
             </h4></a>
@@ -74,11 +62,11 @@
     <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
       <img src="" width="300" height="200" alt="" class="bgw pull-right">
       <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
-        <div style="font-size: 18px; line-height: 24px;"><a style="color: white;" href="###">听听听听纽带的声音</a></div>
-        <div style="color: #ccc;"  >自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧……</div>
+        <div style="font-size: 18px; line-height: 24px;"><a style="color: white;" href="###"><%= @renwu.first.title %></a></div>
+        <div style="color: #ccc;"  ><%= @renwu.first.digest %></div>
       </div>
       <a href="###" class="comments" style="right: 25px;">
-        <i class="icon-comment"></i>(123)
+        <i class="icon-comment"></i>(<%= @renwu.first.comments.count %>)
       </a>
       <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
               人物
@@ -86,12 +74,9 @@
     </div>
     <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
       <div class="text-block">
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <% @yuedu[0..6].each do |read| %>
+          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###"><%= read.title %></a></div>
+        <% end %>
       </div>
       
       <a href="<%= category_path(1) %>"><h4 class="category" style="right: 15px; color: #B657C1">

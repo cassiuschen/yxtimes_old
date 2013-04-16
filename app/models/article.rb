@@ -1,4 +1,4 @@
-# include ActionView::Helpers::SanitizeHelper
+include ActionView::Helpers::SanitizeHelper
 
 class Article
   include Mongoid::Document
@@ -9,7 +9,7 @@ class Article
   field :source, type: String
   field :is_verified, type: Boolean, default: false
 
-  default_scope where(is_verified: true)
+  default_scope where(is_verified: true).desc(:created_at)
 
   field :read_count, type: Integer, default: 0
 
@@ -85,7 +85,7 @@ class Article
   end
 
   def digest(length = 80)
-    strip_tags(article.content)[0..length] + "……"
+    strip_tags(self.content)[0..length] + "……"
   end
 
   protected
