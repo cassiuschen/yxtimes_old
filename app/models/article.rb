@@ -1,4 +1,4 @@
-include ActionView::Helpers::SanitizeHelper
+# include ActionView::Helpers::SanitizeHelper
 
 class Article
   include Mongoid::Document
@@ -7,7 +7,6 @@ class Article
   field :title, type: String
   field :content, type: String
   field :source, type: String
-  field :digest, type: String
   field :is_verified, type: Boolean, default: false
 
   default_scope where(is_verified: true)
@@ -28,7 +27,6 @@ class Article
   has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
   before_save do |article|
-    article.digest = strip_tags(article.content)[0..80] + "……" if article.digest.blank?
     unless article.source.blank? || article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
       article.source = "http://" + article.source
     end
@@ -73,5 +71,9 @@ class Article
 
   def verify!
     self.update_attributes(is_verified: true)
+  end
+
+  def digest(length = 80)
+    strip_tags(article.content)[0..length] + "……"
   end
 end

@@ -1,8 +1,7 @@
 Yxtimes::Application.routes.draw do
 
-  resources :features
-
-
+  resources :features, except: :index
+  get "features" => "features#show", as: 'features'
 
   resources :votes do
     get "comments" => "comments#show"
@@ -23,15 +22,19 @@ Yxtimes::Application.routes.draw do
   end
 
   # category
-  get "cat:id" => "categories#show", as: "category_show"
+  get "cat:id" => "categories#show", as: "category"
 
   # home controller
   get "home/index"
 
   # users controller
-  get "users/:id" => "users#show"
+  get "users/:id" => "users#show", as: "user"
   get "edit" => "users#edit", as: "user_edit"
   put "user" => "users#update"
+
+  get "users/:id/feeds" => "users#show_feeds", as: "user_feeds"
+  get "users/:id/articles" => "users#show_articles", as: "user_articles"
+
   get "logout" => "users#logout"
   get "login" => "users#login"
 

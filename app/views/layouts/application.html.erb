@@ -3,19 +3,21 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="utf-8">
-  <title>银杏时报</title>
+  <title>银杏时报 - <%= t(params[:controller]) %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= yield :style %>
 </head>
 <body>
+  <div class="body-bg"></div>
   <div class="container">
+    <div class="logo"></div>
     <div id="left-nav">
-      <%= link_to "专题", feature_path(Feature.first), class: "nav-link" %>
+      <%= link_to "专题", features_path, class: "nav-link#{" active" if params[:controller]=="features"}" %>
       <% Category.all.each do |category| %>
-        <%= link_to category.name, category_show_path(category), class: "nav-link" %>
+        <%= link_to category.name, category_path(category), class: "nav-link#{" active" if (params[:controller]=="categories" and params[:id]==category.id) or (@article and @article.category==category)}" %>
       <% end -%>
-      <%= link_to "投票", votes_path, class: "nav-link" %>
+      <%= link_to "投票", votes_path, class: "nav-link#{" active" if params[:controller]=="votes"}" %>
     </div>
     <div id="main">
       <% flash.each do |k,v| %>
@@ -26,21 +28,7 @@
       <%= yield %>
     </div>
   </div>
-  <div id="user-info">
-    <% if user_signed_in? %>
-      <%= link_to logout_path do %>
-        <i class="icon-signout"></i>
-      <% end -%>
-      <br>
-      <%= link_to user_edit_path do %>
-        <i class="icon-user"></i>
-      <% end -%>
-    <% else %>
-      <%= link_to CASClient::Frameworks::Rails::Filter.login_url(controller) do %>
-        <i class="icon-signin"></i>
-      <% end -%>
-    <% end -%>
-  </div>
+  <%= render partial: "layouts/user" %>
   <%= debug(params) if Rails.env.development? %>
   <%= javascript_include_tag "application" %>
   <%= yield :script %>

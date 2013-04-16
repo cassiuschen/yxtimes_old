@@ -6,7 +6,7 @@
   <%= submit_tag "Submit" %>
 <% end %>
 <hr>
-<%= render 'comments/comments', collecton: @vote, as: 'article' %>
+<%= render partial: 'comments/comments', object: @vote, as: 'commentable' %>
 <br>
 <br>
 <br>

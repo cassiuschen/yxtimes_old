@@ -9,5 +9,5 @@ module ApplicationHelper
   def short_time(time)
     time.strftime("%Y.%-m.%-d")
   end
-
+  
 end

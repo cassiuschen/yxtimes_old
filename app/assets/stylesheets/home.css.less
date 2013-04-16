@@ -1,3 +1,51 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
+
+@import "todc-bootstrap/variables";
+@import "bootstrap/mixins";
+
+.home-container {
+  position: relative;
+  width: 1020px;
+  margin: 0 auto;
+  min-height: 100%;
+  padding: 50px 0 30px;
+  .clearfix;
+  .logo {
+    left: -85px;
+  }
+}
+
+.home-block {
+  float: left;
+  position: relative;
+  height: 260px;
+  background-color: #FFF;
+  background-color: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  .clearfix;
+  .text-block {
+    position: relative;
+    padding: 25px;
+    height: 210px;
+  }
+  .comments {
+    position: absolute;
+    bottom: 15px;
+    color: #666;
+    &:hover {
+      color: #333;
+    }
+  }
+  h4.category {
+    font-size: 22px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5px;
+  }
+  h2 {
+    line-height: 1;
+    margin: 0 0 15px 0;
+  }
+}
