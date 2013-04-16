@@ -6,12 +6,12 @@
           <%= image_tag current_user.avatar, class: "avatar-inner" %>
           <div class="noti-num">
             <div class="noti-num-inner">
-              <%= @user.notifications.count %>
+              <%= current_user.notifications.count %>
             </div>
           </div>
         </a>
         <div class="noti-box dropdown"> 
-          <% @user.notifications.each do |noti| %>
+          <% current_user.notifications.each do |noti| %>
             <a href="<%= noti.link %>" class="noti-item">
               <div class="unread">●</div>
               <%= noti.content %>
