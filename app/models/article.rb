@@ -27,6 +27,10 @@ class Article
   has_and_belongs_to_many :dislikers, class_name: 'User', inverse_of: nil
   has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
+  def score
+    likers.count - dislikers.count
+  end
+
   before_save do |article|
     article.digest = strip_tags(article.content)[0..80] + "……" if article.digest.blank?
     unless article.source.blank? || article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
