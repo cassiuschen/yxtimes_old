@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+  <div id="user-bar">
+    <div style="vertical-align: middle; display: table-cell;">
+      <div class="avatar-wrap">
+        <a href="###" class="avatar" data-toggle="dropdown">
+          <%= image_tag current_user.avatar, class: "avatar-inner" %>
+          <div class="noti-num">
+            <div class="noti-num-inner">
+              1
+            </div>
+          </div>
+        </a>
+        <div class="noti-box dropdown">
+          <a href="###" class="noti-item">
+            <div class="unread">●</div>
+            尼玛教你回家吃饭! ! 尼玛教你回家吃饭! ! 
+          </a>
+        </div>
+      </div>
+      <div class="center mt10">
+        <span class="white bold" style="font-size: 18px;"><%= current_user.nickname %></span>
+      </div>
+      <div class="center gray">老师</div>
+      <a href="/" class="center gray mt30"><i class="icon-home icon-2x p0"></i><br>主页</a>
+      <a href="<%= new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>发布</a>
+      <a href="<%= "###" %>" class="center gray mt30"><i class="icon-eye-open icon-2x p0"></i><br>审核</a>
+      <a href="<%= user_edit_path %>" class="center gray mt30"><i class="icon-cog icon-2x p0"></i><br>资料</a>
+      <a href="<%= logout_path %>" class="center gray mt30"><i class="icon-signout icon-2x p0"></i><br>注销</a>
+    </div>
+  </div>
+<% else %>
+  <%= link_to CASClient::Frameworks::Rails::Filter.login_url(controller), class: "login_link" do %>
+    <i class="icon-signin"></i>
+  <% end -%>
+<% end -%>
