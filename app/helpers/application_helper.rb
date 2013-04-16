@@ -9,5 +9,9 @@ module ApplicationHelper
   def short_time(time)
     time.strftime("%Y.%-m.%-d")
   end
+
+  def beautify_time_with_br(time)
+    time.strftime("%Y.%-m.%-d <br> %l:%M %p").gsub('PM', "下午").gsub('AM', "上午").html_safe
+  end
   
 end
