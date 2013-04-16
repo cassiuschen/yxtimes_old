@@ -21,8 +21,8 @@ class User
   embeds_many :notifications
   embeds_many :feeds
 
-  def send_notification(notification)
-    self.notifications.create!(content: notification)
+  def send_notification(notification, link)
+    self.notifications.create!(content: notification, link: link)
   end
 
   def send_feed(feed)

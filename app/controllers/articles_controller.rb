@@ -88,4 +88,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+
+  def follow
+    @article = Article.find(params[:id])
+    @article.starrers.push current_user
+
+    redirect_to :back
+  end
 end

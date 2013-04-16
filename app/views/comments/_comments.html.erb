@@ -18,7 +18,7 @@
     <%= subcomment.content %>
   </div>
   <% end -%>
-  <%= form_for @subcomment, url: article_subcomments_path(commentable, comment) do |f| %>
+  <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
     <%= f.text_field :content %>
     <%= f.submit %>
   <% end -%>
