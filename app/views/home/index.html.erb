@@ -1,6 +1,120 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
-<%= kindeditor_tag :content, 'Content', window_onload: true %>
-
-<%= link_to "View all articles", articles_path %>
+<div class="home-container">
+    <div class="logo"></div>
+    <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
+      <img src="" width="610" height="260" alt="" class="bgw pull-left">
+      <div class="text-block" style="margin-left: 610px;">
+        <h2><a href="###">听听纽带的声音</a></h2>
+        <p>自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧节黑匣子展演与培训课程的声自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧节黑匣子展演与培训课程的声培训……</p>
+        <a href="###" class="comments" style="left: 25px;">
+          <i class="icon-comment"></i>(123)
+        </a>
+        <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
+                  专题
+                </h4></a>
+      </div>
+    </div>
+    <div class="ml20" style="float: left; position: relative; height: 210px; padding: 25px 0; width: 150px;">
+      <div style="color:#F6DA3E;font-size:22px;text-shadow:0 1px 1px rgba(0,0,0,0.8);margin-bottom: 15px;">MOST READ</div>
+      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
+        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">1.</span>
+        听听纽带的声音
+      </a>
+      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
+        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">2.</span>
+        听听纽带的声音
+      </a>
+      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
+        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">3.</span>
+        听听纽带的声音
+      </a>
+      <a href="###" style="display: block; color: #FFF; font-size: 16px;">
+        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">4.</span>
+        听听纽带的声音
+      </a>
+    </div>
+    <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
+      <img src="" width="300" height="260" alt="" class="bgw pull-right">
+      <div class="text-block" style="margin-right: 300px;">
+        <h2>听听<a href="###">听听纽带的声音</a></h2>
+        <p>自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧……</p>
+        <a href="###" class="comments" style="right: 25px;">
+          <i class="icon-comment"></i>(123)
+        </a>
+        <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
+                  调查
+                </h4></a>
+      </div>
+    </div>
+    <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
+      <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
+        <h2><a href="###">听听纽带的声音</a></h2>
+        <p>自从上一篇关于戏剧节的报道发出以来……</p>
+        <a href="###" class="comments" style="left: 25px;">
+          <i class="icon-comment"></i>(123)
+        </a>
+      </div>
+      <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5); border-left: 1px solid rgba(0,0,0,0.1)">
+        <h2><a href="###">听听纽带的声音</a></h2>
+        <p>自从上一篇关于戏剧节的报道发出以来……</p>
+        <a href="###" class="comments" style="left: 25px;">
+          <i class="icon-comment"></i>(123)
+        </a>
+      </div>
+      <div class="text-block pull-left" style="width: 111px; border-left: 1px solid rgba(0,0,0,0.1)">
+        <h2><a href="###">听听纽带的声音</a></h2>
+        <p>自从上一篇关于戏剧节的报道发出以来……</p>
+        <a href="###" class="comments" style="left: 25px;">
+          <i class="icon-comment"></i>(123)
+        </a>
+      </div>
+      <a href="<%= category_path(2) %>"><h4 class="category" style="right: 15px; color: #8DC433">
+              观点
+            </h4></a>
+    </div>
+    <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
+      <img src="" width="300" height="200" alt="" class="bgw pull-right">
+      <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
+        <div style="font-size: 18px; line-height: 24px;"><a style="color: white;" href="###">听听听听纽带的声音</a></div>
+        <div style="color: #ccc;"  >自从上一篇关于戏剧节的报道发出以来,学校里有了一些质疑戏剧……</div>
+      </div>
+      <a href="###" class="comments" style="right: 25px;">
+        <i class="icon-comment"></i>(123)
+      </a>
+      <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
+              人物
+            </h4></a>
+    </div>
+    <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
+      <div class="text-block">
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="###">听听听听纽带的声音</a></div>
+      </div>
+      
+      <a href="<%= category_path(1) %>"><h4 class="category" style="right: 15px; color: #B657C1">
+              阅读
+            </h4></a>
+    </div>
+    <div class="home-block mt10 ml20" style="width: 250px;">
+      <div style="padding: 25px;">
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;">为老人让座的常见吗？</div>
+        <%= form_tag vote_options_path(@vote), method: :post do %>
+          <div class="mb20">
+            <% @vote.options.each do |opt| %>
+              <div class="mt10">
+                <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
+              </div>
+            <% end -%>
+          </div>
+          <%= link_to "查看结果", @vote, class: "btn btn-success" %>
+          <%= submit_tag "投票", class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="pull-left" style="height: 260px; position: relative;">
+      <a href="###" class="about_us" style="position: absolute; bottom: -50px; left: -10px;"></a>
+    </div>
+  </div>

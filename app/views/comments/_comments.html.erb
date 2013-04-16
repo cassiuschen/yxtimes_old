@@ -1,7 +1,6 @@
 <h2 id="comments"><%= commentable.comments.count %> Comments:</h2>
 <%= form_for [commentable, @comment] do |f| %>
   <%= f.text_field :content %>
-  <%= check_box_tag :anonymous %>
   <%= f.submit %>
 <% end -%>
 <% commentable.comments.each do |comment| %>

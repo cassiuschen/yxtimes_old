@@ -1,2 +1,54 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div style="margin-top: 130px; height: 108px; background-color: rgba(0,0,0,0.5); postion: relative;">
+  <div class="avatar">
+    <%= image_tag @user.avatar, class: "avatar-inner" %>
+  </div>
+  <div style="position: absolute; color: white;">
+    <h1><%= @user.nickname %></h1>
+    <div><%= @user.is_who %></div>
+  </div>
+</div>
+<div id="timeline" data-toggle="tabs">
+  <% if @user.articles.count %>
+    <div class="tabs-nav">
+      <a href="#feeds" class="tabs-item active">TA的动态</a>
+      <a href="#articles" class="tabs-item">TA的发布</a>
+    </div>
+    <div class="tabs-content">
+  <div id="feeds" style="padding: 0 40px 30px;">  
+  <% else %>
+  <div id="feeds" style="padding: 30px 40px;">  
+  <% end -%>
+    <table>
+      <tr class="timeline-item">
+        <td class="time">
+          2013.3.4<br>
+          13:35
+        </td>
+        <td class="content">
+          关注了
+          <a href="###" class="link">调查</a> 中的文章
+          <a href="###" class="timeline-link">《听听纽带的声音》</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <% if @user.articles.count %>
+    <div id="articles" style="padding: 0 40px 30px;">
+      <table>
+        <tr class="timeline-item">
+        <td class="time">
+          2013.3.4<br>
+          13:35
+        </td>
+        <td class="content">
+          发布于
+          <a href="###" class="link">调查</a>
+          <a href="###" class="timeline-link" style="text-indent: 0;">听听纽带的声音</a>
+          <div style="color: #999;">股市“跌跌不休”，金价持续低迷，银行理财产品和艺术品投资也不保险……面对重回“负利率”时代的通胀压力，工薪阶层几大传统投资理财渠道几乎全部受阻。在博鳌亚洲论坛2013年年会上，如何让百姓的“钱袋子”不缩水进而保值增值，成为与会嘉宾探讨的焦点之一......</div>
+        </td>
+      </tr>
+      </table>
+    </div>
+    </div>
+  <% end -%>
+</div>

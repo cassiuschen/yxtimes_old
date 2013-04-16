@@ -1,0 +1,31 @@
+//
+// Wells
+// --------------------------------------------------
+
+
+// Base class
+.well {
+  background-color: #F7F7F7;
+  padding: 15px;
+  margin: 5px;
+  border: 1px solid #e5e5e5;
+  &.top {
+  margin-top: 10px; 
+  position: relative;
+    &:before, &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 0;
+      width: 0;
+      border: 10px solid transparent;
+      border-bottom-color: #F7F7F7;
+      top: -19px;
+      left: 40px;
+    }
+    &:before {
+      border-bottom-color: #e5e5e5;
+      top: -20px;
+    }
+  }
+}

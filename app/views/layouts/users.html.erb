@@ -3,16 +3,19 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="utf-8">
-  <title>银杏时报 - 首页</title>
+  <title>银杏时报 - <%= t(params[:controller]) %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= yield :style %>
 </head>
 <body>
   <div class="body-bg"></div>
-  
-  <%= yield %>
+  <div class="user-container container">
+    <div class="logo"></div>
+    
+    <%= yield %>
 
+  </div>
   <%= render partial: "layouts/user" %>
   <%= debug(params) if Rails.env.development? %>
   <%= javascript_include_tag "application" %>

@@ -2,7 +2,8 @@ class FeaturesController < ApplicationController
   # GET /features/1
   # GET /features/1.json
   def show
-    @feature = Feature.find(params[:id])
+    @feature = Feature.find(params[:id]) if params[:id]
+    @feature ||= Feature.first
 
     respond_to do |format|
       format.html # show.html.erb

@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.dropdown
+//= require jquery.tabs
 //= require kindeditor
 //= require_tree .

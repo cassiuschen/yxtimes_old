@@ -1,0 +1,6 @@
+engine: css.less
+image_path: app/assets/images
+css_images_path: assets
+stylesheet_path: app/assets/stylesheets
+use_asset_url: true
+optimization: optipng -strip all # strip metadata for IE 

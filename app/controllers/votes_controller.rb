@@ -88,6 +88,8 @@ class VotesController < ApplicationController
   end
 
   def vote_for
+    redirect_to :back and return unless params[:option]
+    
     @vote = Vote.find(params[:vote_id])
     @option = @vote.options.find(params[:option])
 
