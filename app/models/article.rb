@@ -27,6 +27,11 @@ class Article
   has_and_belongs_to_many :dislikers, class_name: 'User', inverse_of: nil
   has_and_belongs_to_many :starrers, class_name: 'User', inverse_of: nil
 
+  # 返回文章中图片
+  def imgs
+    content.scan(/<img src=(.+?) alt>/).flatten
+  end
+
   def score
     likers.count - dislikers.count
   end
