@@ -1,7 +1,30 @@
-<h1><%= @category.name %></h1>
+<% @category.articles.each do |article| %>
+  <div class="category-block">
+    <h3 class="m0"><%= link_to article.title, article %></h3>
+    <p class="muted">
+      作者：<%= link_to article.author.nickname, article.author, class: "muted" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><%= short_time(article.created_at) %> </em>
+    </p>
+    <p>
+      <%= article.digest(100) %>
+    </p>
+    <div class="pull-right">
+      <a href="<%= article_path(article, anchor: 'comments') %>" class="comments">
+        <i class="icon-comment"></i>(<%= article.comments.count %>)
+      </a>
+    </div>
+  </div>
+
+
+
+<% end -%>
+
+
+
+
+<!-- <h1><%= @category.name %></h1>
 <% @category.articles.each do |article| %>
   <%= link_to article.title, article_path(article), class: "link" %> <br>
 <% end -%>
 <br>
 <br>
-<%= link_to 'New Article', new_article_path(category: @category) %>
+<%= link_to 'New Article', new_article_path(category: @category) %> -->
