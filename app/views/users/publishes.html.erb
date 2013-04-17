@@ -19,8 +19,12 @@
   <% @articles.each do |article| %>
     <tr>
       <td><%= article.category.name %></td>
+      <% if article.is_verified? %>
+      <td><%= link_to article.title, article_path(article), class: "link" %></td>
+      <% else %>
       <td><%= link_to article.title, article_path(article), class: "link", remote: true %></td>
-      <% if article.is_verified? and !current_user.is_admin? %>
+      <% end -%>
+      <% if article.is_verified? %>
       <td colspan="2">已发布</td>
       <% else %>
       <td class="w30"><%= link_to '编辑', edit_article_path(article), class: "link" %></td>

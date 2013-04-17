@@ -4,19 +4,25 @@
       <div class="avatar-wrap">
         <a href="###" class="avatar" data-toggle="dropdown">
           <%= image_tag current_user.avatar, class: "avatar-inner" %>
-          <div class="noti-num">
-            <div class="noti-num-inner">
-              <%= current_user.notifications.count %>
+          <% unless current_user.notifications.empty? %>
+            <div class="noti-num">
+              <div class="noti-num-inner">
+                <%= current_user.notifications.count %>
+              </div>
             </div>
-          </div>
+          <% end -%>
         </a>
         <div class="noti-box dropdown"> 
-          <% current_user.notifications.each do |noti| %>
-            <a href="<%= noti.link %>" class="noti-item">
-              <div class="unread">●</div>
-              <%= noti.content %>
-            </a>
-          <% end %>
+          <% if current_user.notifications.empty? %>
+            <div style="text-align: center; color: #999; line-height: 40px;">暂无提醒</div>
+          <% else %>
+            <% current_user.notifications.each do |noti| %>
+              <a href="<%= noti.link %>" class="noti-item">
+                <div class="unread">●</div>
+                <%= noti.content %>
+              </a>
+            <% end %>
+          <% end -%>
         </div>
       </div>
       <div class="center mt10">

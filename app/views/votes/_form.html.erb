@@ -1,4 +1,5 @@
-<%= nested_form_for(@vote) do |f| %>
+
+<%= nested_form_for(@vote, html: {"data-no-turbolink" => true}) do |f| %>
   <% if @vote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
@@ -20,7 +21,7 @@
     <%= option.text_field :content %>
     <%= option.link_to_remove "Remove" %>
   <% end -%>
-    <%= f.link_to_add 'Add', :options %>
+    <%= f.link_to_add 'Add', :options, html: {"data-no-turbolink" => true} %>
 
   <div class="actions">
     <%= f.submit %>

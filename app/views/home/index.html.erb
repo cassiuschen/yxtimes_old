@@ -74,10 +74,10 @@
       <div style="padding: 25px;">
         <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;">为老人让座的常见吗？</div>
         <%= form_tag vote_options_path(@vote), method: :post do %>
-          <div class="mb20">
+          <div class="mb20" style="max-height: 130px; overflow-y: auto;">
             <% @vote.options.each do |opt| %>
               <div class="mt10">
-                <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
+                <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
               </div>
             <% end -%>
           </div>

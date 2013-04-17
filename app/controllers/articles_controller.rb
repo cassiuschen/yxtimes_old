@@ -134,6 +134,6 @@ class ArticlesController < ApplicationController
     @article = Article.unscoped.find(params[:id])
     @article.verify!
 
-    redirect_to :back, flash: { success: "Succeed" }
+    redirect_to articles_path, flash: { success: "Succeed" }
   end
 end
