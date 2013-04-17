@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    render layout: false
+    if params[:raw]
+      render layout: false
+    else
+      render
+    end
   end
 
   def update
@@ -28,7 +32,11 @@ class UsersController < ApplicationController
   def publishes
     @articles = current_user.articles.unscoped.desc(:created_at)
 
-    render layout: false;
+    if params[:raw]
+      render layout: false
+    else
+      render
+    end
   end
 
   def show_feeds
