@@ -1,5 +1,9 @@
 <h1><%= @vote.title %></h1>
-<%= @vote.content %>
+<% unless @vote.content.blank? %>
+<div class="well">
+  <%= @vote.content %>
+</div>
+<% end -%>
 <% if !current_user or @vote.voters.include? current_user %>
   <% @vote.options.each do |opt| %>
     <table class="vote-table">
@@ -42,14 +46,10 @@
       </tr>
       <% end -%>
     </table>
-    <%= submit_tag "投票", class: "btn btn-danger" %>
+    <div style="margin: 5px 0 0 20px;">
+      <%= submit_tag "投票", class: "btn btn-danger" %>
+    </div>
   <% end %>
 <% end -%>
 <hr>
 <%= render partial: 'comments/comments', object: @vote, as: 'commentable' %>
-<br>
-<br>
-<br>
-
-<%= link_to 'Edit', edit_vote_path(@vote) %> |
-<%= link_to 'Back', votes_path %>

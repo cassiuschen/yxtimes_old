@@ -5,6 +5,8 @@ class Feature
   field :title, type: String
   field :content, type: String
 
+  mount_uploader :poster, FeatureUploader
+
   default_scope desc(:created_at)
 
   def comments_count
@@ -12,5 +14,6 @@ class Feature
   end
 
   has_and_belongs_to_many :articles, inverse_of: nil
-  validates_presence_of :articles
+
+  validates_presence_of :title, :articles
 end

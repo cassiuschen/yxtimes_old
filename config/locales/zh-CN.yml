@@ -204,7 +204,10 @@ zh-CN:
       category: 目录
       comment: 评论
       sub_comment: 子评论
+      feature: 专题
     attributes:
+      feature:
+        poster: 海报
       user:
         nickname: 昵称
         avatar: 头像

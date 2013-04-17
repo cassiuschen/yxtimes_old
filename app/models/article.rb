@@ -9,14 +9,14 @@ class Article
   field :source, type: String
   field :is_verified, type: Boolean, default: false
 
-  default_scope where(is_verified: true).desc(:created_at)
+  default_scope where(is_verified: true)
   scope :un_verified, where(is_verified: false)
+  scope :hottest, desc(:read_count)
+  scope :recent, desc(:created_at)
 
   field :read_count, type: Integer, default: 0
 
   validates_presence_of :title, :content
-
-  field :_id, type: Integer, default: -> { Article.count + 1 }
 
   embeds_many :comments, as: :commentable
   belongs_to :category

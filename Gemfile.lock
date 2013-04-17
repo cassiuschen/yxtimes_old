@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/ryanb/nested_form.git
-  revision: a25eebe8205e4e63899873b716535def6c1f5a9d
-  branch: master
-  specs:
-    nested_form (0.3.2)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -210,7 +203,6 @@ DEPENDENCIES
   mini_magick
   miniprofiler
   mongoid
-  nested_form!
   pry-rails
   quiet_assets
   rails (= 3.2.13)

@@ -12,9 +12,9 @@
     </div>
     <div class="ml20" style="float: left; position: relative; height: 210px; padding: 25px 0; width: 150px;">
       <div style="color:#F6DA3E;font-size:22px;text-shadow:0 1px 1px rgba(0,0,0,0.8);margin-bottom: 15px;">MOST READ</div>
-      <% @most_read[0..3].each do |most| %>
+      <% @most_read[0..3].each_with_index do |most,i| %>
         <a href="<%= article_path(most) %>" style="display: block; color: #FFF; font-size: 16px;">
-          <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;">1.</span>
+          <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;"><%= i+1 %>.</span>
           <%= most.title.truncate(18) %>
         </a>
       <% end %>
@@ -36,7 +36,7 @@
       <% @guandian[0..2].each do |point| %>
         <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
           <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
-          <p><%= point.digest(50) %></p>
+          <p><%= point.digest(45) %></p>
           <a href="<%= article_path(point, anchor: 'comments') %>" class="comments" style="left: 25px;">
             <i class="icon-comment"></i>(<%= point.comments.count %>)
           </a>
@@ -50,7 +50,7 @@
       <img src="" width="300" height="200" alt="" class="bgw pull-right">
       <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
         <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.first.title, @renwu.first, style: "color: white;" %></div>
-        <div style="color: #ccc;"  ><%= @renwu.first.digest %></div>
+        <div style="color: #ccc;"  ><%= @renwu.first.digest(30) %></div>
       </div>
       <a href="<%= article_path(@renwu.first, anchor: 'comments') %>" class="comments" style="right: 25px;">
         <i class="icon-comment"></i>(<%= @renwu.first.comments.count %>)
@@ -72,7 +72,7 @@
     </div>
     <div class="home-block mt10 ml20" style="width: 250px;">
       <div style="padding: 25px;">
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;">为老人让座的常见吗？</div>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= @vote.title %></div>
         <%= form_tag vote_options_path(@vote), method: :post do %>
           <div class="mb20" style="max-height: 130px; overflow-y: auto;">
             <% @vote.options.each do |opt| %>

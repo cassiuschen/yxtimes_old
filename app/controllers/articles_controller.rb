@@ -94,7 +94,7 @@ class ArticlesController < ApplicationController
   # PUT /articles/1
   # PUT /articles/1.json
   def update
-    @article = Article.find(params[:id])
+    @article = Article.unscoped.find(params[:id])
 
     unless current_user.is_admin? or (current_user == @article.author and !@article.is_verified?)
       raise ActionController::RoutingError.new('Not Found')
