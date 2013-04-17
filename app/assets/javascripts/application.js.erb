@@ -29,7 +29,9 @@ function hide_right_panel() {
 $('#right-bar-link-2[href*="my"],#right-bar-link-3,#right-bar-link-4').click(function(){
   $rp = $('#right-panel');
   $ub = $('#user-bar');
-  $rp.load($(this).attr("href"), function(){
+  url = $(this).attr("href");
+  url = url.match(/\?/) ? url+"&raw=true" : url+"?raw=true";
+  $rp.load(url, function(){
     $ub.css("right",$rp.width());
     $("body").click(function(e){
       if (!$(e.target).is('#user-bar') && !$(e.target).closest('#user-bar').length) {

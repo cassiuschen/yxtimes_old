@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    render layout: false
+    if params[:raw]
+      render layout: false
+    else
+      render
+    end
   end
 
   def update
@@ -11,7 +15,7 @@ class UsersController < ApplicationController
     params[:user].delete("name")
 
     if @user.update_attributes(params[:user])
-      redirect_to root_path, flash: { success: "profile was successfully update."} 
+      redirect_to root_path
     else
       render action: "edit"
     end
@@ -28,7 +32,11 @@ class UsersController < ApplicationController
   def publishes
     @articles = current_user.articles.unscoped.desc(:created_at)
 
-    render layout: false;
+    if params[:raw]
+      render layout: false
+    else
+      render
+    end
   end
 
   def show_feeds

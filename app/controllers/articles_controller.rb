@@ -8,7 +8,13 @@ class ArticlesController < ApplicationController
     @articles = Article.un_verified
 
     respond_to do |format|
-      format.html { render layout: false } # index.html.erb
+      format.html {
+        if params[:raw]
+          render layout: false
+        else
+          render
+        end
+      } # index.html.erb
       format.json { render json: @articles }
     end
   end
