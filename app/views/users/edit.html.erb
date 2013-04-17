@@ -1,5 +1,6 @@
-<h1>编辑个人资料</h1>
-<%= form_for(@user, url: user_update_path) do |f| %>
+<div style="padding: 50px;">
+<legend style="color: white;">编辑个人资料</legend>
+<%= form_for(@user, url: user_update_path, html: { class: "form-horizontal" }, remote: true) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -12,16 +13,35 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname %>
+  <div class="control-group">
+    <%= f.label :nickname, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :nickname %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-    <%= image_tag @user.avatar, width: 60, height: 60 %>
+  <div class="control-group">
+    <%= f.label :avatar, class: "control-label" %>
+    <div class="controls">
+      <%= f.file_field :avatar %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <div class="control-label">修改密码</div>
+    <div class="controls">
+      <a href="###" class="link" style="vertical-align: -5px;" _target="blank">跳转到 CAS 服务器</a>
+    </div>
+  </div>
+  <div class="controls">
+    <%= f.submit "更新资料", class: "btn btn-danger" %>
   </div>
 <% end %>
+</div>
+
+<script>
+  $('#edit_user_test').submit(function(){
+    hide_right_panel();
+    setTimeout(function(){
+      Turbolinks.visit(window.location)
+    },500)
+  })
+</script>

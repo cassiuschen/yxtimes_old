@@ -23,11 +23,13 @@
         <span class="white bold" style="font-size: 18px;"><%= current_user.nickname %></span>
       </div>
       <div class="center gray"><%= current_user.is_who %></div>
-      <a href="/" class="center gray mt30"><i class="icon-home icon-2x p0"></i><br>主页</a>
-      <a href="<%= new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>发布</a>
-      <a href="<%= "###" %>" class="center gray mt30"><i class="icon-eye-open icon-2x p0"></i><br>审核</a>
-      <a href="<%= user_edit_path %>" class="center gray mt30"><i class="icon-cog icon-2x p0"></i><br>资料</a>
-      <a href="<%= logout_path %>" class="center gray mt30"><i class="icon-signout icon-2x p0"></i><br>注销</a>
+      <a id="right-bar-link-1" href="/" class="center gray mt30"><i class="icon-home icon-2x p0"></i><br>主页</a>
+      <a id="right-bar-link-2" href="<%= current_user.is_reporter? ? user_publishes_path : new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>发布</a>
+      <a id="right-bar-link-3" href="<%= articles_path %>" class="center gray mt30"><i class="icon-eye-open icon-2x p0"></i><br>审核</a>
+      <a id="right-bar-link-4" href="<%= user_edit_path %>" class="center gray mt30"><i class="icon-cog icon-2x p0"></i><br>资料</a>
+      <a id="right-bar-link-5" href="<%= logout_path %>" class="center gray mt30" data-no-turbolink><i class="icon-signout icon-2x p0"></i><br>注销</a>
+    </div>
+    <div id="right-panel">
     </div>
   </div>
 <% else %>

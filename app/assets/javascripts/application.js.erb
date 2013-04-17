@@ -1,0 +1,60 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
+//
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require jquery.dropdown
+//= require jquery.tabs
+//= require jquery_nested_form
+//= require kindeditor
+//= require_self
+//= require_tree .
+
+function hide_right_panel() {
+  $('#user-bar').css("right",0);
+  setTimeout(function(){$("#right-panel").html("");},1000);
+  $("body").off("click");
+}
+
+$('#right-bar-link-2[href*="my"],#right-bar-link-3,#right-bar-link-4').click(function(){
+  $rp = $('#right-panel');
+  $ub = $('#user-bar');
+  $rp.load($(this).attr("href"), function(){
+    $ub.css("right",$rp.width());
+    $("body").click(function(e){
+      if (!$(e.target).is('#user-bar') && !$(e.target).closest('#user-bar').length) {
+        hide_right_panel();
+      };
+    });
+  });
+  return false;
+});
+$('#right-panel').on("click","a[data-remote]",function(e){
+  e.preventDefault();
+  if ($(this).attr("data-confirm") && !confirm($(this).attr("data-confirm")) ) {
+    return false;
+  };
+  url = $(this).attr("href");
+  url = url.match(/\?/) ? url+"&raw=true" : url+"?raw=true";
+  $('#right-panel').load(url,function(){
+    $('#user-bar').css("right",$('#right-panel').width());
+  });
+  return false;
+});
+$('#user-bar').on("click","a:not([data-remote])",hide_right_panel);
+
+$(document).on("page:change", function(){
+  if (typeof(window.onload) === "function") {
+    window.onload();
+  }
+})

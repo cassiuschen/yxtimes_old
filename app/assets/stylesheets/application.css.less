@@ -140,9 +140,9 @@ html, body {
   position: fixed;
   display: table;
   right: 0;
+  .transition(right .5s ease);
   top: 0;
   height: 100%;
-  width: 80px;
   background-color: #000;
   background-color: rgba(0, 0, 0, 0.6);
   .noti-num {
@@ -213,8 +213,26 @@ html, body {
   z-index: 100;
   pointer-events: none;
 }
-label {
+label.vote {
   display: inline-block;
   vertical-align: bottom;
   margin-bottom: 2px;
+}
+
+#right-panel {
+  display: table-cell;
+  height: 100%;
+  position: absolute;
+  padding-right: 1000px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  
+  a {
+    // color: white;
+  }
+  a.link {
+    color: ;
+  }
 }

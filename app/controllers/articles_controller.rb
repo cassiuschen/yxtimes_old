@@ -1,13 +1,14 @@
 class ArticlesController < ApplicationController  
   prepend_before_filter :cas_filter, except: :show
+  append_before_filter :require_admin, only: [:index, :verify]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.page params[:page]
+    @articles = Article.un_verified
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: false } # index.html.erb
       format.json { render json: @articles }
     end
   end
@@ -15,14 +16,25 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
+    @article = Article.unscoped.find(params[:id])
+
+    if !@article.is_verified? and (@article.author != current_user) and !current_user.is_admin?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     @article.read
 
     @comment = Comment.new
     @subcomment = SubComment.new
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        if params[:raw]
+          render layout: false
+        else
+          render
+        end
+      }
       format.json { render json: @article }
     end
   end
@@ -33,15 +45,28 @@ class ArticlesController < ApplicationController
     @article = Article.new
     @article.category_id = params[:category] if params[:category]
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @article }
+    if params[:raw]
+      render layout: false
+    else
+      render
     end
+
   end
 
   # GET /articles/1/edit
   def edit
-    @article = Article.find(params[:id])
+    @article = Article.unscoped.find(params[:id])
+
+    unless current_user.is_admin? or (current_user == @article.author and !@article.is_verified?)
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    
+    if params[:raw]
+      render layout: false
+    else
+      render
+    end
+
   end
 
   # POST /articles
@@ -65,6 +90,10 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
 
+    unless current_user.is_admin? or (current_user == @article.author and !@article.is_verified?)
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     respond_to do |format|
       if @article.update_attributes(params[:article])
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -76,14 +105,19 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
+  # GET /articles/1/delete
+  # GET /articles/1/delete.json
   def destroy
-    @article = Article.find(params[:id])
+    @article = Article.unscoped.find(params[:id])
+
+    unless current_user.is_admin? or (current_user == @article.author and !@article.is_verified?)
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url }
+      format.html { redirect_to articles_url, flash: { success: "删除成功" } }
       format.json { head :no_content }
     end
   end
@@ -93,6 +127,13 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.starrers.push current_user
 
-    redirect_to :back
+    redirect_to :back, flash: { success: "Succeed" }
+  end
+
+  def verify
+    @article = Article.unscoped.find(params[:id])
+    @article.verify!
+
+    redirect_to :back, flash: { success: "Succeed" }
   end
 end

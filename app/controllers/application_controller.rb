@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     unless current_user && current_user.is_admin?
-      redirect_to root_path, notice: "请先登录"
-      return
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 

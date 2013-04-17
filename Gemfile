@@ -34,6 +34,7 @@ group :development do
 end
 
 gem 'jquery-rails'
+gem 'turbolinks'
 
 gem "nested_form"
 gem 'sanitize'

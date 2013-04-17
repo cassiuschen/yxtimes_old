@@ -10,6 +10,7 @@ class Article
   field :is_verified, type: Boolean, default: false
 
   default_scope where(is_verified: true).desc(:created_at)
+  scope :un_verified, where(is_verified: false)
 
   field :read_count, type: Integer, default: 0
 

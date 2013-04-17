@@ -35,7 +35,7 @@
     </table>
   </div>
   <% if @user.articles.count %>
-    <div id="articles" style="padding: 0 40px 30px;">
+    <div id="articles" style="display: none; padding: 0 40px 30px;">
       <table>
         <% @user.articles.each do |article| %>
           <tr class="timeline-item">

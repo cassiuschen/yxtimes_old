@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    render layout: false
   end
 
   def update
@@ -22,6 +23,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def publishes
+    @articles = current_user.articles.unscoped.desc(:created_at)
+
+    render layout: false;
   end
 
   def show_feeds

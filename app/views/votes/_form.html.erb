@@ -26,9 +26,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-<%= content_for :script %>
-<script>
-  $('form#new_vote input[name*=vote][name*=options_attributes][name*=content]').each(function(index,element){$(element).attr("data-options-no",index)});
-
-</script>
