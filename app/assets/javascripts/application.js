@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.dropdown
 //= require jquery.tabs
+//= require jquery_nested_form
 //= require kindeditor
 //= require_tree .

@@ -1,4 +1,4 @@
-<%= form_for(@vote) do |f| %>
+<%= nested_form_for(@vote) do |f| %>
   <% if @vote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
@@ -15,12 +15,20 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.fields_for @option1 do |f2| %>
-      <%= f2.text_field :content %>
-    <% end -%>  
-  </div>
+
+  <%= f.fields_for :options do |option| %>
+    <%= option.text_field :content %>
+    <%= option.link_to_remove "Remove" %>
+  <% end -%>
+    <%= f.link_to_add 'Add', :options %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= content_for :script %>
+<script>
+  $('form#new_vote input[name*=vote][name*=options_attributes][name*=content]').each(function(index,element){$(element).attr("data-options-no",index)});
+
+</script>

@@ -1,31 +1,47 @@
 <h1><%= @vote.title %></h1>
-<% if @vote.voters.include? current_user %>
-    <table class="vote-table">
+<%= @vote.content %>
+<% if !current_user or @vote.voters.include? current_user %>
   <% @vote.options.each do |opt| %>
+    <table class="vote-table">
       <tr>
-        <td style="width: 200px;">
+        <td style="width: 130px;">
           <%= opt.content %>
         </td>
-        <td style="width: 300px;"> 
+        <td style="width: 380px;"> 
           <div class="progress progress-warning" style="margin: 0px;">
             <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters.count).to_s + "%" %>">
             </div>
           </div>
         </td>
-        <td style="width: 50px;">
+        <td style="width: 40px;">
           <%= opt.count %>
         </td>
       </tr>
-    </div>
-  <% end -%>
     </table>
+  <% end -%>
 <% else %>
   <%= form_tag vote_options_path(@vote), method: :post do %>
-    <% @vote.options.each do |opt| %>
-    <div>
-      <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content + " (#{opt.count})" %>
-    </div>
-    <% end -%>
+    <table class="vote-table">
+      <% @vote.options.each do |opt| %>
+      <tr>
+        <td style="width: 20px; padding-right: 0px;">
+          <%= radio_button_tag "option", opt.id %>
+        </td>
+        <td style="width: 130px; padding-left: 0px;">
+          <%= label_tag "option_" + opt.id, opt.content %>
+        </td>
+        <td style="width: 360px;">
+          <div class="progress progress-warning" style="margin: 0px;">
+            <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters.count).to_s + "%" %>">
+            </div>
+          </div>
+        </td>
+        <td style="width: 40px;">
+          <%= opt.count %>
+        </td>
+      </tr>
+      <% end -%>
+    </table>
     <%= submit_tag "投票", class: "btn btn-danger" %>
   <% end %>
 <% end -%>

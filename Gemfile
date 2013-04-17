@@ -35,6 +35,7 @@ end
 
 gem 'jquery-rails'
 
+gem "nested_form"
 gem 'sanitize'
 
 # To use ActiveModel has_secure_password

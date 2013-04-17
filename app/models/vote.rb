@@ -3,6 +3,7 @@ class Vote
   include Mongoid::Timestamps
   
   field :title, type: String
+  field :content, type: String
   field :read_count, type: Integer, default: 0
   field :_id, type: Integer, default: -> { Vote.count + 1 }
 
@@ -12,7 +13,8 @@ class Vote
 
   validates_presence_of :title, :options
 
-  accepts_nested_attributes_for :options
+  accepts_nested_attributes_for :options, :allow_destroy => true
+
   has_and_belongs_to_many :voters, class_name: "User", inverse_of: nil
 
   def read
