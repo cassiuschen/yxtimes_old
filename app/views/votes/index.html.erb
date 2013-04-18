@@ -28,5 +28,11 @@
   </div>
 <% end -%>
 
-
+<% if is_admin? %>
+<div id="actions">
+  <div class="btn-group btn-group-vertical">
+    <%= link_to new_vote_path, class: 'btn' do %>新增<br><i class="icon-list-ul icon-2x"></i><% end -%>
+  </div>
+</div>
+<% end -%>
 </div>

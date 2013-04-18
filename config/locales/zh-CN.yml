@@ -205,7 +205,11 @@ zh-CN:
       comment: 评论
       sub_comment: 子评论
       feature: 专题
+      vote: 投票
     attributes:
+      vote:
+        title: 标题
+        options: 选项
       feature:
         poster: 海报
         title: 标题

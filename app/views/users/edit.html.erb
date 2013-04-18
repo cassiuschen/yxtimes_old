@@ -3,7 +3,7 @@
 <%= form_for(@user, url: user_update_path, html: { class: "form-horizontal" }, remote: true) do |f| %>
   <% if @user.errors.any? %>
     <div class="alert alert-error">
-      <div>发生了<%= @user.errors.count %>个错误。</div>
+      <div>发生了 <%= @user.errors.count %> 个错误。</div>
       <% @user.errors.full_messages.each do |msg| %>
         <div><%= msg %></div>
       <% end %>

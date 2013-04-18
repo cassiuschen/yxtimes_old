@@ -42,6 +42,7 @@ class VotesController < ApplicationController
   # GET /votes/1/edit
   def edit
     @vote = Vote.find(params[:id])
+    flash.now[:notice] = "提醒：修改已有投票可能导致数据错误，请谨慎操作。"
   end
 
   # POST /votes

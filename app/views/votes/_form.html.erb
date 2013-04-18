@@ -1,25 +1,34 @@
 
-<%= form_for(@vote) do |f| %>
+<%= form_for(@vote, html: { class: "form-horizontal" }) do |f| %>
   <% if @vote.errors.any? %>
     <div class="alert alert-error">
-      <div>发生了<%= @user.errors.count %>个错误。</div>
-      <% @user.errors.full_messages.each do |msg| %>
+      <div>发生了 <%= @vote.errors.count %> 个错误。</div>
+      <% @vote.errors.full_messages.each do |msg| %>
         <div><%= msg %></div>
       <% end %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.label :title, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title, style: "width: 480px;" %>
+    </div>
   </div>
-  <legend>options</legend>
-  <%= f.fields_for :options do |option| %>
-    <%= render 'option_fields', f: option %>
-  <% end %>
-  <%= link_to_add_fields "Add Answer", f, :options %>
+  <div class="control-group">
+    <%= f.label "选项", class: "control-label" %>
+    <div class="controls mb10">
+      <%= f.fields_for :options do |option| %>
+        <%= render 'option_fields', f: option %>
+      <% end %>
+      <fieldset>
+        <input type="text" disabled>
+        <%= link_to_add_fields f, :options %>
+      </fieldset>
+    </div>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="controls">
+    <%= f.submit @vote.new_record ? "新增" : "更新", class: "btn btn-danger" %>
   </div>
 <% end %>

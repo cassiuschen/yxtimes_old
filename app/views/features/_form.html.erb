@@ -1,7 +1,7 @@
 <%= form_for(@feature) do |f| %>
   <% if @feature.errors.any? %>
     <div class="alert alert-error">
-      <div>发生了<%= @feature.errors.count %>个错误。</div>
+      <div>发生了 <%= @feature.errors.count %> 个错误。</div>
       <% @feature.errors.full_messages.each do |msg| %>
         <div><%= msg %></div>
       <% end %>

@@ -34,12 +34,10 @@
 <% end -%>
 </div>
 
-<% if current_user %>
+<% if current_user && is_admin? %>
 <div id="actions">
   <div class="btn-group btn-group-vertical">
-    <% if is_admin? %>
     <%= link_to edit_feature_path(@feature), class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
-    <% end -%>
   </div>
 </div>
 <% end -%>
