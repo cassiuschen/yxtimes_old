@@ -2,9 +2,9 @@
 <div class="verl" style="left: 380px;"></div>
 <div style="width: 220px; float: right;">
   <% @votes.hottest[0..8].each do |vote| %>
+  <% data = vote.options.map{|a|a.count}.each_with_index.max %>
+  <% break if data[0] == 0 %>
   <div class="mb10">
-    <% data = vote.options.map{|a|a.count}.each_with_index.max %>
-    <% break if data[0] == 0 %>
     <span style="font: 28px 'Times New Roman'; font-style: italic; " class="text-error"><%= data[0] * 100.0 / vote.voters.count %>%</span>
     的人在 <%= link_to vote.title, vote %> 中选择了 <%= vote.options[data[1]].content %>
   </div>
@@ -25,7 +25,7 @@
     <%= link_to "查看结果", vote, class: "btn btn-success" %>
     <%= submit_tag "投票", class: "btn btn-danger" %>
   <% end %>
-</div>
+  </div>
 <% end -%>
 
 

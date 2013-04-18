@@ -13,6 +13,7 @@ class Article
   scope :un_verified, where(is_verified: false)
   scope :hottest, desc(:read_count)
   scope :recent, desc(:created_at)
+  scope :with_img, where(img_count: { gt: 0 })
 
   field :read_count, type: Integer, default: 0
 
@@ -30,6 +31,10 @@ class Article
   # 返回文章中图片
   def imgs
     content.scan(/<img src=(.+?) alt>/).flatten
+  end
+
+  def img_count
+    self.imgs.count
   end
 
   def score
