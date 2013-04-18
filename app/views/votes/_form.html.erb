@@ -1,14 +1,11 @@
 
 <%= form_for(@vote) do |f| %>
   <% if @vote.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
-
-      <ul>
-      <% @vote.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+    <div class="alert alert-error">
+      <div>发生了<%= @user.errors.count %>个错误。</div>
+      <% @user.errors.full_messages.each do |msg| %>
+        <div><%= msg %></div>
       <% end %>
-      </ul>
     </div>
   <% end %>
 

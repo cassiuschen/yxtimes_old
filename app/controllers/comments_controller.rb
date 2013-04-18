@@ -16,10 +16,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @commentable.comments.new(params[:comment].merge({commenter: current_user})).save
-        format.html { redirect_to @commentable, flash: { success: "Comment successfully." } }
+        format.html { redirect_to @commentable, flash: { success: "评论成功" } }
         format.json { render json: { success: false }, status: :created }
       else
-        format.html { redirect_to @commentable, flash: { error: "Comment error." } }
+        format.html { redirect_to @commentable, flash: { error: "评论失败" } }
         format.json { render json: { success: true }, status: :unprocessable_entity }
       end
     end
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @commentable, notice: "Delete successfully." }
+      format.html { redirect_to @commentable, notice: "删除成功" }
       format.json { head :no_content }
     end
   end
@@ -44,10 +44,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.subcomments.new(params[:sub_comment].merge({commenter: current_user})).save
-        format.html { redirect_to @commentable, flash: { success: "Comment successfully." } }
+        format.html { redirect_to @commentable, flash: { success: "评论成功" } }
         format.json { render json: { success: false }, status: :created }
       else
-        format.html { redirect_to @commentable, flash: { error: "Comment error." }}
+        format.html { redirect_to @commentable, flash: { error: "评论失败" }}
         format.json { render json: { success: true }, status: :unprocessable_entity }
       end
     end
@@ -57,9 +57,11 @@ class CommentsController < ApplicationController
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
     @comment = @commentable.comments.find(params[:comment_id])
     @subcomment = @comment.subcomments.find(params[:id])
+    
+    @subcomment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @commentable, notice: "Delete successfully." }
+      format.html { redirect_to @commentable, notice: "删除成功" }
       format.json { head :no_content }
     end
   end
