@@ -19,6 +19,12 @@
     <%= f.label :content %><br />
     <%= f.text_field :content %>
   </div>
+  <div class="control-group">
+    <%= f.label :poster, class: "control-label" %>
+    <div class="controls">
+      <%= f.file_field :poster %>
+    </div>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

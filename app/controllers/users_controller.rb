@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   def logout
+    cookies.delete(:tgt)
     CASClient::Frameworks::Rails::Filter.logout(self)
   end
 
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def publishes
-    @articles = current_user.articles.unscoped.desc(:created_at)
+    @articles = current_user.articles.unscoped.recent
 
     if params[:raw]
       render layout: false

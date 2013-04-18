@@ -40,7 +40,7 @@ html, body {
   height: 100%;
   width: 100%;
   z-index: 0;
-  background-image: url(/assets/background_image.png);
+  background-image: url(/assets/background_image.jpg);
   .background-size(cover);
 }
 
@@ -117,8 +117,13 @@ html, body {
   }
 }
 #main {
-  margin: 40px 60px 40px 180px;
+  margin: 40px 50px 40px 190px;
   min-height: 500px;
+  position: relative;
+  img {
+    max-width: 610px;
+  }
+  .clearfix;
 }
 .avatar {
   display: block;

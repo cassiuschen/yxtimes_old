@@ -5,7 +5,6 @@ class Vote
   field :title, type: String
   field :content, type: String
   field :read_count, type: Integer, default: 0
-  field :_id, type: Integer, default: -> { Vote.count + 1 }
 
   embeds_many :options, class_name: "Vote::Option"
   embeds_many :comments, as: :commentable

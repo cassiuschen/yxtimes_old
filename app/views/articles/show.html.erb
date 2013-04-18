@@ -29,12 +29,6 @@
 <% else %>
 <hr>
 <%= link_to "follow", follow_article_path, class: 'link' %>
-<%= render partial: 'comments/comments', object: @article, as: :commentable %>
-<br>
-<br>
-<br>
-<br>
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
 
+<%= render partial: 'comments/comments', object: @article, as: :commentable %>
 <% end -%>

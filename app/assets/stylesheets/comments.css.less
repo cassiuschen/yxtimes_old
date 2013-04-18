@@ -1,0 +1,57 @@
+
+@import "todc-bootstrap/variables";
+@import "bootstrap/mixins";
+
+.comments-wrapper {
+  .ml100 {
+    margin-left: 100px;
+  }
+  .controls {
+    padding: 12px 20px;
+    border: 1px solid #CCC;
+    background-color: #F5F5F5;
+    border-radius: 3px;
+  }
+  .tri {
+    position: relative;
+    &:before, &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 0;
+      width: 0;
+      border: 10px solid transparent;
+      border-right-color: #F5F5F5;
+      left: -19px;
+      top: 26px;
+    }
+    &:before {
+      border-right-color: #CCC;
+      left: -20px;
+    }
+    &.hov:after {
+      border-right-color: #FFF;
+    }
+    &.hov:hover:before {
+      border-right-color: #BBB;
+    }
+    textarea:focus {
+      border-color: #BBB;
+    }
+    textarea {
+      box-shadow: none !important;
+      padding: 8px 10px;
+      border-radius: 3px;
+      margin-bottom: 0;
+      height: 52px;
+    }
+  }
+}
+.comment-block {
+  .clearfix;
+  margin-bottom: 20px;
+}
+input.invisible {
+  position: absolute;
+  left: -9999px;
+}

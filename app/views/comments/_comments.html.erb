@@ -1,26 +1,79 @@
-<h2 id="comments"><%= commentable.comments.count %> Comments:</h2>
-<%= form_for [commentable, @comment] do |f| %>
-  <%= f.text_field :content %>
-  <%= f.submit %>
-<% end -%>
-<% commentable.comments.each do |comment| %>
-<div class="well">
-  <b>
-    <%= comment.commenter ? comment.commenter.nickname : "匿名用户" %>
-    says: 
-  </b>
-  <%= comment.content %>
-  <% comment.subcomments.each do |subcomment| %>
-  <div class="well">
-    <b>
-      <%= subcomment.commenter ? subcomment.commenter.nickname : "匿名用户" %> says: 
-    </b>
-    <%= subcomment.content %>
-  </div>
-  <% end -%>
-  <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
-    <%= f.text_field :content %>
-    <%= f.submit %>
+<div class="comments-wrapper">
+<h2 id="comments">评论</h2>
+<div class="avatar pull-left">
+  <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+</div>
+<div class="tri ml100 hov">
+  <%= form_for [commentable, @comment], remote: true do |f| %>
+    <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论,按 Enter 提交" %>
+    <%= f.submit "评论", class: "invisible" %>
   <% end -%>
 </div>
+<% commentable.comments.each do |comment| %>
+<div class="comment-block">
+<div class="avatar pull-left">
+  <%= image_tag((comment.commenter ? comment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+</div>
+<div class="controls ml100 tri">
+  <% if comment.commenter %>
+  <%= link_to comment.commenter.nickname, comment.commenter, class: "black bold" %>
+  <% else %>
+  <span class="bold black">
+    匿名用户
+  </span>
+  <% end -%>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="color: #BBB"><%= beautify_time comment.created_at %></span>
+  <div class="mt10" style="color: #666;">
+    <%= comment.content %>
+  </div>
+</div>
+</div>
+  <% comment.subcomments.each do |subcomment| %>
+  <div class="comment-block">
+    <div class="ml100">
+      <div class="avatar pull-left">
+        <%= image_tag((subcomment.commenter ? subcomment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+      </div>
+      <div class="controls ml100 tri">
+        <% if subcomment.commenter %>
+        <%= link_to subcomment.commenter.nickname, subcomment.commenter, class: "black bold"  %>
+        <% else %>
+        <span class="bold black">
+          匿名用户
+        </span>
+        <% end -%>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="color: #BBB"><%= beautify_time subcomment.created_at %></span>
+        <div class="mt10" style="color: #666;">
+          <%= subcomment.content %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end -%>
+  <div class="comment-block">
+    <div class="ml100">
+      <div class="avatar pull-left">
+        <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+      </div>
+      <div class="hov ml100 tri">
+        <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
+        <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论,按 Enter 提交" %>
+        <%= f.submit "评论", class: "invisible" %>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+<% end -%>
+</div>
+
+<% content_for :script do %>
+  <script>
+    $('textarea').keydown(function (e) {
+      if ( e.keyCode == 13) {
+        $(this).closest("form").submit();
+      }
+    });
+  </script>
 <% end -%>
