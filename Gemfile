@@ -45,7 +45,7 @@ gem 'sanitize'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # thin server
 gem 'thin'
