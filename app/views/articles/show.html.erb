@@ -30,15 +30,17 @@
 <% if current_user %>
 <div id="actions">
   <div class="btn-group btn-group-vertical">
-    <% if @article.starrers.include? current_user %>
-    <%= link_to unfollow_article_path, class: 'btn disabled' do %>取消<br><i class="icon-ok icon-2x"></i><% end -%>
-    <% else %>
-    <%= link_to follow_article_path, class: 'btn' do %>关注<br><i class="icon-plus-sign icon-2x"></i><% end -%>
-    <% end -%>
-    <% if current_user.is_admin? %>
-    <%= link_to edit_article_path, class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
-    <%= link_to destroy_article_path, class: 'btn', html: { confirm: "你确定要删除吗？"} do %>删除<br><i class="icon-trash icon-2x"></i><% end -%>
-    <% end -%>
+    <% if current_user %>
+      <% if @article.starrers.include? current_user %>
+      <%= link_to unfollow_article_path, class: 'btn disabled' do %>取消<br><i class="icon-ok icon-2x"></i><% end -%>
+      <% else %>
+      <%= link_to follow_article_path, class: 'btn' do %>关注<br><i class="icon-plus-sign icon-2x"></i><% end -%>
+      <% end -%>
+      <% if is_admin? %>
+      <%= link_to edit_article_path, class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
+      <%= link_to destroy_article_path, class: 'btn', html: { confirm: "你确定要删除吗？"} do %>删除<br><i class="icon-trash icon-2x"></i><% end -%>
+      <% end -%>
+    <% end %>
   </div>
 </div>
 <% end -%>
