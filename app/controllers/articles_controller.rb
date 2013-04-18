@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.unscoped.find(params[:id])
+    @article = Article.find(params[:id])
 
     if !@article.is_verified? and (@article.author != current_user) and !current_user.is_admin?
       raise ActionController::RoutingError.new('Not Found')
