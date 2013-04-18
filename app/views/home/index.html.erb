@@ -58,10 +58,9 @@
           </h4></a>
   </div>
   <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
-    <%= image_tag @renwu.imgs[0], width: 300, height: 200, class: "bgw pull-right" %>
-    <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
+    <%= image_tag @renwu.imgs[0], width: 300, height: 210, class: "bgw pull-right" %>
+    <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 50px; width: 270px;">
       <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
-      <div style="color: #ccc;"  ><%= @renwu.digest(30) %></div>
     </div>
     <a href="<%= article_path(@renwu, anchor: 'comments') %>" class="comments" style="right: 25px;">
       <i class="icon-comment"></i>(<%= @renwu.comments.count %>)

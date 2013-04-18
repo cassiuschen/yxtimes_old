@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
         @current_user = User.find(session[:cas_user])
       rescue Mongoid::Errors::DocumentNotFound
         @current_user = User.create!(name: session[:cas_user], last_sign_in_at: session[:previous_redirect_to_cas])
-        redirect_to users_edit_path, notice: "您第一次登录系统，修改个人信息."
+        redirect_to root_path, flash: { success: "您第一次登录系统，请点击右侧边栏修改个人资料." }
         return
       end
 
