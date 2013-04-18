@@ -46,6 +46,8 @@ categories.each do |cat|
   end
 end
 
+Article.unscoped.each(&:verify!)
+
 feature = Feature.create!(title: "Test feature", content: "This is a test feature.", articles: Article.all[1..10])
 
 vote = Vote.create!(title: "Test Vote 1", options: (1..4).map{|i|Vote::Option.new(content: "Option " + i.to_s + " in the vote.")})
