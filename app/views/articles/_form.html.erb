@@ -12,7 +12,7 @@
     <%= f.text_field :title, style: "width: 594px;", placeholder: "标题" %>
   </div>
   <div class="field">
-    <%= f.kindeditor :content, window_onload: true, height: 500, items: ["fontname","fontsize","|","forecolor","hilitecolor","bold","italic","underline","removeformat","|","justifyleft","justifycenter","justifyright","insertorderedlist","insertunorderedlist","|","emoticons","image","link", "|", "clearhtml", "quickformat"], cssPath: [asset_path("application.css"), asset_path("bootstrap.css")], cssData: "body {background: white;} img{max-width: 100%}" %>
+    <%= f.kindeditor :content, window_onload: true, height: 500, items: ["fontname","fontsize","|","forecolor","hilitecolor","bold","italic","underline","removeformat","|","justifyleft","justifycenter","justifyright","insertorderedlist","insertunorderedlist","|","emoticons","image","link", "|", "clearhtml", "quickformat"], cssPath: [asset_path("application.css"), asset_path("bootstrap.css")], cssData: "body {background: white; height: auto;} img{max-width: 100%}", allowFileManager: false, resizeType: 1, themeType: "simple" %>
   </div>
   <div class="control-group mt20">
     <%= f.label :category_id, class: "control-label" %>
