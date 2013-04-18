@@ -13,11 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
-    current_user.is_admin?
+    current_user && current_user.is_admin?
   end
 
   def is_reporter?
-    current_user.is_reporter?
+    current_user && current_user.is_reporter?
   end
 
   def cas_gateway_filter

@@ -12,8 +12,10 @@
 <% commentable.comments.each do |comment| %>
 <div class="comment-block" id="<%= comment.id %>">
 <div class="avatar pull-left">
+  <% if comment.commenter %>
   <%= link_to user_path(comment.commenter) do %>
     <%= image_tag((comment.commenter ? comment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+  <% end %>
   <% end %>
 </div>
 <div class="controls ml100 tri">
@@ -35,7 +37,7 @@
   <div class="comment-block" id="<%= subcomment.id %>">
     <div class="ml100">
       <div class="avatar pull-left">
-        <%= link_to user_path(subcomment.commenter) do %>
+        <%= link_to user_path(subcomment.commenter) if subcomment.commenter do %>
         <%= image_tag((subcomment.commenter ? subcomment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
         <% end %>
       </div>

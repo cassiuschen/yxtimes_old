@@ -56,7 +56,7 @@
 
 <%= render partial: 'comments/comments', object: @vote, as: 'commentable' %>
 
-<% if current_user.is_admin? %>
+<% if is_admin? %>
 <div id="actions">
   <div class="btn-group btn-group-vertical">
     <%= link_to edit_vote_path, class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
