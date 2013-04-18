@@ -34,6 +34,7 @@
 <% end -%>
 </div>
 
+<% if current_user %>
 <div id="actions">
   <div class="btn-group btn-group-vertical">
     <% if current_user.is_admin? %>
@@ -41,3 +42,4 @@
     <% end -%>
   </div>
 </div>
+<% end -%>

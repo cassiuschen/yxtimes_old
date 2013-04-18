@@ -27,6 +27,7 @@
 
 <%= render partial: 'comments/comments', object: @article, as: :commentable %>
 
+<% if current_user %>
 <div id="actions">
   <div class="btn-group btn-group-vertical">
     <% if @article.starrers.include? current_user %>
@@ -40,4 +41,5 @@
     <% end -%>
   </div>
 </div>
+<% end -%>
 <% end -%>

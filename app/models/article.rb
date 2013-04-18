@@ -8,12 +8,13 @@ class Article
   field :content, type: String
   field :source, type: String
   field :is_verified, type: Boolean, default: false
+  field :has_image, type: Boolean, default: false
 
   default_scope where(is_verified: true)
   scope :un_verified, where(is_verified: false)
   scope :hottest, desc(:read_count)
   scope :recent, desc(:created_at)
-  scope :with_img, where(img_count: { gt: 0 })
+  scope :with_img, where(has_image: true)
 
   field :read_count, type: Integer, default: 0
 
@@ -30,11 +31,7 @@ class Article
 
   # 返回文章中图片
   def imgs
-    content.scan(/<img src=(.+?) alt>/).flatten
-  end
-
-  def img_count
-    self.imgs.count
+    content.scan(/<img src="(.+?)"/).flatten
   end
 
   def score
@@ -42,6 +39,7 @@ class Article
   end
 
   before_save do |article|
+    self.has_image = true if self.imgs.count > 0
     unless article.source.blank? || article.source.match(/^http:\/\//i) || article.source.match(/^https:\/\//i) || article.source.match(/^ftp:\/\//i)
       article.source = "http://" + article.source
     end

@@ -6,5 +6,5 @@ Yxtimes::Application.initialize!
 
 # RubyCAS-client
 CASClient::Frameworks::Rails::Filter.configure(
-  :cas_base_url => "http://test.seiue.com:8888/"
+  :cas_base_url => "http://127.0.0.1:8888/"
 )

@@ -5,7 +5,7 @@
 </div>
 <div class="tri ml100 hov">
   <%= form_for [commentable, @comment] do |f| %>
-    <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论,按 Enter 提交" %>
+    <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论，按 Enter 提交" %>
     <%= f.submit "评论", class: "invisible" %>
   <% end -%>
 </div>
@@ -59,7 +59,7 @@
       </div>
       <div class="hov ml100 tri">
         <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
-        <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论,按 Enter 提交" %>
+        <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论，按 Enter 提交" %>
         <%= f.submit "评论", class: "invisible" %>
         <% end -%>
       </div>
