@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
  
   def create
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
+    @commentable.starrers << current_user if params[:article_id]
 
     respond_to do |format|
       if @commentable.comments.new(params[:comment].merge({commenter: current_user})).save
@@ -38,6 +39,8 @@ class CommentsController < ApplicationController
   def create_subcomment
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
     @comment = @commentable.comments.find(params[:comment_id])
+
+    @commentable.starrers << current_user if params[:article_id]
 
     respond_to do |format|
       if @comment.subcomments.new(params[:sub_comment].merge({commenter: current_user})).save

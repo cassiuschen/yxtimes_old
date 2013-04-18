@@ -10,6 +10,9 @@ class Vote
   embeds_many :comments, as: :commentable
   belongs_to :author, class_name: "User"
 
+  scope :hottest, desc(:read_count)
+  scope :recent, desc(:created_at)
+
   validates_presence_of :title, :options
 
   accepts_nested_attributes_for :options, :allow_destroy => true

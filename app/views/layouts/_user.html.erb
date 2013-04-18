@@ -17,7 +17,7 @@
             <div style="text-align: center; color: #999; line-height: 40px;">暂无提醒</div>
           <% else %>
             <% current_user.notifications.each do |noti| %>
-              <a href="<%= noti.link %>" class="noti-item">
+              <a href="<%= noti_path(noti) %>" class="noti-item">
                 <div class="unread">●</div>
                 <%= noti.content %>
               </a>
@@ -31,7 +31,7 @@
       <div class="center gray"><%= current_user.is_who %></div>
       <a id="right-bar-link-1" href="/" class="center gray mt30"><i class="icon-home icon-2x p0"></i><br>主页</a>
       <% if current_user.is_reporter? %>
-      <a id="right-bar-link-2" href="<%= current_user.articles.empty? ? new_article_path : user_publishes_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>发布</a>
+      <a id="right-bar-link-2" href="<%= current_user.articles.empty? ? new_article_path : user_publishes_path %>" class="center gray mt30"><i class="icon-pencil icon-2x p0"></i><br>发布</a>
       <% else %>
       <a id="right-bar-link-2" href="<%= new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>投稿</a>
       <% end -%>

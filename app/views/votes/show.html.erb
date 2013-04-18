@@ -1,4 +1,5 @@
 <h1><%= @vote.title %></h1>
+<div style="margin-bottom: 50px;">  
 <% unless @vote.content.blank? %>
 <div class="well">
   <%= @vote.content %>
@@ -51,5 +52,15 @@
     </div>
   <% end %>
 <% end -%>
-<hr>
+</div>
+
 <%= render partial: 'comments/comments', object: @vote, as: 'commentable' %>
+
+<% if current_user.is_admin? %>
+<div id="actions">
+  <div class="btn-group btn-group-vertical">
+    <%= link_to edit_vote_path, class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
+    <%= link_to destroy_vote_path, class: 'btn', html: { confirm: "你确定要删除吗？"} do %>删除<br><i class="icon-trash icon-2x"></i><% end -%>
+  </div>
+</div>
+<% end -%>

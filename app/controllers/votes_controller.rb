@@ -95,12 +95,12 @@ class VotesController < ApplicationController
     @option = @vote.options.find(params[:option])
 
     if @vote.voters.include? current_user
-      redirect_to :back, flash: { error: "Vote again!" }
+      redirect_to :back, flash: { error: "请勿重复投票" }
       return 
     end
     
     @option.update_attributes(count: @option.count + 1)
     @vote.voters << current_user
-    redirect_to :back, flash: { success: "Vote successfully" }
+    redirect_to :back, flash: { success: "投票成功" }
   end
 end
