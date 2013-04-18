@@ -35,7 +35,7 @@
       <% else %>
       <a id="right-bar-link-2" href="<%= new_article_path %>" class="center gray mt30"><i class="icon-edit icon-2x p0"></i><br>投稿</a>
       <% end -%>
-      <% if current_user.is_admin? %>
+      <% if is_admin? %>
       <a id="right-bar-link-3" href="<%= articles_path %>" class="center gray mt30"><i class="icon-eye-open icon-2x p0"></i><br>审核</a>
       <% end -%>
       <a id="right-bar-link-4" href="<%= user_edit_path %>" class="center gray mt30"><i class="icon-cog icon-2x p0"></i><br>资料</a>

@@ -35,7 +35,7 @@
       <% else %>
       <%= link_to follow_article_path, class: 'btn' do %>关注<br><i class="icon-plus-sign icon-2x"></i><% end -%>
       <% end -%>
-      <% if current_user.is_admin? %>
+      <% if is_admin? %>
       <%= link_to edit_article_path, class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
       <%= link_to destroy_article_path, class: 'btn', html: { confirm: "你确定要删除吗？"} do %>删除<br><i class="icon-trash icon-2x"></i><% end -%>
       <% end -%>
