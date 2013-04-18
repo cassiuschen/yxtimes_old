@@ -31,7 +31,7 @@ class VotesController < ApplicationController
   # GET /votes/new.json
   def new
     @vote = Vote.new
-    @option = @vote.options.build
+    3.times { @vote.options.build }
 
     respond_to do |format|
       format.html # new.html.erb
