@@ -4,13 +4,13 @@
   <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
 </div>
 <div class="tri ml100 hov">
-  <%= form_for [commentable, @comment], remote: true do |f| %>
+  <%= form_for [commentable, @comment] do |f| %>
     <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论,按 Enter 提交" %>
     <%= f.submit "评论", class: "invisible" %>
   <% end -%>
 </div>
 <% commentable.comments.each do |comment| %>
-<div class="comment-block">
+<div class="comment-block" id="<%= comment.id %>">
 <div class="avatar pull-left">
   <%= image_tag((comment.commenter ? comment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
 </div>
@@ -30,7 +30,7 @@
 </div>
 </div>
   <% comment.subcomments.each do |subcomment| %>
-  <div class="comment-block">
+  <div class="comment-block" id="<%= subcomment.id %>">
     <div class="ml100">
       <div class="avatar pull-left">
         <%= image_tag((subcomment.commenter ? subcomment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
@@ -73,6 +73,9 @@
     $('textarea').keydown(function (e) {
       if ( e.keyCode == 13) {
         $(this).closest("form").submit();
+        setTimeout(function(){
+          Turbolinks.visit(window.location)
+        },100)
       }
     });
   </script>

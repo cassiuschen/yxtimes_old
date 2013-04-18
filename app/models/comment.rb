@@ -39,12 +39,12 @@ class Comment
 
       self.commentable.starrers.each do |user|
         next if user==self.commenter
-        user.send_notification("#{commenter ? commenter.name : "匿名用户"} 评论了文章《#{commentable.title}》", article_path(commentable))
+        user.send_notification("#{commenter ? commenter.name : "匿名用户"} 评论了文章《#{commentable.title}》", article_path(commentable) + "##{self.id}")
       end
       self.commentable.starrers << self.commenter
 
       unless self.commentable.starrers.include? self.commentable.author or self.commenter==self.commentable.author
-        self.commentable.author.send_notification("#{commenter ? commenter.name : "匿名用户"} 评论了文章《#{commentable.title}》", article_path(commentable))
+        self.commentable.author.send_notification("#{commenter ? commenter.name : "匿名用户"} 评论了文章《#{commentable.title}》", article_path(commentable) + "##{self.id}")
       end
 
       self.commenter.send_feed("评论了 <a href='#{category_path(commentable.category)}' class='link'>#{commentable.category.name}</a> 中的文章<a href='#{article_path(commentable)}' class='timeline-link'>《#{commentable.title}》</a>") if self.commenter

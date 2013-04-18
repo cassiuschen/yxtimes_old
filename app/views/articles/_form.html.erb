@@ -1,4 +1,4 @@
-<%= form_for(@article) do |f| %>
+<%= form_for @article, html: { class: "form-horizontal" } do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -11,23 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.text_field :title, style: "width: 594px;", placeholder: "标题" %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
-    <%= f.kindeditor :content, window_onload: true %>
+    <%= f.kindeditor :content, window_onload: true, height: 500, items: ["fontname","fontsize","|","forecolor","hilitecolor","bold","italic","underline","removeformat","|","justifyleft","justifycenter","justifyright","insertorderedlist","insertunorderedlist","|","emoticons","image","link", "|", "clearhtml", "quickformat"], cssPath: [asset_path("application.css"), asset_path("bootstrap.css")], cssData: "body {background: white;} img{max-width: 100%}" %>
   </div>
-  <div class="field">
-    <%= f.label :category_id %><br />
+  <div class="control-group mt20">
+    <%= f.label :category_id, class: "control-label" %>
+    <div class="controls">
     <%= f.select :category_id, options_for_select(Category.all.map{|c|[c.name,c.id.to_s]}, @article.category_id), :prompt => '选择分类' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="controls">
+    <%= f.submit @article.new_record ? "发布" : "更新", class: "btn btn-danger" %>
   </div>
-
-  <pre>
-    <%= @article.to_json %>
-  </pre>
 <% end %>

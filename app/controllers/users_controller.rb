@@ -58,4 +58,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def noti
+    @noti = current_user.notifications.find(params[:id])
+    @noti.read
+
+    redirect_to @noti.link
+  end
+
 end

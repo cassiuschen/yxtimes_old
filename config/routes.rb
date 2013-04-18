@@ -3,7 +3,7 @@ Yxtimes::Application.routes.draw do
   resources :features, except: :index
   get "features" => "features#show", as: 'features'
 
-  resources :votes do
+  resources :votes, except: :destroy do
     get "comments" => "comments#show"
     post "comments" => "comments#create"
     delete "comments/:id" => "comments#destroy", as: "comment"
@@ -11,6 +11,10 @@ Yxtimes::Application.routes.draw do
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
     
     post "options" => "votes#vote_for"
+
+    member do 
+      get "delete" => "votes#destroy", as: "destroy"
+    end
   end
 
   resources :articles, except: :destroy do
@@ -21,6 +25,7 @@ Yxtimes::Application.routes.draw do
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
     member do 
       get "follow"
+      get "unfollow"
       get "verify"
       get "delete" => "articles#destroy", as: "destroy"
     end
@@ -37,6 +42,7 @@ Yxtimes::Application.routes.draw do
   get "edit" => "users#edit", as: "user_edit"
   put "user" => "users#update", as: "user_update"
   get "my" => "users#publishes", as: "user_publishes"
+  get "noti/:id" => "users#noti", as: "noti"
 
   get "users/:id/feeds" => "users#show_feeds", as: "user_feeds"
   get "users/:id/articles" => "users#show_articles", as: "user_articles"

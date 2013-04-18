@@ -59,3 +59,14 @@ $(document).on("page:change", function(){
     window.onload();
   }
 })
+
+
+$(window).scroll(function(){
+  $('#left-nav').css("top",$(window).scrollTop()+230);
+  $('#actions').css("top",$(window).scrollTop()+140);
+})
+
+
+
+
+

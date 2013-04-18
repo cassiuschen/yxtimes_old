@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController  
+class ArticlesController < ApplicationController
   prepend_before_filter :cas_filter, except: :show
   append_before_filter :require_admin, only: [:index, :verify]
 
@@ -115,6 +115,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1/delete.json
   def destroy
     @article = Article.unscoped.find(params[:id])
+    @category = @article.category
 
     unless current_user.is_admin? or (current_user == @article.author and !@article.is_verified?)
       raise ActionController::RoutingError.new('Not Found')
@@ -123,7 +124,13 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, flash: { success: "删除成功" } }
+      format.html { 
+        if params[:raw]
+          redirect_to articles_url, flash: { success: "删除成功" }
+        else
+          redirect_to @category, flash: { success: "删除成功" }
+        end
+      }
       format.json { head :no_content }
     end
   end
@@ -133,13 +140,24 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.starrers.push current_user
 
-    redirect_to :back, flash: { success: "Succeed" }
+    current_user.send_feed("关注了 <a href='#{category_path(@article.category)}' class='link'>#{@article.category.name}</a> 中的文章<a href='#{article_path(@article)}' class='timeline-link'>《#{@article.title}》</a>")
+
+    redirect_to :back
+  end
+
+  def unfollow
+    @article = Article.find(params[:id])
+    @article.starrers.delete current_user
+
+    redirect_to :back
   end
 
   def verify
     @article = Article.unscoped.find(params[:id])
     @article.verify!
 
-    redirect_to articles_path, flash: { success: "Succeed" }
+    @article.author.send_feed("在 <a href='#{category_path(@article.category)}' class='link'>#{@article.category.name}</a> 中发布了文章<a href='#{article_path(@article)}' class='timeline-link'>《#{@article.title}》</a>")
+
+    redirect_to articles_path(raw: true)
   end
 end
