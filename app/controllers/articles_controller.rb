@@ -80,6 +80,8 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params[:article].merge({ author: current_user }))
 
+    @article.starrers.push current_user
+
     respond_to do |format|
       if @article.save
         format.html { redirect_to root_path, notice: 'Article was successfully created.' }
@@ -126,7 +128,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { 
         if params[:raw]
-          redirect_to articles_url, flash: { success: "删除成功" }
+          redirect_to articles_path(raw: true), flash: { success: "删除成功" }
         else
           redirect_to @category, flash: { success: "删除成功" }
         end

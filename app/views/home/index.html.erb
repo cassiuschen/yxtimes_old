@@ -1,92 +1,108 @@
 <div class="home-container">
-    <div class="logo"></div>
-    <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
-      <%= image_tag @feature.poster, width: 610, height: 260, class: "bgw pull-left" %>
-      <div class="text-block" style="margin-left: 610px;">
-        <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
-        <p><%= @feature.content %></p>
-        <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
-                  专题
-                </h4></a>
+  <div class="logo">
+    <a href="/" class="logo-inner"></a>
+  </div>
+  <div id="flash" style="position: absolute;top: -100px;width: 620px;left: 230px;">
+    <% flash.each do |k,v| %>
+      <div class="alert alert-<%= k %>">
+        <%= v %>
       </div>
-    </div>
-    <div class="ml20" style="float: left; position: relative; height: 210px; padding: 25px 0; width: 150px;">
-      <div style="color:#F6DA3E;font-size:22px;text-shadow:0 1px 1px rgba(0,0,0,0.8);margin-bottom: 15px;">MOST READ</div>
-      <% @most_read[0..3].each_with_index do |most,i| %>
-        <a href="<%= article_path(most) %>" style="display: block; color: #FFF; font-size: 16px;">
-          <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;"><%= i+1 %>.</span>
-          <%= most.title.truncate(18) %>
-        </a>
-      <% end %>
-    </div>
-    <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
-      <%= image_tag @diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right" %>
-      <div class="text-block" style="margin-right: 300px;">
-        <h2><%= link_to @diaocha.title, @diaocha %></h2>
-        <p><%= @diaocha.digest(50) %></p>
-        <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
-          <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
-        </a>
-        <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
-                  调查
-                </h4></a>
-      </div>
-    </div>
-    <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
-      <% @guandian[0..2].each do |point| %>
-        <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
-          <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
-          <p><%= point.digest(45) %></p>
-          <a href="<%= article_path(point, anchor: 'comments') %>" class="comments" style="left: 25px;">
-            <i class="icon-comment"></i>(<%= point.comments.count %>)
-          </a>
-        </div> 
-      <% end %>
-      <a href="<%= category_path(2) %>"><h4 class="category" style="right: 15px; color: #8DC433">
-              观点
-            </h4></a>
-    </div>
-    <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
-      <%= image_tag @renwu.imgs[0], width: 300, height: 200, class: "bgw pull-right" %>
-      <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
-        <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
-        <div style="color: #ccc;"  ><%= @renwu.digest(30) %></div>
-      </div>
-      <a href="<%= article_path(@renwu, anchor: 'comments') %>" class="comments" style="right: 25px;">
-        <i class="icon-comment"></i>(<%= @renwu.comments.count %>)
-      </a>
-      <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
-              人物
-            </h4></a>
-    </div>
-    <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
-      <div class="text-block">
-        <% @yuedu[0..6].each do |read| %>
-          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="<%= article_path(read) %>"><%= read.title %></a></div>
-        <% end %>
-      </div>
-      
-      <a href="<%= category_path(1) %>"><h4 class="category" style="right: 15px; color: #B657C1">
-              阅读
-            </h4></a>
-    </div>
-    <div class="home-block mt10 ml20" style="width: 270px;">
-      <div style="padding: 25px;">
-        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
-        <%= form_tag vote_options_path(@vote), method: :post do %>
-          <div class="mb20" style="max-height: 140px; overflow-y: auto;">
-            <% @vote.options.each do |opt| %>
-              <div class="mt10">
-                <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
-              </div>
-            <% end -%>
-          </div>
-          <%= link_to "所有投票", votes_path, class: "btn btn-success" %>
-          <%= submit_tag "投票", class: "btn btn-danger" %>
-        <% end %>
-      </div>
-    </div>
-    <div class="pull-left" style="height: 260px; position: relative;">
-      <a href="###" class="about_us" style="position: absolute; bottom: -50px; left: -10px;"></a>
+    <% end -%>
+    <%= yield %>
+  </div>
+  <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
+    <%= image_tag @feature.poster, width: 610, height: 260, class: "bgw pull-left" %>
+    <div class="text-block" style="margin-left: 610px;">
+      <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
+      <p><%= @feature.content %></p>
+      <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
+                专题
+              </h4></a>
     </div>
   </div>
+  <div class="ml20" style="float: left; position: relative; height: 210px; padding: 25px 0; width: 150px;">
+    <div style="color:#F6DA3E;font-size:22px;text-shadow:0 1px 1px rgba(0,0,0,0.8);margin-bottom: 15px;">MOST READ</div>
+    <% @most_read[0..3].each_with_index do |most,i| %>
+      <a href="<%= article_path(most) %>" style="display: block; color: #FFF; font-size: 16px;">
+        <span style="font: 28px 'Times New Roman'; font-style: italic; vertical-align: -2px;"><%= i+1 %>.</span>
+        <%= most.title.truncate(18) %>
+      </a>
+    <% end %>
+  </div>
+  <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
+    <%= image_tag @diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right" %>
+    <div class="text-block" style="margin-right: 300px;">
+      <h2><%= link_to @diaocha.title, @diaocha %></h2>
+      <p><%= @diaocha.digest(50) %></p>
+      <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
+        <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
+      </a>
+      <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
+                调查
+              </h4></a>
+    </div>
+  </div>
+  <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
+    <% @guandian[0..2].each do |point| %>
+      <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
+        <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
+        <p><%= point.digest(45) %></p>
+        <a href="<%= article_path(point, anchor: 'comments') %>" class="comments" style="left: 25px;">
+          <i class="icon-comment"></i>(<%= point.comments.count %>)
+        </a>
+      </div> 
+    <% end %>
+    <a href="<%= category_path(2) %>"><h4 class="category" style="right: 15px; color: #8DC433">
+            观点
+          </h4></a>
+  </div>
+  <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
+    <%= image_tag @renwu.imgs[0], width: 300, height: 200, class: "bgw pull-right" %>
+    <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 60px;">
+      <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
+      <div style="color: #ccc;"  ><%= @renwu.digest(30) %></div>
+    </div>
+    <a href="<%= article_path(@renwu, anchor: 'comments') %>" class="comments" style="right: 25px;">
+      <i class="icon-comment"></i>(<%= @renwu.comments.count %>)
+    </a>
+    <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
+            人物
+          </h4></a>
+  </div>
+  <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
+    <div class="text-block">
+      <% @yuedu[0..6].each do |read| %>
+        <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="<%= article_path(read) %>"><%= read.title %></a></div>
+      <% end %>
+    </div>
+    
+    <a href="<%= category_path(1) %>"><h4 class="category" style="right: 15px; color: #B657C1">
+            阅读
+          </h4></a>
+  </div>
+  <div class="home-block mt10 ml20" style="width: 270px;">
+    <div style="padding: 25px;">
+      <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
+      <%= form_tag vote_options_path(@vote), method: :post do %>
+        <div class="mb20" style="max-height: 140px; overflow-y: auto;">
+          <% @vote.options.each do |opt| %>
+            <div class="mt10">
+              <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
+            </div>
+          <% end -%>
+        </div>
+        <%= link_to "所有投票", votes_path, class: "btn btn-success" %>
+        <%= submit_tag "投票", class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="pull-left" style="height: 260px; position: relative;">
+    <a href="###" class="about_us" style="position: absolute; bottom: -50px; left: -10px;"></a>
+  </div>
+</div>
+
+<% content_for :script do %>
+  <script>
+    $('#flash').animate({"top":"-2"},1000);
+  </script>
+<% end -%>

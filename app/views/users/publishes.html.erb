@@ -16,7 +16,7 @@
     <th>标题</th>
     <th colspan="2">动作</th>
   </tr>
-  <% current_user.articles.each do |article| %>
+  <% current_user.articles.unscoped.recent.each do |article| %>
     <tr>
       <td><%= article.category.name %></td>
       <% if article.is_verified? %>
