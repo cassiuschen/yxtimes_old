@@ -51,7 +51,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, flash: { success: 'Vote was successfully created.' } }
+        format.html { redirect_to @vote, flash: { success: '投票创建成功。' } }
         format.json { render json: @vote, status: :created, location: @vote }
       else
         format.html { render action: "new" }
@@ -67,7 +67,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.update_attributes(params[:vote])
-        format.html { redirect_to @vote, flash: { success: 'Vote was successfully updated.' } }
+        format.html { redirect_to @vote, flash: { success: '投票更新成功。' } }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -95,7 +95,7 @@ class VotesController < ApplicationController
     @option = @vote.options.find(params[:option])
 
     if @vote.voters.include? current_user
-      redirect_to :back, flash: { error: "请勿重复投票" }
+      redirect_to :back, flash: { error: "您已经投过票了" }
       return 
     end
     

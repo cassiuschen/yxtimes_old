@@ -1,9 +1,13 @@
 <div style="padding: 50px; width: 500px;">
-<% flash.each do |k,v| %>
-  <div class="alert alert-<%= k %>">
-    <%= v %>
+  <% unless flash.empty? %>
+  <div class="flash" style="position: absolute;top: -2px;width: 540px;left: 30px;">
+    <% flash.each do |k,v| %>
+      <div class="alert alert-<%= k %>">
+        <%= v %>
+      </div>
+    <% end -%>
   </div>
-<% end -%>
+  <% end -%>
 <legend style="color: white;">待审核文章</legend>
 
 <% if @articles.empty? %>

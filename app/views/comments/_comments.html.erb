@@ -63,7 +63,7 @@
           <% end -%>
         </div>
         <% if subcomment.commenter %>
-        <%= link_to subcomment.commenter.nickname, subcomment.commenter, class: "black bold"  %>
+        <%= link_to subcomment.commenter.nickname, subcomment.commenter, class: "black bold" %>
         <% else %>
         <span class="bold black">
           匿名用户
@@ -97,7 +97,7 @@
 <% content_for :script do %>
   <script>
     $('textarea').keydown(function (e) {
-      if ( e.keyCode == 13) {
+      if (e.keyCode == 13) {
         $(this).closest("form").submit();
         setTimeout(function(){
           Turbolinks.visit(window.location)

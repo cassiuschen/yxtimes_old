@@ -1,9 +1,13 @@
 <div style="padding: 50px; width: 400px;">
-<% flash.each do |k,v| %>
-  <div class="alert alert-<%= k %>">
-    <%= v %>
+  <% unless flash.empty? %>
+  <div class="flash" style="position: absolute;top: -2px;width: 440px;left: 30px;">
+    <% flash.each do |k,v| %>
+      <div class="alert alert-<%= k %>">
+        <%= v %>
+      </div>
+    <% end -%>
   </div>
-<% end -%>
+  <% end -%>
 <legend style="color: white;">
   <a href="<%= new_article_path %>" class="btn btn-danger pull-right" style="margin-top: 5px;">发布新文章</a>
   我的文章

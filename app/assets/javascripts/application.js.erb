@@ -55,11 +55,17 @@ $('#right-panel').on("click","a[data-remote]",function(e){
 $('#user-bar').on("click","a:not([data-remote])",hide_right_panel);
 
 $(document).on("page:change", function(){
+  // if (window.location.hash) $("html,body").animate({scrollTop: $(window.location.hash).offset().top - 60}, 500);
   if (typeof(window.onload) === "function") {
     window.onload();
   }
 })
 
+$('#left-nav a').click(function(){
+  $("html,body").animate({scrollTop: 0}, 500);
+  $(this).siblings().removeClass("active");
+  $(this).addClass("active");
+})
 
 $(window).scroll(function(){
   $('#left-nav').css("top",$(window).scrollTop()+230);

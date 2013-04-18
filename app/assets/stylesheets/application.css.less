@@ -270,3 +270,20 @@ label.vote {
     color: ;
   }
 }
+
+@-webkit-keyframes slidein {
+  0% {
+    -webkit-transform:translate(0px,-50px)
+  }
+  40% {
+    -webkit-transform:translate(0px,-50px)
+  }
+  100% {
+    -webkit-transform:translate(0px,0px)
+  }
+}
+
+.flash {
+  -webkit-animation-name: slidein;
+  -webkit-animation-duration: 1s;
+}

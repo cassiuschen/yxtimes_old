@@ -2,14 +2,15 @@
   <div class="logo">
     <a href="/" class="logo-inner"></a>
   </div>
-  <div id="flash" style="position: absolute;top: -100px;width: 620px;left: 230px;">
+  <% unless flash.empty? %>
+  <div class="flash" style="position: absolute;top: -2px;width: 620px;left: 230px;">
     <% flash.each do |k,v| %>
       <div class="alert alert-<%= k %>">
         <%= v %>
       </div>
     <% end -%>
-    <%= yield %>
   </div>
+  <% end -%>
   <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
     <%= image_tag @feature.poster, width: 610, height: 260, class: "bgw pull-left" %>
     <div class="text-block" style="margin-left: 610px;">
@@ -100,9 +101,3 @@
     <a href="###" class="about_us" style="position: absolute; bottom: -50px; left: -10px;"></a>
   </div>
 </div>
-
-<% content_for :script do %>
-  <script>
-    $('#flash').animate({"top":"-2"},1000);
-  </script>
-<% end -%>

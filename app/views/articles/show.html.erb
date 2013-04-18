@@ -1,5 +1,14 @@
 <% if params[:raw] %>
 <div style="padding: 30px 50px; width: 500px;">
+  <% unless flash.empty? %>
+  <div class="flash" style="position: absolute;top: -2px;width: 540px;left: 30px;">
+    <% flash.each do |k,v| %>
+      <div class="alert alert-<%= k %>">
+        <%= v %>
+      </div>
+    <% end -%>
+  </div>
+  <% end -%>
 <%= link_to "< 返回", params[:from]=="index" ? articles_path : user_publishes_path , class: "link" ,remote: true %>
 <legend style="color: white;"><%= @article.title %></legend>
 <% else %>

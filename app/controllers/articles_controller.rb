@@ -84,7 +84,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to root_path, notice: 'Article was successfully created.' }
+        format.html { redirect_to root_path, flash: { success: '文章发布成功，请等候审核。' } }
         format.json { render json: @article, status: :created, location: @article }
       else
         format.html { render action: "new" }
@@ -104,7 +104,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.update_attributes(params[:article])
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to @article, flash: { success: '文章修改成功' } }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
