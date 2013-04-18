@@ -14,11 +14,20 @@
 <div class="avatar pull-left">
   <% if comment.commenter %>
   <%= link_to user_path(comment.commenter) do %>
-    <%= image_tag((comment.commenter ? comment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+    <%= image_tag(comment.commenter.avatar, class: "avatar-inner") %>
   <% end %>
+  <% else %>
+    <%= image_tag(asset_path("avatar_default.jpg"), class: "avatar-inner") %>
   <% end %>
 </div>
 <div class="controls ml100 tri">
+  <div class="toolbox">
+    <% if current_user.is_admin? %>
+    <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
+      <i class="icon-trash"></i>
+    <% end -%>
+    <% end -%>
+  </div>
   <% if comment.commenter %>
   <%= link_to comment.commenter.nickname, comment.commenter, class: "black bold" %>
   <% else %>
@@ -37,11 +46,22 @@
   <div class="comment-block" id="<%= subcomment.id %>">
     <div class="ml100">
       <div class="avatar pull-left">
-        <%= link_to user_path(subcomment.commenter) if subcomment.commenter do %>
-        <%= image_tag((subcomment.commenter ? subcomment.commenter.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+        <% if subcomment.commenter %>
+        <%= link_to user_path(subcomment.commenter) do %>
+        <%= image_tag(subcomment.commenter.avatar, class: "avatar-inner") %>
         <% end %>
+        <% else %>
+        <%= image_tag asset_path("avatar_default.jpg"), class: "avatar-inner" %>
+        <% end -%>
       </div>
       <div class="controls ml100 tri">
+        <div class="toolbox">
+          <% if current_user.is_admin? %>
+          <%= link_to eval("#{commentable.class.to_s.downcase}_subcomment_path(commentable, comment, subcomment)"), method: :delete, data: { confirm: "确认删除吗？" } do %>
+            <i class="icon-trash"></i>
+          <% end -%>
+          <% end -%>
+        </div>
         <% if subcomment.commenter %>
         <%= link_to subcomment.commenter.nickname, subcomment.commenter, class: "black bold"  %>
         <% else %>

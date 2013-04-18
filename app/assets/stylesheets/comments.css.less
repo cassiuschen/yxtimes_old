@@ -11,6 +11,16 @@
     border: 1px solid #CCC;
     background-color: #F5F5F5;
     border-radius: 3px;
+    position: relative;
+    & > .toolbox {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      display: none;
+    }
+    &:hover > .toolbox {
+      display: block;
+    }
   }
   .tri {
     position: relative;
@@ -48,8 +58,8 @@
   }
 }
 .comment-block {
-  .clearfix;
   margin-bottom: 20px;
+  .clearfix;
 }
 input.invisible {
   position: absolute;
