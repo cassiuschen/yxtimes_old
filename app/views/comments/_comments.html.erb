@@ -22,7 +22,7 @@
 </div>
 <div class="controls ml100 tri">
   <div class="toolbox">
-    <% if current_user.is_admin? %>
+    <% if current_user && current_user.is_admin? %>
     <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
       <i class="icon-trash"></i>
     <% end -%>
@@ -56,7 +56,7 @@
       </div>
       <div class="controls ml100 tri">
         <div class="toolbox">
-          <% if current_user.is_admin? %>
+          <% if current_user && current_user.is_admin? %>
           <%= link_to eval("#{commentable.class.to_s.downcase}_subcomment_path(commentable, comment, subcomment)"), method: :delete, data: { confirm: "确认删除吗？" } do %>
             <i class="icon-trash"></i>
           <% end -%>

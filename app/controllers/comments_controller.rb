@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @commentable, notice: "删除成功" }
+      format.html { redirect_to @commentable, flash: { success: "删除成功" } } 
       format.json { head :no_content }
     end
   end
@@ -57,11 +57,11 @@ class CommentsController < ApplicationController
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
     @comment = @commentable.comments.find(params[:comment_id])
     @subcomment = @comment.subcomments.find(params[:id])
-    
+
     @subcomment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @commentable, notice: "删除成功" }
+      format.html { redirect_to @commentable, flash: { success: "删除成功" } } 
       format.json { head :no_content }
     end
   end
