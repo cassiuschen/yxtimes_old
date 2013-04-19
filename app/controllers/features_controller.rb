@@ -2,6 +2,10 @@ class FeaturesController < ApplicationController
   prepend_before_filter :cas_filter, except: :show
   append_before_filter :require_admin, except: :show
 
+  def index
+    @features = Feature.all
+  end
+
   # GET /features/1
   # GET /features/1.json
   def show

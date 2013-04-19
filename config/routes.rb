@@ -2,6 +2,7 @@ Yxtimes::Application.routes.draw do
 
   resources :features, except: :index
   get "features" => "features#show", as: 'features'
+  get "features_review" => "features#index", as: 'features_review'
 
   resources :votes, except: :destroy do
     get "comments" => "comments#show"
