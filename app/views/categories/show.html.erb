@@ -1,6 +1,6 @@
 <div class="clearfix" style="margin-left: -15px; position: relative;">
 <div class="verl"></div>
-<% @category.articles.recent.each do |article| %>
+<% @articles.recent.each do |article| %>
   <div class="category-block">
     <h3 class="m0"><%= link_to article.title, article %></h3>
     <p class="muted">
@@ -17,3 +17,4 @@
   </div>
 <% end -%>
 </div>
+<%= paginate @articles %>

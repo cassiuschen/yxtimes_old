@@ -36,11 +36,13 @@
 
 <div id="actions">
   <div class="btn-group btn-group-vertical">
-
     <% if current_user && is_admin? %>
     <%= link_to new_feature_path, class: 'btn' do %>新增<br><i class="icon-file icon-2x"></i><% end -%>
     <%= link_to edit_feature_path(@feature), class: 'btn' do %>修改<br><i class="icon-edit icon-2x"></i><% end -%>
     <%= link_to feature_path(@feature), method: :delete, data: { confirm: '确认删除吗？' }, class: 'btn' do %>删除<br><i class="icon-trash icon-2x"></i><% end -%>
     <% end -%>
   </div>
+</div>
+<div class="pull-right mt20">
+  <%= link_to "查看往期回顾 >", features_review_path, class: "link" %>
 </div>

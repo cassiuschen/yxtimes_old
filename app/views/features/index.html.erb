@@ -1,25 +1,22 @@
-<h1>Listing features</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @features.each do |feature| %>
-  <tr>
-    <td><%= feature.title %></td>
-    <td><%= feature.content %></td>
-    <td><%= link_to 'Show', feature %></td>
-    <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-    <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Feature', new_feature_path %>
+<div class="clearfix">
+  <div class="pull-left" style="width: 150px;">
+    <%= image_tag feature.poster, style: "width: 150px" %>
+  </div>
+  <div style="margin-left: 170px;">
+    <h4 style="font-size: 18px; font-weight: bold; color: #333;">
+      <%= link_to feature.title, feature %>
+    </h4>
+    <p>
+      <%= feature.content %>
+    </p>
+    <p style="color: #999;">
+      包含文章:
+      <% feature.articles[0..3].each do |a| %>
+        <%= link_to "《#{a.title}》", a, class: "link" %>
+      <% end -%>
+    </p>
+  </div>
+</div>
+<hr>
+<% end -%>
