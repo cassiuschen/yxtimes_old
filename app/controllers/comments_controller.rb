@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @commentable.comments.new(params[:comment].merge({commenter: current_user})).save
-        format.html { redirect_to @commentable, flash: { success: "评论成功" } }
+        format.html { redirect_to @commentable, anchor: "comments" , flash: { success: "评论成功" } }
         format.json { render json: { success: false }, status: :created }
       else
         format.html { redirect_to @commentable, flash: { error: "评论失败" } }

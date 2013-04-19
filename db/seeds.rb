@@ -1,8 +1,11 @@
+Setting.destroy_all
 User.destroy_all
 Category.destroy_all
 Article.destroy_all
 Feature.destroy_all
 Vote.destroy_all
+
+Setting.create!()
 
 User.create!(name: "test", power: 100)
 User.create!(name: "reporter", power: 1)

@@ -20,7 +20,6 @@
 //= require_self
 //= require_tree .
 
-
 function ajaxLoading() {
   $('body').append('<div id="ajax-loading"><img class="loading" src="<%= asset_path("loading.gif") %>" width=64><div class="error"></div></div>');
   $('#ajax-loading').click(function(){
@@ -81,6 +80,8 @@ $(document).on("page:change", function(){
 
 $(document).on("page:fetch", function(){
   $("html,body").animate({scrollTop: 0}, 500);
+  // ajaxSuccess();
+  // ajaxLoading();
 })
   
 
