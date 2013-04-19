@@ -51,6 +51,10 @@ Yxtimes::Application.routes.draw do
   get "logout" => "users#logout"
   get "login" => "users#login"
 
+  # admins controller
+  get 'admin/index'
+  post 'admin/update'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

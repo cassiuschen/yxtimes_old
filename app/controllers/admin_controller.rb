@@ -8,4 +8,8 @@ class AdminController < ApplicationController
     User.find(params[:admin_ids]).update_attributes({ power: 100 }, without_protection: true)
     User.find(params[:teacher_ids]).update_attributes({ power: 10 }, without_protection: true)
   end
+
+  def index
+    @setting = Setting.first
+  end
 end
