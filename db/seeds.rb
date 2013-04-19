@@ -33,7 +33,7 @@ end
 
 # with imgs
 Category.renwu.articles.create!(title: "一个伟大的人", content: content + "<img src=\"/test3.png\" >", author: User.first, is_verified: true)
-Category.diaocha.articles.create!(title: "北大附中", content: content + "<img src=\"/test2.jpg\" >", author: User.first, is_verified: true)
+Category.diaocha.articles.create!(title: "北大附中", content: content + "<img src=\"/test2.jpg\" >", author: User.first, is_verified: true, read_count: 10)
 
 
 Category.diaocha.articles.create!(title: "未审查的文章", content: content, author: User.first)

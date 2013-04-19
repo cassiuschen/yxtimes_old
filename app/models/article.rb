@@ -7,16 +7,17 @@ class Article
   field :title, type: String
   field :content, type: String
   field :source, type: String
+
   field :is_verified, type: Boolean, default: false
   field :has_image, type: Boolean, default: false
+
+  field :read_count, type: Integer, default: 0
 
   default_scope where(is_verified: true)
   scope :un_verified, where(is_verified: false)
   scope :hottest, desc(:read_count)
   scope :recent, desc(:created_at)
   scope :with_img, where(has_image: true)
-
-  field :read_count, type: Integer, default: 0
 
   validates_presence_of :title, :content
 

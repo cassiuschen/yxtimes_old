@@ -25,9 +25,17 @@
   <div class="control-group">
     <div class="control-label">修改密码</div>
     <div class="controls">
-      <a href="###" class="link" style="vertical-align: -5px;" _target="blank">跳转到 CAS 服务器</a>
+      <a href="###" class="link" style="vertical-align: -5px;" target="_blank">跳转到 CAS 服务器</a>
     </div>
   </div>
+  <% if is_admin? %>
+  <div class="control-group">
+    <div class="control-label">网站管理</div>
+    <div class="controls">
+      <a href="<%= admin_path %>" class="link" style="vertical-align: -5px;" target="_blank">点击此打开网站管理页面</a>
+    </div>
+  </div>
+  <% end -%>
   <div class="controls">
     <%= f.submit "更新资料", class: "btn btn-danger" %>
   </div>
