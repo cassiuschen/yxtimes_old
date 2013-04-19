@@ -214,6 +214,8 @@ zh-CN:
         poster: 海报
         title: 标题
         content: 专题说明
+        articles: 相关文章
+        article_ids: 相关文章
       user:
         nickname: 昵称
         avatar: 头像

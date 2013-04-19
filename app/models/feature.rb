@@ -15,5 +15,5 @@ class Feature
 
   has_and_belongs_to_many :articles, inverse_of: nil
 
-  validates_presence_of :title, :articles
+  validates_presence_of :title, :articles, :poster
 end

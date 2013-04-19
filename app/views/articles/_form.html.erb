@@ -17,7 +17,8 @@
   <div class="control-group mt20">
     <%= f.label :category_id, class: "control-label" %>
     <div class="controls">
-    <%= f.select :category_id, options_for_select(Category.all.map{|c|[c.name,c.id.to_s]}, @article.category_id), :prompt => '选择分类' %>
+
+    <%= f.select :category_id, Category.all.map{|c|[c.name,c.id.to_s]}, prompt: "选择分类" %>
     </div>
   </div>
   <div class="control-group mt20">
@@ -28,5 +29,7 @@
   </div>
   <div class="controls">
     <%= f.submit @article.new_record ? "发布" : "更新", class: "btn btn-danger" %>
+    &nbsp;
+    <%= link_to "放弃" ,@article ,class: "btn" unless @article.new_record? or !@article.is_verified? %>
   </div>
 <% end %>

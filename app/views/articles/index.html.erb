@@ -25,7 +25,7 @@
       <td><%= link_to article.title, article_path(article, from: "index"), class: "link", remote: true %></td>
       <td class="w30"><%= link_to '通过', verify_article_path(article), class: "link", remote: true %></td>
       <td class="w30"><%= link_to '编辑', edit_article_path(article), class: "link" %></td>
-      <td class="w30"><%= link_to '删除', destroy_article_path(article), remote: true, data: { confirm: 'Are you sure?' }, class: "link" %></td>
+      <td class="w30"><%= link_to '删除', destroy_article_path(article), remote: true, data: { confirm: '确认删除吗？' }, class: "link" %></td>
     </tr>
   <% end %>
 </table>

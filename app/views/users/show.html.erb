@@ -55,3 +55,12 @@
     </div>
   <% end -%>
 </div>
+
+<% content_for :script do %>
+  <script>
+    $('.logo-inner').click(function(){
+      history.go(-1);
+      return false;
+    })
+  </script>
+<% end -%>

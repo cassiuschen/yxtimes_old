@@ -10,6 +10,7 @@
  *
  *= require bootstrap
  *= require todc-bootstrap
+ *= require select2
  *= require_self
  *= require_directory .
  */
@@ -286,4 +287,28 @@ label.vote {
 .flash {
   -webkit-animation-name: slidein;
   -webkit-animation-duration: 1s;
+}
+
+#ajax-loading {
+  z-index: 100000;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+  }
+  .error {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,0,0,0.3);
+    display: none;
+  }
 }

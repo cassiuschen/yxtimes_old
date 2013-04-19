@@ -5,8 +5,12 @@ class FeaturesController < ApplicationController
   # GET /features/1
   # GET /features/1.json
   def show
-    @feature = Feature.find(params[:id]) if params[:id]
-    @feature ||= Feature.first
+    @feature = params[:id] ? Feature.find(params[:id]) : Feature.first
+
+    if @feature == nil
+      redirect_to new_feature_path, notice: "请至少创建一个专题。"
+      return 
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +41,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
+        format.html { redirect_to @feature, flash: { success: '创建专题成功。' } }
         format.json { render json: @feature, status: :created, location: @feature }
       else
         format.html { render action: "new" }
@@ -53,7 +57,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.update_attributes(params[:feature])
-        format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
+        format.html { redirect_to @feature, flash: { success: '专题更新成功。' } }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,7 +73,7 @@ class FeaturesController < ApplicationController
     @feature.destroy
 
     respond_to do |format|
-      format.html { redirect_to features_url }
+      format.html { redirect_to features_url, flash: { success: '专题删除成功。' } }
       format.json { head :no_content }
     end
   end

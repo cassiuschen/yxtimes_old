@@ -12,7 +12,7 @@
   </div>
   <% end -%>
   <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
-    <%= image_tag @feature.poster, width: 610, height: 260, class: "bgw pull-left" %>
+    <%= image_tag(@feature.poster.cover, width: 610, height: 260, class: "bgw pull-left") %>
     <div class="text-block" style="margin-left: 610px;">
       <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
       <p><%= @feature.content %></p>

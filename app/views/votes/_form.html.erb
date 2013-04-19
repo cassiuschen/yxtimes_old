@@ -30,5 +30,7 @@
 
   <div class="controls">
     <%= f.submit @vote.new_record ? "新增" : "更新", class: "btn btn-danger" %>
+    &nbsp;
+    <%= link_to "放弃" ,@vote, class: "btn" unless @vote.new_record? %>
   </div>
 <% end %>

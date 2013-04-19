@@ -1,4 +1,4 @@
-<%= form_for(@feature) do |f| %>
+<%= form_for(@feature, html: { class: "form-horizontal" }) do |f| %>
   <% if @feature.errors.any? %>
     <div class="alert alert-error">
       <div>发生了 <%= @feature.errors.count %> 个错误。</div>
@@ -8,21 +8,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.label :title, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title, style: "width: 492px;" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
+
+  <div class="control-group">
+    <%= f.label :content, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_area :content, style: "width: 496px;", rows: 6 %>
+    </div>
   </div>
+
   <div class="control-group">
     <%= f.label :poster, class: "control-label" %>
     <div class="controls">
       <%= f.file_field :poster %>
     </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="control-group">
+    <%= f.label :article_ids, class: "control-label" %>
+    <div class="controls">
+      <% 
+          options = ""
+          Article.each { |article|
+            options << "<option value=\"#{article.id}\" #{"selected='selected'" if @feature.article_ids.include?(article.id)}>#{article.category.name}: #{article.title}</option>"
+          }
+       %>
+      <%= f.select :article_ids , options.html_safe, {}, multiple: "multiple", style: "min-width: 510px;", data: { toggle: "select"} %>
+        
+    </div>
+  </div>
+  <div class="controls">
+    <%= f.submit @feature.new_record ? "发布" : "更新", class: "btn btn-danger" %>
+    &nbsp;
+    <%= link_to "放弃" ,@feature ,class: "btn" unless @feature.new_record? %>
   </div>
 <% end %>
+
+<% content_for :script do %>
+<script>
+  $('[data-toggle="select"]').select2();
+</script>
+<% end -%>

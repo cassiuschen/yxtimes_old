@@ -29,6 +29,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
+  # resize_to_fill如果图片过大是会将图片截取，resize_to_fit则不会截取，而是通过较长长或宽同比例压缩，resize_to_limit变形。 
   process :resize_to_fill => [300, 300]
 
   # Create different versions of your uploaded files:

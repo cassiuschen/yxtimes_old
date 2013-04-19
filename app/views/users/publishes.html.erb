@@ -32,7 +32,7 @@
       <td colspan="2">已发布</td>
       <% else %>
       <td class="w30"><%= link_to '编辑', edit_article_path(article), class: "link" %></td>
-      <td class="w30"><%= link_to '删除', destroy_article_path(article), remote: true, data: { confirm: 'Are you sure?' }, class: "link" %></td>
+      <td class="w30"><%= link_to '删除', destroy_article_path(article), remote: true, data: { confirm: '确认删除吗？' }, class: "link" %></td>
       <% end -%>
     </tr>
   <% end %>
