@@ -206,7 +206,10 @@ zh-CN:
       sub_comment: 子评论
       feature: 专题
       vote: 投票
+      setting: 全站设置
     attributes:
+      setting: 
+        background: 背景图片
       vote:
         title: 标题
         options: 选项

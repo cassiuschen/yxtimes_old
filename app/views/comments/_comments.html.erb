@@ -22,6 +22,9 @@
 </div>
 <div class="controls ml100 tri">
   <div class="toolbox">
+    <a href="###" class="reply">
+      <i class="icon-reply"></i>
+    </a>
     <% if current_user && current_user.is_admin? %>
     <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
       <i class="icon-trash"></i>
@@ -56,6 +59,9 @@
       </div>
       <div class="controls ml100 tri">
         <div class="toolbox">
+          <a href="###" class="reply">
+            <i class="icon-reply"></i>
+          </a>
           <% if current_user && current_user.is_admin? %>
           <%= link_to eval("#{commentable.class.to_s.downcase}_subcomment_path(commentable, comment, subcomment)"), method: :delete, data: { confirm: "确认删除吗？" } do %>
             <i class="icon-trash"></i>
@@ -78,7 +84,7 @@
     </div>
   </div>
   <% end -%>
-  <div class="comment-block">
+  <div class="comment-block subcom" style="display: none;">
     <div class="ml100">
       <div class="avatar pull-left">
         <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
@@ -104,5 +110,10 @@
         },100)
       }
     });
+
+    $('.reply').click(function(){
+      $(this).closest(".comment-block").nextAll(".subcom").first().slideDown();
+      return false;
+    })
   </script>
 <% end -%>

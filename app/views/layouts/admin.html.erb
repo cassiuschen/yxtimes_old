@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <title>银杏时报 - 管理页面</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+  <%= yield :style %>
+</head>
+<body>
+  <div class="container">
+    <% unless flash.empty? %>
+    <div class="flash" style="position: absolute;top: -2px;width: 80%; left: 10%;">
+      <% flash.each do |k,v| %>
+        <div class="alert alert-<%= k %>">
+          <%= v %>
+        </div>
+      <% end -%>
+    </div>
+    <% end -%>
+    <div style="padding: 40px 100px;">
+      <%= yield %>
+    </div>
+  </div>
+  <%= debug(params) if Rails.env.development? %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :script %>
+</body>
+</html>

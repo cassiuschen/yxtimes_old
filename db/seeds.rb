@@ -5,7 +5,7 @@ Article.destroy_all
 Feature.destroy_all
 Vote.destroy_all
 
-Setting.create!()
+Setting.create!(background: File.open(File.join(Rails.root, '/public/test4.jpg')))
 
 User.create!(name: "test", power: 100)
 User.create!(name: "reporter", power: 1)

@@ -1,0 +1,54 @@
+<h1>银杏时报 - 管理页面</h1>
+<hr> 
+<%= form_tag admin_path, class: "form-horizontal", method: :post do %>
+
+  <%= fields_for @setting do |setting| %>
+  <div class="control-group">
+    <%= setting.label :background, class: "control-label" %>
+    <div class="controls">
+      <%= setting.file_field :background %>
+    </div>
+  </div>
+  <% end -%>
+
+  <div class="control-group">
+    <%= label_tag "reporter_ids[]", "记者组成员", class: "control-label" %>
+    <div class="controls">
+      <% 
+        options = ""
+        @users.each do |user|
+          options << "<option value=\"#{user.id}\" #{'selected' if user.is_reporter?}>#{user.name} - #{user.nickname}</option>"
+        end
+       %>
+      <%= select_tag 'reporter_ids[]', options.html_safe, multiple: "multiple", data: { toggle: "select"}, style: "width: 500px;" %>
+    </div>
+
+    <div class="controls mt10">
+      管理组的成员自动拥有记者组的所有权限
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag "admin_ids[]", "管理组成员", class: "control-label" %>
+    <div class="controls">
+      <% 
+        options = ""
+        @users.each do |user|
+          options << "<option value=\"#{user.id}\" #{'selected' if user.is_admin?}>#{user.name} - #{user.nickname}</option>"
+        end
+       %>
+      <%= select_tag "admin_ids[]", options.html_safe, multiple: "multiple", data: { toggle: "select"}, style: "width: 500px;" %>
+    </div>
+  </div>
+ 
+  <div class="controls mt10">
+    <%= submit_tag "保存", class: "btn" %>
+  </div>
+
+<% end -%>
+
+
+<% content_for :script do %>
+<script>
+  $('[data-toggle="select"]').select2();
+</script>
+<% end -%>
