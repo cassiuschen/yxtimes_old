@@ -40,7 +40,7 @@ class User
 
   def is_who
     if self.is_admin?
-      "审查"
+      "管理员"
     elsif self.is_reporter?
       "记者"
     else
