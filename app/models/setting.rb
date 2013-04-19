@@ -3,7 +3,5 @@ class Setting
 
   mount_uploader :background, BackgroundUploader
 
-  before_save do |file|
-    false if Setting.count > 0
-  end
+  default_scope desc(:created_at)
 end
