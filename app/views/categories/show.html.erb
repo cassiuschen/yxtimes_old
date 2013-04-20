@@ -1,15 +1,15 @@
 <div class="clearfix" style="margin-left: -15px; position: relative;">
 <div class="verl"></div>
 <% @articles.recent.each do |article| %>
-  <div class="category-block">
+  <div class="category-block" style="position: relative">
     <h3 class="m0"><%= link_to article.title, article %></h3>
     <p class="muted">
       作者：<%= link_to article.author.nickname, article.author, class: "muted" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><%= short_time(article.created_at) %> </em>
     </p>
     <p>
-      <%= article.digest(100) %>
+      <%= article.digest(90) %>
     </p>
-    <div class="pull-right">
+    <div style="position: absolute; bottom: 20px; right: 20px;">
       <a href="<%= article_path(article, anchor: 'comments') %>" class="comments">
         <i class="icon-comment"></i>(<%= article.comments.count %>)
       </a>
