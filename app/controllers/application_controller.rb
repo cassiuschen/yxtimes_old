@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def cas_gateway_filter
     return if @has_already_filter
-    if cookies[:tgt]
+    if cookies[:tgt] or params[:ticket]
       CASClient::Frameworks::Rails::Filter.filter(self)
       @has_already_filter = true
     end
