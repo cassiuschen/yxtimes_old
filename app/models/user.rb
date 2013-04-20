@@ -38,9 +38,15 @@ class User
     !!(self.power >= 1)
   end
 
+  def is_teacher?
+    !!(self.id.match(/^F00.+/i))
+  end
+
   def is_who
     if self.is_admin?
       "管理员"
+    elsif self.is_teacher?
+      "老师"
     elsif self.is_reporter?
       "记者"
     else
