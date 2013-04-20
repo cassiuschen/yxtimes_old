@@ -1,7 +1,7 @@
-working_directory "/home/seiue/CODE/yxtimes/"
-pid "/home/seiue/CODE/yxtimes/tmp/pids/unicorn.pid"
-stderr_path "/home/seiue/CODE/yxtimes/log/unicorn.log"
-stdout_path "/home/seiue/CODE/yxtimes/log/unicorn.log"
+working_directory "/home/bdfz/code/yxtimes/"
+pid "/home/bdfz/code/yxtimes/tmp/pids/unicorn.pid"
+stderr_path "/home/bdfz/code/yxtimes/log/unicorn.log"
+stdout_path "/home/bdfz/code/yxtimes/log/unicorn.log"
 
 listen "/tmp/unicorn.yxtimes.sock"
 worker_processes 4
