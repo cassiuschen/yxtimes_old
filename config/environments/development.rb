@@ -35,3 +35,9 @@ Yxtimes::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+
+# RubyCAS-client
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => "http://127.0.0.1:8888/"
+)

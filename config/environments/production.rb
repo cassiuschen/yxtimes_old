@@ -65,3 +65,10 @@ Yxtimes::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+
+# RubyCAS-client
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => "http://bdfz-cas.pkuschool.edu.cn:80/cas/",
+  :validate_url => "http://bdfz-cas.pkuschool.edu.cn:80/cas/serviceValidate"
+)
