@@ -5,7 +5,7 @@
   <% data = vote.options.map{|a|a.count}.each_with_index.max %>
   <% break if data[0] == 0 %>
   <div class="mb10">
-    <span style="font: 28px 'Times New Roman'; font-style: italic; " class="text-error"><%= data[0] * 100.0 / vote.voters.count %>%</span>
+    <span style="font: 28px 'Times New Roman'; font-style: italic; " class="text-error"><%= data[0] * 100 / vote.voters.count %>%</span>
     的人在 <%= link_to vote.title, vote %> 中选择了 <%= vote.options[data[1]].content %>
   </div>
   <% end -%>
