@@ -36,7 +36,7 @@ Yxtimes::Application.routes.draw do
   get "cat:id" => "categories#show", as: "category"
 
   # home controller
-  get "home/index"
+  get "about" => "home#about"
 
   # users controller
   get "users/:id" => "users#show", as: "user"

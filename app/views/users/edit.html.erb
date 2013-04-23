@@ -13,19 +13,13 @@
   <div class="control-group">
     <%= f.label :nickname, class: "control-label" %>
     <div class="controls">
-      <%= f.text_field :nickname %>
+      <%= f.text_field :nickname, disabled: "disabled" %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :avatar, class: "control-label" %>
     <div class="controls">
       <%= f.file_field :avatar %>
-    </div>
-  </div>
-  <div class="control-group">
-    <div class="control-label">修改密码</div>
-    <div class="controls">
-      <a href="###" class="link" style="vertical-align: -5px;" target="_blank">跳转到 CAS 服务器</a>
     </div>
   </div>
   <% if is_admin? %>

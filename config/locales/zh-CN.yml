@@ -210,6 +210,7 @@ zh-CN:
     attributes:
       setting: 
         background: 背景图片
+        about: 关于我们
       vote:
         title: 标题
         options: 选项

@@ -1,6 +1,14 @@
+<style>
+  .form-horizontal .control-label {
+    width: 110px;
+  }
+  .form-horizontal .controls {
+    margin-left: 130px;
+  }
+</style>
 <h1>银杏时报 - 管理页面</h1>
-<hr> 
-<%= form_tag admin_path, class: "form-horizontal", method: :post do %>
+<hr>
+<%= form_tag admin_path, class: "form-horizontal", method: :post, :multipart => true do %>
 
   <%= fields_for @setting do |setting| %>
   <div class="control-group">
@@ -10,6 +18,12 @@
     </div>
     <div class="controls mt10">
       请尽量上传 JPG 格式的图片，且大小不要超过 100KB
+    </div>
+  </div>
+  <div class="control-group">
+    <%= setting.label :about, class: "control-label" %>
+    <div class="controls">
+      <%= setting.text_area :about, style: "width: 486px;", rows: 7 %>
     </div>
   </div>
   <% end -%>
@@ -40,6 +54,17 @@
         end
        %>
       <%= select_tag "admin_ids[]", options.html_safe, multiple: "multiple", data: { toggle: "select"}, style: "width: 500px;" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag "user_data", "更新用户数据库", class: "control-label" %>
+    <div class="controls">
+      <%= text_area_tag "user_data", "", style: "width: 486px;", rows: 7 %>
+    </div>
+
+    <div class="controls mt10" style="color: #dd4b39">
+      如果要新增/修改用户信息，请在框中粘入，一行一条，格式为“12345678,Name”。如无修改请留空。 <br>
+      <strong>注意：大量修改可能造成服务器较长的反映时间，请稍等片刻。</strong>
     </div>
   </div>
  

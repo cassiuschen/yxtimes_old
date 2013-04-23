@@ -12,4 +12,10 @@ class HomeController < ApplicationController
     @vote = Vote.first
     @most_read = Article.hottest
   end
+
+  def about
+    @about = Setting.first.about
+
+    render layout: false
+  end
 end

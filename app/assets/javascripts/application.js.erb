@@ -41,7 +41,7 @@ function hide_right_panel() {
   $("body").off("click");
 }
 
-$('#right-bar-link-2[href*="my"],#right-bar-link-3,#right-bar-link-4').click(function(){
+$('#right-bar-link-2[href*="my"],#right-bar-link-3,#right-bar-link-4,.about_us').click(function(){
   $rp = $('#right-panel');
   $ub = $('#user-bar');
   url = $(this).attr("href");

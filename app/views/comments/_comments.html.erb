@@ -6,7 +6,7 @@
 <div class="tri ml100 hov">
   <%= form_for [commentable, @comment] do |f| %>
     <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
-    <%= f.submit "评论", class: "invisible" %>
+    <%= f.submit "评论", class: "btn comment-submit" %>
   <% end -%>
 </div>
 <% commentable.comments.each do |comment| %>
@@ -92,7 +92,7 @@
       <div class="hov ml100 tri">
         <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
         <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
-        <%= f.submit "评论", class: "invisible" %>
+        <%= f.submit "评论", class: "btn comment-submit" %>
         <% end -%>
       </div>
     </div>
@@ -105,15 +105,22 @@
     $('textarea').keydown(function (e) {
       if ( (e.metaKey || e.ctrlKey) && e.keyCode == 13) {
         $(this).closest("form").submit();
-        setTimeout(function(){
-          Turbolinks.visit(window.location)
-        },100)
       }
+    }).focusin(function(){
+      $(this).siblings(".comment-submit").fadeIn();
+    }).focusout(function(){
+      if (!$(this).val()) {
+        $(this).siblings(".comment-submit").fadeOut();
+      };
     });
-
     $('.reply').click(function(){
-      $(this).closest(".comment-block").nextAll(".subcom").first().slideDown();
+      $(this).closest(".comment-block").nextAll(".subcom").first().slideDown().find("textarea").focus();
       return false;
-    })
+    });
+    $('.subcom textarea').focusout(function(){
+      if (!$(this).val()) {
+        $(this).closest(".comment-block").slideUp();
+      };
+    });
   </script>
 <% end -%>

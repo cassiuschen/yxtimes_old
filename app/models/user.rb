@@ -3,6 +3,7 @@ class User
 
   field :name, type: String
   validates_uniqueness_of :name
+  validates_format_of :name, with: /^(\d{7})|(F.+)$/i
 
   attr_readonly :name
   field :_id, type: String, default: -> { name }
@@ -11,7 +12,7 @@ class User
   validates_presence_of :nickname
 
   field :power, type: Integer, default: 0
-  attr_protected :power, as: :admin
+  attr_protected :power, :nickname
 
   field :last_sign_in_at, :type => Time
   field :last_sign_in_ip, :type => String
@@ -39,7 +40,7 @@ class User
   end
 
   def is_teacher?
-    !!(self.id.match(/^F00.+/i))
+    !!(self.id.match(/^F.+/i))
   end
 
   def is_who
