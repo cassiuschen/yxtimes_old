@@ -10,7 +10,7 @@ class AdminController < ApplicationController
       begin
         User.find(arr[0]).update_attributes({nickname: arr[1]}, without_protection: true)
       rescue Mongoid::Errors::DocumentNotFound
-        User.create!(name: arr[0], nickname: arr[1])
+        User.create(name: arr[0], nickname: arr[1])
       end
     end 
 
