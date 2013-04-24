@@ -1,6 +1,6 @@
 class FeaturesController < ApplicationController
-  prepend_before_filter :cas_filter, except: :show
-  append_before_filter :require_admin, except: :show
+  prepend_before_filter :cas_filter, except: [:show, :index]
+  append_before_filter :require_admin, except: [:show, :index]
 
   def index
     @features = Feature.all
