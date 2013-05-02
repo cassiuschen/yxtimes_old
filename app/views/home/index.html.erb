@@ -14,8 +14,10 @@
   <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
     <%= image_tag(@feature.poster.cover, width: 610, height: 260, class: "bgw pull-left") %>
     <div class="text-block" style="margin-left: 610px;">
-      <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
-      <p><%= @feature.content[0..80] + "……" %></p>
+      <div style="height: 190px; overflow: hidden;">
+        <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
+        <p><%= @feature.content[0..80] + "……" %></p>
+      </div>
       <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
                 专题
               </h4></a>
@@ -36,8 +38,10 @@
     <% else  %>
       <%= image_tag(@diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right") unless @diaocha.imgs.empty? %>
       <div class="text-block" style="margin-right: 300px;">
-        <h2><%= link_to @diaocha.title, @diaocha %></h2>
-        <p><%= @diaocha.digest(50) %></p>
+        <div style="height: 190px; overflow: hidden;">
+          <h2><%= link_to @diaocha.title, @diaocha %></h2>
+          <p><%= @diaocha.digest(50) %></p>
+        </div>
         <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
           <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
         </a>
@@ -50,8 +54,10 @@
   <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
     <% @guandian[0..2].each do |point| %>
       <div class="text-block pull-left" style="width: 111px; border-right: 1px solid rgba(255,255,255,0.5);">
-        <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
-        <p><%= point.digest(45) %></p>
+        <div style="height: 190px; overflow: hidden;">
+          <h2 style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to point.title, point %></h2>
+          <p><%= point.digest(45) %></p>
+        </div>
         <a href="<%= article_path(point, anchor: 'comments') %>" class="comments" style="left: 25px;">
           <i class="icon-comment"></i>(<%= point.comments.count %>)
         </a>
@@ -79,9 +85,11 @@
   </div>
   <div class="home-block mt10 ml20" style="width: 280px; border-right: 5px solid #B657C1;">
     <div class="text-block">
+      <div style="height: 190px; overflow: hidden;">
       <% @yuedu[0..6].each do |read| %>
         <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><a href="<%= article_path(read) %>"><%= read.title %></a></div>
       <% end %>
+      </div>
     </div>
     
     <a href="<%= category_path(1) %>"><h4 class="category" style="right: 15px; color: #B657C1">
@@ -93,9 +101,9 @@
       暂无投票
     <% else %>
       <div style="padding: 25px;">
-      <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
       <%= form_tag vote_options_path(@vote), method: :post do %>
-        <div class="mb20" style="max-height: 140px; overflow-y: auto;">
+        <div style="height: 180px; overflow: auto; margin-bottom: 5px;">
+          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
           <% @vote.options.each do |opt| %>
             <div class="mt10">
               <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>

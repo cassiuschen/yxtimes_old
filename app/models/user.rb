@@ -3,7 +3,6 @@ class User
 
   field :name, type: String
   validates_uniqueness_of :name
-  validates_format_of :name, with: /^(\d{7})|(F.+)$/i
 
   attr_readonly :name
   field :_id, type: String, default: -> { name }
