@@ -15,7 +15,7 @@
     <%= image_tag(@feature.poster.cover, width: 610, height: 260, class: "bgw pull-left") %>
     <div class="text-block" style="margin-left: 610px;">
       <h2><a href="<%= features_path %>"><%= @feature.title %></a></h2>
-      <p><%= @feature.content %></p>
+      <p><%= @feature.content[0..80] + "……" %></p>
       <a href="<%= features_path %>"><h4 class="category" style="right: 15px;color: #39A7DE">
                 专题
               </h4></a>
