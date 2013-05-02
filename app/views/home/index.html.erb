@@ -34,7 +34,7 @@
     <% if @diaocha.nil? %>
       该栏目暂无文章
     <% else  %>
-      <%= image_tag @diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right" %>
+      <%= image_tag(@diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right") unless @diaocha.imgs.empty? %>
       <div class="text-block" style="margin-right: 300px;">
         <h2><%= link_to @diaocha.title, @diaocha %></h2>
         <p><%= @diaocha.digest(50) %></p>
@@ -65,7 +65,7 @@
     <% if @renwu.nil? %>
       该栏目暂无文章
     <% else %>
-      <%= image_tag @renwu.imgs[0], width: 300, height: 210, class: "bgw pull-right" %>
+      <%= image_tag(@renwu.imgs[0], width: 300, height: 210, class: "bgw pull-right") unless @renwu.imgs.empty? %>
       <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 50px; width: 270px;">
         <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
       </div>
