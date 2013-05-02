@@ -18,7 +18,7 @@
 <% @feature.articles.recent.each do |article| %>
   <div class="verl"></div>
   <div class="category-block">
-    <h3 class="m0"><%= link_to article.title, article %></h3>
+    <h3 class="m0" style="line-height: 1.3;"><%= link_to article.title, article %></h3>
     <p class="muted">
       作者：<%= link_to article.author.nickname, article.author, class: "muted" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><%= short_time(article.created_at) %> </em>
     </p>
