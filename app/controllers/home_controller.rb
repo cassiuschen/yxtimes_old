@@ -7,9 +7,6 @@ class HomeController < ApplicationController
     @yuedu = Category.yuedu.articles.hottest
     @vote = Vote.first
     @most_read = Article.hottest
-    unless @feature && @diaocha && @guandian && @renwu && @yuedu && @vote 
-      redirect_to new_article_path, notice: "请至少每个目录创建一篇文章，否则首页无法显示"
-    end
   end
 
   def about

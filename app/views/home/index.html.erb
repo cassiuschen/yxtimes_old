@@ -8,9 +8,9 @@
       <div class="alert alert-<%= k %>">
         <%= v %>
       </div>
-    <% end -%>
+    <% end %>
   </div>
-  <% end -%>
+  <% end %>
   <div class="home-block" style="width: 845px; border-right: 5px solid #39A7DE;">
     <%= image_tag(@feature.poster.cover, width: 610, height: 260, class: "bgw pull-left") %>
     <div class="text-block" style="margin-left: 610px;">
@@ -31,17 +31,21 @@
     <% end %>
   </div>
   <div class="home-block mt10" style="width: 490px; border-left: 5px solid #D24542;">
-    <%= image_tag @diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right" %>
-    <div class="text-block" style="margin-right: 300px;">
-      <h2><%= link_to @diaocha.title, @diaocha %></h2>
-      <p><%= @diaocha.digest(50) %></p>
-      <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
-        <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
-      </a>
-      <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
-                调查
-              </h4></a>
-    </div>
+    <% if @diaocha.nil? %>
+      该栏目暂无文章
+    <% else  %>
+      <%= image_tag @diaocha.imgs[0], width: 300, height: 260, class: "bgw pull-right" %>
+      <div class="text-block" style="margin-right: 300px;">
+        <h2><%= link_to @diaocha.title, @diaocha %></h2>
+        <p><%= @diaocha.digest(50) %></p>
+        <a href="<%= article_path(@diaocha, anchor: 'comments') %>" class="comments" style="right: 25px;">
+          <i class="icon-comment"></i>(<%= @diaocha.comments.count %>)
+        </a>
+        <a href="<%= category_path(3) %>"><h4 class="category" style="left: 15px; color: #D24542">
+                  调查
+                </h4></a>
+      </div>
+    <% end %>
   </div>
   <div class="home-block mt10 ml20" style="width: 490px; border-right: 5px solid #8DC433;">
     <% @guandian[0..2].each do |point| %>
@@ -58,13 +62,17 @@
           </h4></a>
   </div>
   <div class="home-block mt10" style="width: 300px; border-left: 5px solid #0FA39A;">
-    <%= image_tag @renwu.imgs[0], width: 300, height: 210, class: "bgw pull-right" %>
-    <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 50px; width: 270px;">
-      <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
-    </div>
-    <a href="<%= article_path(@renwu, anchor: 'comments') %>" class="comments" style="right: 25px;">
-      <i class="icon-comment"></i>(<%= @renwu.comments.count %>)
-    </a>
+    <% if @renwu.nil? %>
+      该栏目暂无文章
+    <% else %>
+      <%= image_tag @renwu.imgs[0], width: 300, height: 210, class: "bgw pull-right" %>
+      <div style="position: absolute; padding: 15px; background-color: rgba(0,0,0,0.7); bottom: 50px; width: 270px;">
+        <div style="font-size: 18px; line-height: 24px;"><%= link_to @renwu.title, @renwu, style: "color: white;" %></div>
+      </div>
+      <a href="<%= article_path(@renwu, anchor: 'comments') %>" class="comments" style="right: 25px;">
+        <i class="icon-comment"></i>(<%= @renwu.comments.count %>)
+      </a>
+    <% end %>
     <a href="<%= category_path(4) %>"><h4 class="category" style="left: 15px; color: #0FA39A">
             人物
           </h4></a>
@@ -81,7 +89,10 @@
           </h4></a>
   </div>
   <div class="home-block mt10 ml20" style="width: 270px;">
-    <div style="padding: 25px;">
+    <% if @vote.nil? %>
+      暂无投票
+    <% else %>
+      <div style="padding: 25px;">
       <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
       <%= form_tag vote_options_path(@vote), method: :post do %>
         <div class="mb20" style="max-height: 140px; overflow-y: auto;">
@@ -89,12 +100,13 @@
             <div class="mt10">
               <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
             </div>
-          <% end -%>
+          <% end %>
         </div>
         <%= link_to "所有投票", votes_path, class: "btn btn-success" %>
         <%= submit_tag "投票", class: "btn btn-danger" %>
       <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
   <div class="pull-left" style="height: 260px; position: relative;">
     <a href="<%= about_path %>" class="about_us" style="position: absolute; bottom: -50px; left: -10px;"></a>
