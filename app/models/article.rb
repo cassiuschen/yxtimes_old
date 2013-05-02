@@ -90,7 +90,7 @@ class Article
   end
 
   def digest(length = 80)
-    strip_tags(self.content)[0..length] + "……"
+    strip_tags(self.content).gsub(/\s+/, "").gsub(/ +/,"")[0..length] + "……"
   end
 
   protected
