@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @guandian = Category.guandian.articles.recent
     @renwu = Category.renwu.articles.with_img.recent.first || Category.renwu.articles.hottest.first
     @yuedu = Category.yuedu.articles.recent
-    @vote = Vote.first
+    @vote = Vote.recent.first
     @most_read = Article.hottest
   end
 
