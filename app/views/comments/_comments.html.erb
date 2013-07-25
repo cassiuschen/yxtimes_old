@@ -35,10 +35,10 @@
   <%= link_to comment.commenter.nickname, comment.commenter, class: "black bold" %>
   <% else %>
   <span class="bold black">
-    匿名用户
+    匿名用户  <span class="gray"><%= comment.ip.sub(/.\d+.\d+$/,'.*.*') if comment.ip %></span>
   </span>
   <% end -%>  
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <span style="color: #BBB"><%= beautify_time comment.created_at %></span>
   <div class="mt10" style="color: #666;">
     <%= comment.content %>
@@ -72,10 +72,10 @@
         <%= link_to subcomment.commenter.nickname, subcomment.commenter, class: "black bold" %>
         <% else %>
         <span class="bold black">
-          匿名用户
+          匿名用户  <span class="gray"><%= subcomment.ip.sub(/.\d+.\d+$/,'.*.*') if subcomment.ip %></span>
         </span>
         <% end -%>  
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span style="color: #BBB"><%= beautify_time subcomment.created_at %></span>
         <div class="mt10" style="color: #666;">
           <%= subcomment.content %>

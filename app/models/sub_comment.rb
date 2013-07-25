@@ -4,6 +4,7 @@ class SubComment
   include Rails.application.routes.url_helpers
 
   field :content, type: String
+  field :ip, type: String
   validates_presence_of :content
 
   embedded_in :comment
