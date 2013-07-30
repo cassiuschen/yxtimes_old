@@ -11,7 +11,7 @@ class User
   validates_presence_of :nickname
 
   field :power, type: Integer, default: 0
-  attr_protected :power, :nickname
+  attr_protected :power
 
   field :last_sign_in_at, :type => Time
   field :last_sign_in_ip, :type => String

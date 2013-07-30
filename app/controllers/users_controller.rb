@@ -23,7 +23,13 @@ class UsersController < ApplicationController
 
   def logout
     cookies.delete(:tgt)
-    CASClient::Frameworks::Rails::Filter.logout(self)
+    if session[:user_nickname]
+      session.delete(:cas_user)
+      session.delete(:user_nickname)
+      redirect_to root_path
+    else
+      CASClient::Frameworks::Rails::Filter.logout(self)
+    end
   end
 
   def show
