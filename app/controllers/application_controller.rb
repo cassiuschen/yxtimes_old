@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     elsif params[:reg]
       # validate the reg
       begin
-        result = Net::HTTP.get(URI.parse("http://123.116.118.254:3000/yxtimes_validate?token=" + params[:reg]))
+        result = Net::HTTP.get(URI.parse("http://localhost:9000/yxtimes_validate?token=" + params[:reg]))
       rescue Errno::ECONNREFUSED
         flash.now[:error] = "注册系统登录出现异常。"
         return
