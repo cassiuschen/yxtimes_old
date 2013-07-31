@@ -98,12 +98,13 @@ class Article
     self.content = Sanitize.clean(
       self.content,
       :elements => %w[
-        a abbr b blockquote br cite code dd dfn dl dt em h1 h2 h3 h4 h5 h6 i kbd div font 
+        a abbr b blockquote br cite code dd dfn dl dt em h1 h2 h3 h4 h5 h6 i kbd div font embed
         li mark ol p pre q s samp small span strike strong sub sup time u ul var img table tbody tr td
       ],
       :attributes => {
         :all    => ['style', 'width', 'height', 'src', 'color'],
         'a'     => ['title', 'href', 'target'],
+        'embed' => ['height', 'width', 'type', 'quality']
       },
       :protocols => {
         'a'   => {'href' => ['ftp', 'http', 'https', 'mailto']}
