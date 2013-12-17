@@ -81,7 +81,6 @@ $(document).on("page:change", function(){
     var count = $form.find("input[type=checkbox]:checked").length;
     var bol = count >= (+ $form.attr("max"));
     $form.find("input[type=checkbox]").not(":checked").attr("disabled", bol);
-    console.log($form);
   });
 })
 
@@ -90,7 +89,6 @@ $("form.multiple-vote input[type=checkbox]").click(function() {
   var count = $form.find("input[type=checkbox]:checked").length;
   var bol = count >= (+ $form.attr("max"));
   $form.find("input[type=checkbox]").not(":checked").attr("disabled", bol);
-  console.log($form);
 });
 
 $(document).on("page:fetch", function(){
