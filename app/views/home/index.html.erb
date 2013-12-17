@@ -99,6 +99,34 @@
   <div class="home-block mt10 ml20" style="width: 270px;">
     <% if @vote.nil? %>
       暂无投票
+    <% elsif !current_user or (current_user and @vote.voters.include? current_user) %>
+      <div style="padding: 25px;">
+        <div style="height: 180px; overflow: auto; margin-bottom: 5px;">
+          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
+          <% @vote.options.each do |opt| %>
+            <div class="mt10">
+              <%= label_tag "options_#{opt.id}", opt.content, class: "vote", style: "width: 220px; vertical-align: middle;" %>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "所有投票", votes_path, class: "btn btn-success" %>
+      </div>
+    <% elsif @vote.max_vote > 1 %>
+      <div style="padding: 25px;">
+      <%= form_tag vote_options_path(@vote), method: :post, class: "multiple-vote", max: @vote.max_vote do %>
+        <div style="height: 180px; overflow: auto; margin-bottom: 5px;">
+          <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
+          <% @vote.options.each do |opt| %>
+            <div class="mt10">
+              <%= check_box_tag "options[]", opt.id, false, id: "options_#{opt.id}"  %>
+              <%= label_tag "options_#{opt.id}", opt.content, class: "vote", style: "width: 200px; vertical-align: middle;" %>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "所有投票", votes_path, class: "btn btn-success" %>
+        <%= submit_tag "投票", class: "btn btn-danger" %>
+      <% end %>
+      </div>
     <% else %>
       <div style="padding: 25px;">
       <%= form_tag vote_options_path(@vote), method: :post do %>
@@ -106,7 +134,8 @@
           <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>
           <% @vote.options.each do |opt| %>
             <div class="mt10">
-              <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
+              <%= radio_button_tag "options[]", opt.id, false, id: "options_#{opt.id}" %>
+              <%= label_tag "options_#{opt.id}", opt.content, class: "vote", style: "width: 200px; vertical-align: middle;" %>
             </div>
           <% end %>
         </div>

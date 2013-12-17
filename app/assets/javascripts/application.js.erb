@@ -76,7 +76,22 @@ $(document).on("page:change", function(){
   if (typeof(window.onload) === "function") {
     window.onload();
   }
+  $("form.multiple-vote input[type=checkbox]").click(function() {
+    var $form = $(this).closest("form.multiple-vote");
+    var count = $form.find("input[type=checkbox]:checked").length;
+    var bol = count >= (+ $form.attr("max"));
+    $form.find("input[type=checkbox]").not(":checked").attr("disabled", bol);
+    console.log($form);
+  });
 })
+
+$("form.multiple-vote input[type=checkbox]").click(function() {
+  var $form = $(this).closest("form.multiple-vote");
+  var count = $form.find("input[type=checkbox]:checked").length;
+  var bol = count >= (+ $form.attr("max"));
+  $form.find("input[type=checkbox]").not(":checked").attr("disabled", bol);
+  console.log($form);
+});
 
 $(document).on("page:fetch", function(){
   $("html,body").animate({scrollTop: 0}, 500);

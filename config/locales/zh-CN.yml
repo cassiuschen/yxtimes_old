@@ -214,6 +214,7 @@ zh-CN:
       vote:
         title: 标题
         options: 选项
+        max_vote: 最多多选
       feature:
         poster: 海报
         title: 标题

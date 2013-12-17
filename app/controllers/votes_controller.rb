@@ -90,17 +90,19 @@ class VotesController < ApplicationController
   end
 
   def vote_for
-    redirect_to :back and return unless params[:option]
-    
+    redirect_to :back and return unless params[:options].present?
+
     @vote = Vote.find(params[:vote_id])
-    @option = @vote.options.find(params[:option])
+    @options = @vote.options.find(params[:options].to(@vote.max_vote - 1))
 
     if @vote.voters.include? current_user
       redirect_to :back, flash: { error: "您已经投过票了" }
       return 
     end
-    
-    @option.update_attributes(count: @option.count + 1)
+
+    @options.each do |option|
+      option.update_attributes(count: option.count + 1)
+    end
     @vote.voters << current_user
     redirect_to :back, flash: { success: "投票成功" }
   end

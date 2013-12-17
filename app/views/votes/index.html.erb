@@ -2,12 +2,13 @@
 <div class="verl" style="left: 380px;"></div>
 <div style="width: 220px; float: right;">
   <% @votes.hottest[0..8].each do |vote| %>
-  <% data = vote.options.map{|a|a.count}.each_with_index.max %>
-  <% break if data[0] == 0 %>
-  <div class="mb10">
-    <span style="font: 28px 'Times New Roman'; font-style: italic; " class="text-error"><%= data[0] * 100 / vote.voters.count %>%</span>
-    的人在 <%= link_to vote.title, vote %> 中选择了 <%= vote.options[data[1]].content %>
-  </div>
+    <% data = vote.options.map{|a|a.count}.each_with_index.max %>
+    <% break if data[0] == 0 %>
+    <% next if vote.voters.count == 0 %>
+    <div class="mb10">
+      <span style="font: 28px 'Times New Roman'; font-style: italic; " class="text-error"><%= data[0] * 100 / vote.voters.count %>%</span>
+      的人在 <%= link_to vote.title, vote %> 中选择了 <%= vote.options[data[1]].content %>
+    </div>
   <% end -%>
 </div>
 
@@ -29,20 +30,36 @@
     <% end -%>
   </table>
   <%= link_to "查看详情", vote, class: "btn btn-success pull-right", style: "margin-top: 10px;" %>
+  <% elsif vote.max_vote > 1 %>
+    <%= form_tag vote_options_path(vote), method: :post, class: "multiple-vote", max: vote.max_vote do %>
+      <div>
+        <% vote.options.each do |opt| %>
+          <div class="mt10">
+            <%= check_box_tag "options[]", opt.id, false, id: "options_#{opt.id}"  %>
+            <%= label_tag "options_#{opt.id}", opt.content, class: "vote" %>
+          </div>
+        <% end -%>
+      </div>
+      <div class="pull-right mt10">
+        <%= submit_tag "投票", class: "btn btn-danger" %>
+        <%= link_to "查看结果", vote, class: "btn btn-success" %>
+      </div>
+    <% end %>
   <% else %>
-  <%= form_tag vote_options_path(vote), method: :post do %>
-    <div>
-      <% vote.options.each do |opt| %>
-        <div class="mt10">
-          <%= radio_button_tag "option", opt.id %> <%= label_tag "option_" + opt.id, opt.content , class: "vote" %>
-        </div>
-      <% end -%>
-    </div>
-    <div class="pull-right mt10">
-      <%= submit_tag "投票", class: "btn btn-danger" %>
-      <%= link_to "查看结果", vote, class: "btn btn-success" %>
-    </div>
-  <% end %>
+    <%= form_tag vote_options_path(vote), method: :post do %>
+      <div>
+        <% vote.options.each do |opt| %>
+          <div class="mt10">
+            <%= radio_button_tag "options[]", opt.id, false, id: "options_#{opt.id}" %>
+            <%= label_tag "options_#{opt.id}", opt.content, class: "vote" %>
+          </div>
+        <% end -%>
+      </div>
+      <div class="pull-right mt10">
+        <%= submit_tag "投票", class: "btn btn-danger" %>
+        <%= link_to "查看结果", vote, class: "btn btn-success" %>
+      </div>
+    <% end %>
   <% end -%>
   </div>
 <% end -%>

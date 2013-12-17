@@ -6,6 +6,8 @@ class Vote
   field :content, type: String
   field :read_count, type: Integer, default: 0
 
+  field :max_vote, type: Integer, default: 1
+
   embeds_many :options, class_name: "Vote::Option"
   embeds_many :comments, as: :commentable
   belongs_to :author, class_name: "User"
