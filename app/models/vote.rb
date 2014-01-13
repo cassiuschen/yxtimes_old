@@ -7,6 +7,7 @@ class Vote
   field :read_count, type: Integer, default: 0
 
   field :max_vote, type: Integer, default: 1
+  field :is_disabled, type: Boolean, default: false
 
   embeds_many :options, class_name: "Vote::Option"
   embeds_many :comments, as: :commentable
@@ -26,6 +27,6 @@ class Vote
   end
   
   def already_voted_by?(user)
-    voters.include? user
+    is_disabled || voters.include? user
   end
 end

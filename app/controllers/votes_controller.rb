@@ -95,7 +95,7 @@ class VotesController < ApplicationController
     @vote = Vote.find(params[:vote_id])
     @options = @vote.options.find(params[:options].to(@vote.max_vote - 1))
 
-    if @vote.voters.include? current_user
+    if @vote.already_voted_by? current_user
       redirect_to :back, flash: { error: "您已经投过票了" }
       return 
     end

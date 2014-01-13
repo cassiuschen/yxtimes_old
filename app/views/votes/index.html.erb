@@ -15,7 +15,7 @@
 <% @votes.recent.each do |vote| %>
   <div class="vote-block clearfix">
   <h3 class="m0"><%= link_to vote.title, vote %></h3>
-  <% if !current_user or (current_user and vote.voters.include? current_user) %>
+  <% if !current_user or (current_user and vote.already_voted_by? current_user) %>
   <table>
     <% vote.options.each do |opt| %>
     <tr>

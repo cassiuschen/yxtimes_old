@@ -5,7 +5,7 @@
   <%= @vote.content %>
 </div>
 <% end -%>
-<% if !current_user or @vote.voters.include? current_user %>
+<% if !current_user or @vote.already_voted_by? current_user %>
   <% @vote.options.each do |opt| %>
     <table class="vote-table">
       <tr>

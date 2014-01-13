@@ -33,6 +33,12 @@
       <%= f.text_field :max_vote, style: "width: 480px;" %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :is_disabled, class: "control-label" %>
+    <div class="controls">
+      <%= f.check_box :is_disabled %>
+    </div>
+  </div>
 
   <div class="controls">
     <%= f.submit @vote.new_record ? "新增" : "更新", class: "btn btn-danger" %>
