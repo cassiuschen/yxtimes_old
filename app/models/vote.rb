@@ -27,6 +27,6 @@ class Vote
   end
   
   def already_voted_by?(user)
-    is_disabled || voters.include? user
+    is_disabled || voters.include?(user)
   end
 end
