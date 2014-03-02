@@ -1,5 +1,5 @@
 <div class="comments-wrapper">
-<h2 id="comments">评论</h2>
+<h2 id="comments"><%= commentable.comments.present? "评论" : "暂无评论" %></h2>
 <% if current_user %>
   <div class="avatar pull-left">
     <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
