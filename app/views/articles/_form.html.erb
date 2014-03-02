@@ -17,16 +17,23 @@
   <div class="control-group mt20">
     <%= f.label :category_id, class: "control-label" %>
     <div class="controls">
-
-    <%= f.select :category_id, Category.all.map{|c|[c.name,c.id.to_s]}, prompt: "选择分类" %>
+      <%= f.select :category_id, Category.all.map{|c|[c.name,c.id.to_s]}, prompt: "选择分类" %>
     </div>
   </div>
   <div class="control-group mt20">
     <%= f.label :source, class: "control-label" %>
     <div class="controls">
-    <%= f.text_field :source, placeholder: "可以留空" %>
+      <%= f.text_field :source, placeholder: "请填写 URL！可以留空" %>
     </div>
   </div>
+  <% if @article.new_record %>
+    <div class="control-group mt20">
+      <%= f.label :anonymous?, class: "control-label" %>
+      <div class="controls">
+        <%= f.check_box :anonymous %>
+      </div>
+    </div>
+  <% end -%>
   <div class="controls">
     <%= f.submit @article.new_record ? "发布" : "更新", class: "btn btn-danger" %>
     &nbsp;

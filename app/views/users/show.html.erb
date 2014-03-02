@@ -34,7 +34,7 @@
   <% if @user.articles.count > 0 %>
     <div id="articles" style="display: none; padding: 0 40px 30px;">
       <table>
-        <% @user.articles.each do |article| %>
+        <% @user.articles.where(anonymous: false).each do |article| %>
           <tr class="timeline-item">
           <td class="time">
             <%= beautify_time_with_br(article.created_at) %>

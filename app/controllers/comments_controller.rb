@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @commentable.starrers << current_user if params[:article_id]
 
     respond_to do |format|
-      if @commentable.comments.new(params[:comment].merge(commenter: current_user).merge(ip: request.remote_ip)).save
+      if @commentable.comments.new(params[:comment].merge(commenter: params[:anonymous].present? ? nil : current_user).merge(ip: request.remote_ip)).save
         format.html { redirect_to @commentable, anchor: "comments" , flash: { success: "评论成功" } }
         format.json { render json: { success: false }, status: :created }
       else
@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
     @commentable.starrers << current_user if params[:article_id]
 
     respond_to do |format|
-      if @comment.subcomments.new(params[:sub_comment].merge(commenter: current_user).merge(ip: request.remote_ip)).save
+      if @comment.subcomments.new(params[:sub_comment].merge(commenter: params[:anonymous].present? ? nil : current_user).merge(ip: request.remote_ip)).save
         format.html { redirect_to @commentable, flash: { success: "评论成功" } }
         format.json { render json: { success: false }, status: :created }
       else

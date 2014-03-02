@@ -7,7 +7,10 @@
   <div class="tri ml100 hov">
     <%= form_for [commentable, @comment] do |f| %>
       <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
-      <%= f.submit "评论", class: "btn comment-submit" %>
+        <%= hidden_field_tag :anonymous %>
+        <div class="comment-submit">
+          <%= f.submit "评论", class: "btn" %><%= f.submit "匿名评论", class: "btn comment-anonymous", style: "margin-left: -1px;" %>
+        </div>
     <% end -%>
   </div>
 <% end -%>
@@ -30,9 +33,9 @@
     </a>
     <% end -%>
     <% if current_user && current_user.is_admin? %>
-    <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
-      <i class="icon-trash"></i>
-    <% end -%>
+      <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
+        <i class="icon-trash"></i>
+      <% end -%>
     <% end -%>
   </div>
   <% if comment.commenter %>
@@ -99,7 +102,10 @@
       <div class="hov ml100 tri">
         <%= form_for @subcomment, url: eval("#{commentable.class.to_s.downcase}_subcomments_path(commentable, comment)") do |f| %>
         <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
-        <%= f.submit "评论", class: "btn comment-submit" %>
+        <%= hidden_field_tag :anonymous %>
+        <div class="comment-submit">
+          <%= f.submit "评论", class: "btn" %><%= f.submit "匿名评论", class: "btn comment-anonymous", style: "margin-left: -1px;" %>
+        </div>
         <% end -%>
       </div>
     </div>
@@ -130,5 +136,8 @@
         $(this).closest(".comment-block").slideUp();
       };
     });
+    $('.comment-anonymous').click(function(){
+      $(this).closest('form').find("[name=anonymous]").val(true);
+    })
   </script>
 <% end -%>

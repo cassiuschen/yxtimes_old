@@ -1,3 +1,6 @@
 <h1>修改文章</h1>
+<% if current_user.is_admin? %>
+  <h4>作者：<%= @article.author.name %> <%= "（使用匿名身份）" if @article.anonymous %></h4>
+<% end -%>
 
 <%= render 'form' %>

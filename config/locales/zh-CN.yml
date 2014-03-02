@@ -230,6 +230,8 @@ zh-CN:
         source: 来源
         category_id: 目录
         category: 目录
+        anonymous: 匿名
+        anonymous?: 匿名？
       comment:
         content: 内容
       sub_comment:

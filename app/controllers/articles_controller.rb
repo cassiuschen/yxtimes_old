@@ -157,9 +157,9 @@ class ArticlesController < ApplicationController
   def verify
     @article = Article.unscoped.find(params[:id])
     @article.verify!
-
-    @article.author.send_feed("在 <a href='#{category_path(@article.category)}' class='link'>#{@article.category.name}</a> 中发布了文章<a href='#{article_path(@article)}' class='timeline-link'>《#{@article.title}》</a>")
-
+    if not @article.anonymous
+      @article.author.send_feed("在 <a href='#{category_path(@article.category)}' class='link'>#{@article.category.name}</a> 中发布了文章<a href='#{article_path(@article)}' class='timeline-link'>《#{@article.title}》</a>")
+    end
     redirect_to articles_path(raw: true)
   end
 end

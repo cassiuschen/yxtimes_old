@@ -24,7 +24,12 @@
     </div>
   <% end -%>  
   <div class="time" style="color: #999;">
-    <%= link_to @article.author.nickname, @article.author, class: "muted" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= short_time @article.created_at %>
+    <% if @article.anonymous %>
+      匿名用户
+    <% else %>
+      <%= link_to @article.author.nickname, @article.author, class: "muted" %>
+    <% end -%>
+    &nbsp;&nbsp;&nbsp;<%= short_time @article.created_at %>
   </div>
 </div>
 <div class="article-content" style="margin: 20px 0 50px;">

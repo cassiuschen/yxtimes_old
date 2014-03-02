@@ -1,15 +1,15 @@
 Setting.destroy_all
 User.destroy_all
 Category.destroy_all
-Article.destroy_all
+Article.unscoped.destroy_all
 Feature.destroy_all
 Vote.destroy_all
 
 Setting.create!(background: File.open(File.join(Rails.root, '/public/test4.jpg')))
 
-User.create!(name: "test", power: 100)
-User.create!(name: "reporter", power: 1)
-User.create!(name: "student", power: 0)
+User.create!(name: "test").set("power", 100)
+User.create!(name: "reporter").set("power", 1)
+User.create!(name: "student").set("power", 0)
 
 categories = Category.create!([
   { name: '阅读' },

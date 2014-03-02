@@ -10,6 +10,7 @@ class Article
 
   field :is_verified, type: Boolean, default: false
   field :has_image, type: Boolean, default: false
+  field :anonymous, type: Boolean, default: false
 
   field :read_count, type: Integer, default: 0
 
