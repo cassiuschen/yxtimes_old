@@ -135,7 +135,7 @@
           <% @vote.options.each do |opt| %>
             <div class="mt10">
               <%= radio_button_tag "options[]", opt.id, false, id: "options_#{opt.id}" %>
-              <%= label_tag "options_#{opt.id}", opt.content, class: "vote", style: "width: 200px; vertical-align: middle;" %>
+              <%= label_tag "options_#{opt.id}", opt.content, class: "vote", style: "margin-left: 3px;" %>
             </div>
           <% end %>
         </div>
