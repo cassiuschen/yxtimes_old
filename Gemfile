@@ -46,6 +46,7 @@ gem 'sanitize'
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 
 # thin server
 gem 'thin'
