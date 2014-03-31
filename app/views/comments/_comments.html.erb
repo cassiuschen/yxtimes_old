@@ -1,19 +1,21 @@
 <div class="comments-wrapper">
 <h2 id="comments"><%= commentable.comments.present? ? "评论" : "暂无评论" %></h2>
-<% if current_user %>
-  <div class="avatar pull-left">
-    <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
-  </div>
-  <div class="tri ml100 hov">
-    <%= form_for [commentable, @comment] do |f| %>
-      <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
-        <%= hidden_field_tag :anonymous %>
-        <div class="comment-submit">
+<div class="avatar pull-left">
+  <%= image_tag((current_user ? current_user.avatar : asset_path("avatar_default.jpg")), class: "avatar-inner") %>
+</div>
+<div class="tri ml100 hov">
+  <%= form_for [commentable, @comment] do |f| %>
+    <%= f.text_area :content, style: "width: 488px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
+      <%= hidden_field_tag :anonymous %>
+      <div class="comment-submit">
+        <% if current_user %>
           <%= f.submit "评论", class: "btn" %><%= f.submit "匿名评论", class: "btn comment-anonymous", style: "margin-left: -1px;" %>
-        </div>
-    <% end -%>
-  </div>
-<% end -%>
+        <% else %>
+          <%= f.submit "匿名评论", class: "btn" %>
+        <% end -%>
+      </div>
+  <% end -%>
+</div>
 <% commentable.comments.each do |comment| %>
 <div class="comment-block" id="<%= comment.id %>">
 <div class="avatar pull-left">
@@ -27,11 +29,9 @@
 </div>
 <div class="controls ml100 tri">
   <div class="toolbox">
-    <% if current_user %>
     <a href="###" class="reply">
       <i class="icon-reply"></i>
     </a>
-    <% end -%>
     <% if current_user && current_user.is_admin? %>
       <%= link_to [commentable, comment], method: :delete, data: { confirm: "确认删除吗？" } do %>
         <i class="icon-trash"></i>
@@ -66,11 +66,9 @@
       </div>
       <div class="controls ml100 tri">
         <div class="toolbox">
-          <% if current_user %>
           <a href="###" class="reply">
             <i class="icon-reply"></i>
           </a>
-          <% end -%>
           <% if current_user && current_user.is_admin? %>
           <%= link_to eval("#{commentable.class.to_s.downcase}_subcomment_path(commentable, comment, subcomment)"), method: :delete, data: { confirm: "确认删除吗？" } do %>
             <i class="icon-trash"></i>
@@ -93,7 +91,6 @@
     </div>
   </div>
   <% end -%>
-  <% if current_user %>
   <div class="comment-block subcom" style="display: none;">
     <div class="ml100">
       <div class="avatar pull-left">
@@ -104,13 +101,16 @@
         <%= f.text_area :content, style: "width: 388px;", rows: 3, placeholder: "输入评论，按 Ctrl + Enter 提交" %>
         <%= hidden_field_tag :anonymous %>
         <div class="comment-submit">
-          <%= f.submit "评论", class: "btn" %><%= f.submit "匿名评论", class: "btn comment-anonymous", style: "margin-left: -1px;" %>
+          <% if current_user %>
+            <%= f.submit "评论", class: "btn" %><%= f.submit "匿名评论", class: "btn comment-anonymous", style: "margin-left: -1px;" %>
+          <% else %>
+            <%= f.submit "匿名评论", class: "btn" %>
+          <% end -%>
         </div>
         <% end -%>
       </div>
     </div>
   </div>
-  <% end -%>
 <% end -%>
 </div>
 

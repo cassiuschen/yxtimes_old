@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :cas_filter
+  before_filter :cas_filter, only: [:destroy, :destroy_subcomment]
   append_before_filter :require_admin, only: [:destroy, :destroy_subcomment]
 
   def show

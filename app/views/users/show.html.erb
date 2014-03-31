@@ -19,7 +19,7 @@
   <div id="feeds" style="padding: 30px 40px;">  
   <% end -%>
     <table>
-      <% @user.feeds.each do |feed| %>
+      <% @user.feeds.limit(15).each do |feed| %>
         <tr class="timeline-item">
           <td class="time">
             <%= beautify_time_with_br(feed.created_at) %>
@@ -34,7 +34,7 @@
   <% if @user.articles.count > 0 %>
     <div id="articles" style="display: none; padding: 0 40px 30px;">
       <table>
-        <% @user.articles.where(anonymous: false).each do |article| %>
+        <% @user.articles.where(anonymous: false).desc(:created_at).each do |article| %>
           <tr class="timeline-item">
           <td class="time">
             <%= beautify_time_with_br(article.created_at) %>
