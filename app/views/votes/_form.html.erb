@@ -34,6 +34,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :allow_anonymous, class: "control-label" %>
+    <div class="controls">
+      <%= f.check_box :allow_anonymous %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :is_disabled, class: "control-label" %>
     <div class="controls">
       <%= f.check_box :is_disabled %>

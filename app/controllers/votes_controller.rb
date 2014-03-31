@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
-  prepend_before_filter :cas_filter, except: [:index, :show]
+  prepend_before_filter :cas_filter, except: [:index, :show, :vote_for]
+  append_before_filter :require_admin, except: [:index, :show, :vote_for]
 
   # GET /votes
   # GET /votes.json
@@ -95,15 +96,20 @@ class VotesController < ApplicationController
     @vote = Vote.find(params[:vote_id])
     @options = @vote.options.find(params[:options].to(@vote.max_vote - 1))
 
-    if @vote.already_voted_by? current_user
-      redirect_to :back, flash: { error: "您已经投过票了" }
+    if !can_vote?(@vote)
+      redirect_to :back, flash: { error: "您已经投过票了或无权投票" }
       return 
     end
 
     @options.each do |option|
       option.update_attributes(count: option.count + 1)
     end
-    @vote.voters << current_user
+    if current_user
+      @vote.voters << current_user
+    else
+      session[:vote_id_list] << @vote.id
+      @vote.inc(:anonymous_voters_count, 1)
+    end
     redirect_to :back, flash: { success: "投票成功" }
   end
 end

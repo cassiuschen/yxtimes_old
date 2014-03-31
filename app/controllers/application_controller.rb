@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :cas_gateway_filter, :cas_user
   
-  helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?
+  helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?, :can_vote?
 
   private
 
@@ -20,6 +20,19 @@ class ApplicationController < ActionController::Base
 
   def is_reporter?
     current_user && current_user.is_reporter?
+  end
+
+  def can_vote? vote
+    if vote.is_disabled
+      false
+    elsif current_user
+      !vote.voters.include?(current_user)
+    elsif vote.allow_anonymous and cookies[:_yxtimes_session]
+      session[:vote_id_list] ||= []
+      !session[:vote_id_list].include?(vote.id)
+    else
+      false
+    end
   end
 
   def cas_gateway_filter

@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :cas_filter
+  append_before_filter :require_admin, only: [:destroy, :destroy_subcomment]
 
   def show
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
@@ -26,7 +27,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    redirect_to :back and return unless current_user.is_admin?
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
     @comment = @commentable.comments.find(params[:id])
     @comment.destroy
@@ -55,7 +55,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy_subcomment
-    redirect_to :back and return unless current_user.is_admin?
     @commentable = params[:article_id] ? Article.find(params[:article_id]) : Vote.find(params[:vote_id])
     @comment = @commentable.comments.find(params[:comment_id])
     @subcomment = @comment.subcomments.find(params[:id])

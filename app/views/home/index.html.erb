@@ -99,7 +99,7 @@
   <div class="home-block mt10 ml20" style="width: 270px;">
     <% if @vote.nil? %>
       暂无投票
-    <% elsif !current_user or (current_user and @vote.already_voted_by? current_user) %>
+    <% elsif !can_vote?(@vote) %>
       <div style="padding: 25px;">
         <div style="height: 180px; overflow: auto; margin-bottom: 5px;">
           <div style="font-size: 18px; line-height: 24px; margin-bottom: 5px;"><%= link_to @vote.title, @vote %></div>

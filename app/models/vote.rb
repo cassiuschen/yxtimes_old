@@ -7,6 +7,8 @@ class Vote
   field :read_count, type: Integer, default: 0
 
   field :max_vote, type: Integer, default: 1
+  field :allow_anonymous, type: Boolean, default: false
+  field :anonymous_voters_count, type: Integer, default: 0
   field :is_disabled, type: Boolean, default: false
 
   embeds_many :options, class_name: "Vote::Option"
@@ -25,8 +27,8 @@ class Vote
   def read
     update_attributes(read_count: read_count + 1)
   end
-  
-  def already_voted_by?(user)
-    is_disabled || voters.include?(user)
+
+  def voters_count
+    anonymous_voters_count + voters.count
   end
 end
