@@ -107,7 +107,9 @@ class VotesController < ApplicationController
     if current_user
       @vote.voters << current_user
     else
-      session[:vote_id_list] << @vote.id
+      vote_id_list = Rails.cache.fetch(["vote_record", cookies[:_yxtimes_vid]])
+      vote_id_list << @vote.id
+      Rails.cache.write(["vote_record", cookies[:_yxtimes_vid]], vote_id_list)
       @vote.inc(:anonymous_voters_count, 1)
     end
     redirect_to :back, flash: { success: "投票成功" }

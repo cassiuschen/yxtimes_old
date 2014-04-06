@@ -28,8 +28,12 @@ class ApplicationController < ActionController::Base
     elsif current_user
       !vote.voters.include?(current_user)
     elsif vote.allow_anonymous and cookies[:_yxtimes_session]
-      session[:vote_id_list] ||= []
-      !session[:vote_id_list].include?(vote.id)
+      if !cookies[:_yxtimes_vid]
+        cookies[:_yxtimes_vid] = {}
+        cookies[:_yxtimes_vid] = { :value => SecureRandom.hex(10), :expires => 1.year.from_now }
+      end
+      vote_id_list = Rails.cache.fetch(["vote_record", cookies[:_yxtimes_vid]]) { [] }
+      !vote_id_list.include?(vote.id)
     else
       false
     end
