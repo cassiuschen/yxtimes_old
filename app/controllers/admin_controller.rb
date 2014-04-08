@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  http_basic_authenticate_with ***REMOVED***
+  http_basic_authenticate_with :name => CONFIG["admin_username"], :password => CONFIG["admin_password"]
 
   def update
     Setting.first.update_attributes(params[:setting])

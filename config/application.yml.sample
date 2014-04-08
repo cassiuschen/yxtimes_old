@@ -1,0 +1,3 @@
+admin_username: admin
+admin_password: admin
+secret_token: bb9098e53eb5e91996df35c05f9b2805 # Your own secret token by running `rake secret`
