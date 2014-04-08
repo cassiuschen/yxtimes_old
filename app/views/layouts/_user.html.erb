@@ -12,7 +12,7 @@
             </div>
           <% end -%>
         </a>
-        <div class="noti-box dropdown"> 
+        <div class="noti-box dropdown">
           <% if current_user.notifications.empty? %>
             <div style="text-align: center; color: #999; line-height: 40px;">暂无提醒</div>
           <% else %>
@@ -46,7 +46,12 @@
     </div>
   </div>
 <% else %>
-  <%= link_to CASClient::Frameworks::Rails::Filter.login_url(controller), class: "login_link" do %>
+  <!--
+  <= link_to CASClient::Frameworks::Rails::Filter.login_url(controller), class: "login_link" do %>
     <i class="icon-signin"></i>
-  <% end -%>
+  < end -%>
+  -->
+  <%= link_to '/auth/bdfzer', class: "login link" do %>
+    <i class="icon-signin"></i>
+  <% end %>
 <% end -%>

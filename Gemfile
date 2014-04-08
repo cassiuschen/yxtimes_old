@@ -65,3 +65,8 @@ gem 'rails_kindeditor', '~> 0.3.14'
 
 # To use debugger
 # gem 'debugger'
+#
+# Use BDFZer ID
+gem 'omniauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-bdfzer', github: 'cassiuschen/omniauth-bdfzer'

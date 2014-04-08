@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  prepend_before_filter :cas_filter, except: :show
+  #prepend_before_filter :cas_filter, except: :show,
 
   def edit
     @user = current_user
@@ -71,4 +71,17 @@ class UsersController < ApplicationController
     redirect_to @noti.link
   end
 
+  def omniauth_login
+    @user = User.find(auth_hash['uid']) || User.create!(
+      _id: auth_hash['uid'],
+      name: auth_hash['info']['name']
+    )
+    self.current_user = @user
+    redirect_to root_path
+  end
+
+  private
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end

@@ -1,9 +1,9 @@
 require 'net/http'
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery :except => [:omniauth_login]
   before_filter :cas_gateway_filter, :cas_user
-  
+
   helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?, :can_vote?
 
   private

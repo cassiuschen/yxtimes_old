@@ -10,10 +10,10 @@ Yxtimes::Application.routes.draw do
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
-    
+
     post "options" => "votes#vote_for"
 
-    member do 
+    member do
       get "delete" => "votes#destroy", as: "destroy"
     end
   end
@@ -24,7 +24,7 @@ Yxtimes::Application.routes.draw do
     delete "comments/:id" => "comments#destroy", as: "comment"
     post "comments/:comment_id" => "comments#create_subcomment", as: "subcomments"
     delete "comments/:comment_id/:id" => "comments#destroy_subcomment", as: "subcomment"
-    member do 
+    member do
       get "follow"
       get "unfollow"
       get "verify"
@@ -54,6 +54,20 @@ Yxtimes::Application.routes.draw do
   # admins controller
   get 'admin' => "admin#index"
   post 'admin' => "admin#update"
+
+
+  #%w(get post).each do |method|
+  # send(method, '/auth/:provider/callback') do
+  #   env['omniauth.auth']
+  # end
+  #end
+  get '/auth/:provider/callback' => 'users#omniauth_login', as: 'bdfzer_login'
+
+  get '/auth/failure' do
+    flash[:notice] = params[:message]
+    redirect '/'
+  end
+
 
 
   # The priority is based upon order of creation:
