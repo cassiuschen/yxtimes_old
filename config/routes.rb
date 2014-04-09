@@ -1,5 +1,7 @@
 Yxtimes::Application.routes.draw do
 
+  devise_for :users
+
   resources :features, except: :index
   get "features" => "features#show", as: 'features'
   get "features_review" => "features#index", as: 'features_review'
@@ -61,7 +63,7 @@ Yxtimes::Application.routes.draw do
   #   env['omniauth.auth']
   # end
   #end
-  get '/auth/:provider/callback' => 'users#login', as: 'bdfzer_login'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get '/auth/failure' do
     flash[:notice] = params[:message]

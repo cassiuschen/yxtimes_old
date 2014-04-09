@@ -51,8 +51,8 @@
     <i class="icon-signin"></i>
   < end -%>
   -->
-  <a class="login_link" href="/auth/bdfzer">
+  <%= link_to user_omniauth_authorize_path(:facebook), class: "login_link" %>
     <i class="icon-signin"></i>
-  </a>
+  <% end -%>
   
 <% end -%>
