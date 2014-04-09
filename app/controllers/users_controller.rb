@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   #prepend_before_filter :cas_filter, except: :show,
+  prepend_before_filter :omniauth_filter, except: [:show, :login]
 
   def edit
     @user = current_user
@@ -71,17 +72,22 @@ class UsersController < ApplicationController
     redirect_to @noti.link
   end
 
-  def omniauth_login
-    @user = User.find(auth_hash['uid']) || User.create!(
-      _id: auth_hash['uid'],
-      name: auth_hash['info']['name']
-    )
-    self.current_user = @user
-    redirect_to root_path
-  end
 
-  private
-  def auth_hash
-    request.env['omniauth.auth']
+  def login
+    begin
+        @current_user = User.find(auth_hash['uid'])
+        session[:user_nickname] = current_user.nickname
+        session[:user_id] = current_user.name
+        redirect_to root_path, flash: { success: "登录成功！欢迎你，#{current_user.nickname}!" }
+      rescue Mongoid::Errors::DocumentNotFound
+        @current_user = User.create!(_id: auth_hash['uid'], name: auth_hash['uid'], last_sign_in_at: Time.now, last_sign_in_ip: request.remote_ip)
+        @current_user.update_attributes!(nickname: auth_hash['info']['name'])
+        session[:user_nickname] = @current_user.nickname
+        session[:user_id] = current_user.name
+        redirect_to root_path, flash: { success: "您第一次登录系统，请点击右侧边栏修改个人资料." }
+        return
+      end
+
+      @current_user.update_attributes!(last_sign_in_at: Time.now, last_sign_in_ip: request.remote_ip)
   end
 end

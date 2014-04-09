@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  APP_ID = "ab5bd555d4537f02c280158ff01a5f2c8f8f42e3dc8c976f4983abd4af3d9d63"
-  APP_SEC = "aa177ee5ab83ff7778b076c0cc5a9f61fee78b896c945d67033994281fba867f"
+  APP_ID = "6d325b84369766cddab1e5a2ae3c8e2c4d434af7d6cbe7cc80eaa8e5e0bfa755"
+  APP_SEC = "64bd6f60aa073e64205274ee28b89319b8f36811fe72977325aa488991cc8428"
   provider :bdfzer, APP_ID, APP_SEC
 end

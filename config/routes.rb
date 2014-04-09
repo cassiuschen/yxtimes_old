@@ -61,7 +61,7 @@ Yxtimes::Application.routes.draw do
   #   env['omniauth.auth']
   # end
   #end
-  get '/auth/:provider/callback' => 'users#omniauth_login', as: 'bdfzer_login'
+  get '/auth/:provider/callback' => 'users#login', as: 'bdfzer_login'
 
   get '/auth/failure' do
     flash[:notice] = params[:message]

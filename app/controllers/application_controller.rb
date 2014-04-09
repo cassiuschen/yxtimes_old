@@ -2,9 +2,9 @@ require 'net/http'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery :except => [:omniauth_login]
-  before_filter :cas_gateway_filter, :cas_user
+  #before_filter :cas_gateway_filter, :cas_user
 
-  helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?, :can_vote?
+  helper_method :current_user, :user_signed_in?, :is_admin?, :is_reporter?, :can_vote?, :omniauth_login
 
   private
 
@@ -71,6 +71,12 @@ class ApplicationController < ActionController::Base
     @has_already_filter = true
   end
 
+  def omniauth_filter
+    return if @has_already_filter
+    session[:user_nickname] || omniauth_login
+    @has_already_filter = true
+  end
+
   def cas_user
     if session[:cas_user]
       begin
@@ -86,12 +92,38 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def omniauth_login
+    begin
+        @current_user = User.find(auth_hash['uid'])
+        session[:user_nickname] = current_user.nickname
+        session[:user_id] = current_user.name
+        redirect_to root_path, flash: { success: "登录成功！欢迎你，#{current_user.nickname}!" }
+      rescue Mongoid::Errors::DocumentNotFound
+        @current_user = User.create!(_id: auth_hash['uid'], name: auth_hash['uid'], last_sign_in_at: Time.now, last_sign_in_ip: request.remote_ip)
+        @current_user.update_attributes!(nickname: auth_hash['info']['name'])
+        session[:user_nickname] = @current_user.nickname
+        session[:user_id] = current_user.name
+        redirect_to root_path, flash: { success: "您第一次登录系统，请点击右侧边栏修改个人资料." }
+        return
+      end
+
+      @current_user.update_attributes!(last_sign_in_at: Time.now, last_sign_in_ip: request.remote_ip)
+  end
+
   def user_signed_in?
     !!@current_user
   end
 
   def current_user
-    @current_user
+    begin
+    @current_user ||= User.find(session[:user_id])
+    rescue Mongoid::Errors::InvalidFind
+      return
+    end
   end
 
+  private
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end
