@@ -55,26 +55,12 @@ Yxtimes::Application.routes.draw do
   get "users/:id/feeds" => "users#show_feeds", as: "user_feeds"
   get "users/:id/articles" => "users#show_articles", as: "user_articles"
 
-  get "logout" => "users#logout"
-  get "login" => "users#login"
+  #get "logout" => "users#logout"
+  #get "login" => "users#login"
 
   # admins controller
   get 'admin' => "admin#index"
   post 'admin' => "admin#update"
-
-
-  #%w(get post).each do |method|
-  # send(method, '/auth/:provider/callback') do
-  #   env['omniauth.auth']
-  # end
-  #end
-
-  get '/auth/failure' do
-    flash[:notice] = params[:message]
-    redirect '/'
-  end
-
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

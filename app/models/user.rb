@@ -11,6 +11,7 @@ class User
   # Omniauth
   field :uid,   type: String
   field :provider, type: String
+  field :email, type: String
 
   ## Database authenticatable
   field :encrypted_password, type: String, default: ""
@@ -79,6 +80,17 @@ class User
       "记者"
     else
       "学生"
+    end
+  end
+
+  def self.find_for_bdfzer_oauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.uid
+      user.password = Devise.friendly_token[0,20]
+      user.nickname = auth.info.name   # assuming the user model has a name
+      #user.image = auth.info.image # assuming the user model has an image
     end
   end
 

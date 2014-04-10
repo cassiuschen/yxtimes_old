@@ -1,7 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def bdfzer
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
-    
     @user = User.find_for_bdfzer_oauth auth_hash
 
     if @user.persisted?
@@ -24,7 +22,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       user.uid = auth.uid
       user.name = auth.uid
       user.password = Devise.friendly_token[0,20]
-      user.nickame = auth.info.name   # assuming the user model has a name
+      user.nickname = auth.info.name   # assuming the user model has a name
       #user.image = auth.info.image # assuming the user model has an image
     end
   end
