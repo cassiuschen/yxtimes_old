@@ -29,7 +29,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [ :name]
+  config.authentication_keys = [ :name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -137,7 +137,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 6..128
 
   # nameregex used to validate nameformats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -229,7 +229,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :bdfzer, '6d325b84369766cddab1e5a2ae3c8e2c4d434af7d6cbe7cc80eaa8e5e0bfa755', '64bd6f60aa073e64205274ee28b89319b8f36811fe72977325aa488991cc8428'
+  config.omniauth :bdfzer, CONFIG['bdfzer_app_id'], CONFIG['bdfzer_app_sec']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -252,5 +252,5 @@ Devise.setup do |config|
   #
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
-  config.omniauth_path_prefix = '/auth/bdfzer'
+  # config.omniauth_path_prefix = '/auth/oauth2/'
 end

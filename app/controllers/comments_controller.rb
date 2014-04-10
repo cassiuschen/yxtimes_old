@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :omniauth_filter, only: [:destroy, :destroy_subcomment]
+  before_filter :authenticate_member!, only: [:destroy, :destroy_subcomment]
   append_before_filter :require_admin, only: [:destroy, :destroy_subcomment]
 
   def show

@@ -1,12 +1,16 @@
 class User
   include Mongoid::Document
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :omniauthable, :omniauth_providers => [:bdfzer],
-         :recoverable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable, :rememberable
+  devise :database_authenticatable, :registerable, :omniauthable,
+         :recoverable, :trackable, :validatable, :omniauth_providers => [:bdfzer]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :password, :password_confirmation, :remember_me
+
+  # Omniauth
+  field :uid,   type: String
+  field :provider, type: String
 
   ## Database authenticatable
   field :encrypted_password, type: String, default: ""
@@ -75,6 +79,14 @@ class User
       "记者"
     else
       "学生"
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.bdfzer_data"] && session["devise.bdfzer_data"]["extra"]["raw_info"]
+        user.name = data["name"] if user.name.blank?
+      end
     end
   end
 end
