@@ -1,5 +1,5 @@
 class FeaturesController < ApplicationController
-  prepend_before_filter :omniauth_filter, except: [:show, :index]
+  prepend_before_filter :authenticate_member!, except: [:show, :index]
   append_before_filter :require_admin, except: [:show, :index]
 
   def index

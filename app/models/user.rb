@@ -1,5 +1,34 @@
 class User
   include Mongoid::Document
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable, :rememberable
+  devise :database_authenticatable, :registerable, :omniauthable,
+         :recoverable, :trackable, :validatable, :omniauth_providers => [:bdfzer]
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :name, :password, :password_confirmation, :remember_me
+
+  # Omniauth
+  field :uid,   type: String
+  field :provider, type: String
+  field :email, type: String
+
+  ## Database authenticatable
+  field :encrypted_password, type: String, default: ""
+
+  ## Recoverable
+  field :reset_password_token,   type: String
+  field :reset_password_sent_at, type: Time
+
+  ## Rememberable
+  field :remember_created_at, type: Time
+
+  ## Trackable
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   field :name, type: String
   validates_uniqueness_of :name
@@ -51,6 +80,25 @@ class User
       "记者"
     else
       "学生"
+    end
+  end
+
+  def self.find_for_bdfzer_oauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.uid
+      user.password = Devise.friendly_token[0,20]
+      user.nickname = auth.info.name   # assuming the user model has a name
+      #user.image = auth.info.image # assuming the user model has an image
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.bdfzer_data"] && session["devise.bdfzer_data"]["extra"]["raw_info"]
+        user.name = data["name"] if user.name.blank?
+      end
     end
   end
 end

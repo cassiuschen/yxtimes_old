@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if current_user %>
   <div id="user-bar">
     <div style="vertical-align: middle; display: table-cell;">
       <div class="avatar-wrap">
@@ -51,8 +51,8 @@
     <i class="icon-signin"></i>
   < end -%>
   -->
-  <a class="login_link" href="/auth/bdfzer">
+  <%= link_to user_omniauth_authorize_path(:bdfzer), class: "login_link" do%>
     <i class="icon-signin"></i>
-  </a>
+  <% end -%>
   
 <% end -%>
