@@ -40,7 +40,7 @@
       <% end -%>
       <a id="right-bar-link-4" href="<%= user_edit_path %>" class="center gray mt30"><i class="icon-cog icon-2x p0"></i><br>资料</a>
       <a href="http://peer.pkuschool.edu.cn" target="_blank" class="center gray mt30"><i class="icon-group icon-2x p0"></i><br>晨会</a>
-      <a id="right-bar-link-5" href="<%= logout_path %>" class="center gray mt30" data-no-turbolink><i class="icon-signout icon-2x p0"></i><br>注销</a>
+      <a id="right-bar-link-5" href="<%= destroy_user_session_path %>" class="center gray mt30" method="delete" data-no-turbolink><i class="icon-signout icon-2x p0"></i><br>注销</a>
     </div>
     <div id="right-panel">
     </div>
@@ -54,5 +54,5 @@
   <%= link_to user_omniauth_authorize_path(:bdfzer), class: "login_link" do%>
     <i class="icon-signin"></i>
   <% end -%>
-  
+
 <% end -%>
