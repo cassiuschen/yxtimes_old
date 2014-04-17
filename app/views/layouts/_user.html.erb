@@ -46,11 +46,6 @@
     </div>
   </div>
 <% else %>
-  <!--
-  <= link_to CASClient::Frameworks::Rails::Filter.login_url(controller), class: "login_link" do %>
-    <i class="icon-signin"></i>
-  < end -%>
-  -->
   <%= link_to user_omniauth_authorize_path(:bdfzer), class: "login_link" do%>
     <i class="icon-signin"></i>
   <% end -%>

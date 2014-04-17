@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #prepend_before_filter :cas_filter, except: :show,
   prepend_before_filter :authenticate_user!, except: [:show, :login]
 
   def edit

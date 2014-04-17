@@ -7,11 +7,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, :kind => "bdfzer") if is_navigational_format?
     else
       session["devise.bdfzer_data"] = auth_hash
-      seed = SecureRandom.hex 50
       @new_user = User.create(
         name: auth_hash.uid,
         email: auth_hash.info.email,
-        #password: seed,
         provider: "bdfzer",
         uid: auth_hash.uid,
         nickname: auth_hash.info.name
