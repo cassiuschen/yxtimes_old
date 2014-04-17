@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #prepend_before_filter :cas_filter, except: :show,
-  prepend_before_filter :authenticate_member!, except: [:show, :login]
+  prepend_before_filter :authenticate_user!, except: [:show, :login]
 
   def edit
     @user = current_user

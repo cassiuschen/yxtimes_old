@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   #prepend_before_filter :omniauth_filter, except: :show
-  prepend_before_filter :authenticate_member!, except: :show
+  prepend_before_filter :authenticate_user!, except: :show
   append_before_filter :require_admin, only: [:index, :verify]
 
   # GET /articles

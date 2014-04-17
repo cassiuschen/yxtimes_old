@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  prepend_before_filter :authenticate_member!, except: [:index, :show, :vote_for]
+  prepend_before_filter :authenticate_user!, except: [:index, :show, :vote_for]
   append_before_filter :require_admin, except: [:index, :show, :vote_for]
 
   # GET /votes
