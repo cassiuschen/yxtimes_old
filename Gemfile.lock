@@ -1,5 +1,6 @@
-PATH
-  remote: ../omniauth-bdfzer
+GIT
+  remote: git://github.com/cassiuschen/omniauth-bdfzer.git
+  revision: f0c9321e255765cb6ea3b526004097a65c951d7e
   specs:
     omniauth-bdfzer (0.1)
       omniauth-oauth2 (~> 1.1)
