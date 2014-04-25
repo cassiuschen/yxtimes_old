@@ -12,15 +12,17 @@
         <td style="width: 130px;">
           <%= opt.content %>
         </td>
-        <td style="width: 380px;">
-          <div class="progress progress-warning" style="margin: 0px;">
-            <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+        <%- if @vote.is_public %>
+          <td style="width: 380px;">
+            <div class="progress progress-warning" style="margin: 0px;">
+              <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+              </div>
             </div>
-          </div>
-        </td>
-        <td style="width: 40px;">
-          <%= opt.count %>
-        </td>
+          </td>
+          <td style="width: 40px;">
+            <%= opt.count %>
+          </td>
+        <% end -%>
       </tr>
     </table>
   <% end -%>
@@ -35,15 +37,17 @@
         <td style="width: 130px; padding-left: 0px;">
           <%= label_tag "options_#{opt.id}", opt.content %>
         </td>
-        <td style="width: 360px;">
-          <div class="progress progress-warning" style="margin: 0px;">
-            <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+        <%- if @vote.is_public %>
+          <td style="width: 360px;">
+            <div class="progress progress-warning" style="margin: 0px;">
+              <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+              </div>
             </div>
-          </div>
-        </td>
-        <td style="width: 40px;">
-          <%= opt.count %>
-        </td>
+          </td>
+          <td style="width: 40px;">
+            <%= opt.count %>
+          </td>
+        <% end -%>
       </tr>
       <% end -%>
     </table>
@@ -62,15 +66,17 @@
         <td style="width: 130px; padding-left: 0px;">
           <%= label_tag "options_#{opt.id}", opt.content %>
         </td>
-        <td style="width: 360px;">
-          <div class="progress progress-warning" style="margin: 0px;">
-            <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+        <%- if @vote.is_public %>
+          <td style="width: 360px;">
+            <div class="progress progress-warning" style="margin: 0px;">
+              <div class="bar" style="width: <%= (opt.count * 100.0 / @vote.voters_count).to_s + "%" %>">
+              </div>
             </div>
-          </div>
-        </td>
-        <td style="width: 40px;">
-          <%= opt.count %>
-        </td>
+          </td>
+          <td style="width: 40px;">
+            <%= opt.count %>
+          </td>
+        <% end -%>
       </tr>
       <% end -%>
     </table>

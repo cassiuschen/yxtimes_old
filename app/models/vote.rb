@@ -10,6 +10,7 @@ class Vote
   field :allow_anonymous, type: Boolean, default: false
   field :anonymous_voters_count, type: Integer, default: 0
   field :is_disabled, type: Boolean, default: false
+  field :is_public, type: Boolean, default: true
 
   embeds_many :options, class_name: "Vote::Option"
   embeds_many :comments, as: :commentable
