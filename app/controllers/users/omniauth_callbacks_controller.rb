@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def bdfzer
     @user = User.find_for_bdfzer_oauth auth_hash
 
-    if @user.persisted?
+    if !(@user.nil?)
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => "bdfzer") if is_navigational_format?
     else
@@ -23,11 +23,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
   def auth_hash
   	request.env["omniauth.auth"]
-  end
-
-  def self.find_for_bdfzer_oauth(auth)
-  	where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.name = auth.uid
-    end
   end
 end

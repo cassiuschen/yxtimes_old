@@ -1,4 +1,4 @@
-<% if current_user %>
+<%- if current_user %>
   <div id="user-bar">
     <div style="vertical-align: middle; display: table-cell;">
       <div class="avatar-wrap">
@@ -45,9 +45,9 @@
     <div id="right-panel">
     </div>
   </div>
-<% else %>
+<%- else %>
   <%= link_to user_omniauth_authorize_path(:bdfzer), class: "login_link" do%>
     <i class="icon-signin"></i>
   <% end -%>
 
-<% end -%>
+<%- end -%>

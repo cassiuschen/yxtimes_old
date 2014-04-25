@@ -2,11 +2,11 @@ class User
   include Mongoid::Document
   # Include default devise modules. Others available are: :database_authenticatable, :registerable,
   # :confirmable, :lockable, :timeoutable and :omniauthable, :rememberable, :validatable
-  devise  :omniauthable, :recoverable, :trackable, :omniauth_providers => [:bdfzer],
-            :authentication_keys => [:name] 
+  devise  :omniauthable, :trackable, :omniauth_providers => [:bdfzer],
+            :authentication_keys => [:name]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :remember_me
 
   # Omniauth
   field :uid,   type: String
@@ -14,11 +14,11 @@ class User
   field :email, type: String
 
   ## Database authenticatable
-  field :encrypted_password, type: String, default: ""
+  #field :encrypted_password, type: String, default: ""
 
   ## Recoverable
-  field :reset_password_token,   type: String
-  field :reset_password_sent_at, type: Time
+  #field :reset_password_token,   type: String
+  #field :reset_password_sent_at, type: Time
 
   ## Rememberable
   field :remember_created_at, type: Time
@@ -35,7 +35,7 @@ class User
 
   attr_readonly :name
   field :_id, type: String, default: -> { name }
-  
+
   field :nickname, type: String, default: -> { name }
   validates_presence_of :nickname
 
@@ -84,9 +84,15 @@ class User
   end
 
   def self.find_for_bdfzer_oauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.name = auth.uid
-    end
+    where(name: auth.uid).first
+  end
+
+  def self.update_info_from_bdfzer(auth)
+    self.nickname = auth.info.name
+    self.email = auth.info.email
+    self.uid = auth.uid
+    self.provider = "bdfzer"
+    self.save
   end
 
   def self.new_with_session(params, session)
